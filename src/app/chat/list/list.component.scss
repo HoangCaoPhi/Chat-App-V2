@@ -1,0 +1,158 @@
+.contact-líst {
+	height: 100vh;
+	background-color: #0a1d3b;
+	overflow: hidden;
+	padding-right: 0px;
+	width: auto;
+	position: relative;
+	min-width: 300px;
+
+	.contact-líst:hover {
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+
+	.contact-líst::-webkit-scrollbar {
+		height: 3px;
+		width: 1px;
+		background: #2c3e50;
+	}
+
+	.contact-view {
+		margin-top: 20px;
+		.search {
+			display: flex;
+			.input-contact {
+				border-bottom: 2px solid #36455e;
+				input {
+					outline: 0;
+					color: #ffffff;
+					border: 0;
+					position: left;
+					padding-left: 30px;
+					background-size: 15px;
+					background-image: url('./../../../assets/ICON/IconAppChat/11.svg');
+					background-color: #0a1d3b;
+					background-repeat: no-repeat;
+					background-position: left center;
+					outline: none;
+					margin-left: 24px;
+				}
+			}
+			.btn-add {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: #2196f3;
+				border-radius: 4px;
+				width: 32px;
+				height: 32px;
+				overflow: hidden;
+				cursor: pointer;
+				margin-right: 35px;
+			}
+			
+		}
+	}
+	 
+}
+
+
+#contacts {
+	margin-top: 15px;
+
+	ul {
+		li.contact {
+			.wrap {
+				margin-left: 14px;
+				display: flex;
+				position: relative;
+				margin-top: 15px;
+
+				p {
+					color: white;
+				}
+
+				img {
+					width: 40px;
+					border-radius: 50%;
+					float: left;
+					margin-right: 10px;
+					margin-top: 10px;
+					width: 36px;
+					height: 40px;
+				}
+
+				.status {
+					margin-top: 12px;
+					float: right;
+					position: absolute;
+					right: 0;
+					margin-right: 12px;
+
+					.time {
+						font-size: 11px;
+						color: #8e97a5;
+					}
+					.seen {
+						font-size: 11px;
+					}
+				}
+
+				.meta {
+					.name {
+						font-size: 13px;
+						padding-top: 10px;
+						color: #ffffff;
+					}
+					.preview {
+						font-size: 13px;
+						color: #ffffff;
+						width: 100%;
+						padding-bottom: 10px;
+						font-weight: 400;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						-moz-transition: 1s all ease;
+						-o-transition: 1s all ease;
+						-webkit-transition: 1s all ease;
+						transition: 1s all ease;
+
+						span {
+							position: initial;
+							border-radius: initial;
+							background: none;
+							border: none;
+							padding: 0 2px 0 0;
+							margin: 0 0 0 1px;
+							opacity: .5;
+						}
+					}
+				}
+			}
+		}
+		li.contact:hover {
+			background: #32465a;
+			cursor: pointer;
+		}
+		li.contact:focus {
+			outline: 0;
+		}
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	#contacts ul li.contact .wrap .meta {
+			 display: none;
+    }
+   .contact-líst .contact-view .search {
+			 display: none;
+   }
+   #contacts ul li.contact .wrap img {
+	   		align-items: center;
+   }
+   .contact-líst {
+		    min-width: 0px;
+   }
+}

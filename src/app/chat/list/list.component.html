@@ -1,0 +1,40 @@
+<div class="contact-líst">
+	<div class="contact-view">
+		<!-- Phần tìm kiếm -->
+		<div class="row search">
+			<div class="col-sm-10">
+				<div class="input-contact">
+					<input type="text" class="form-control" placeholder="Tìm kiếm cuộc trò chuyện"
+						[(ngModel)]='listFilter'>
+				</div>
+			</div>
+			<div class="col-sm-2 btn-add">
+				<img src="./../../../assets/ICON/IconboxChat/23.svg" alt="">
+			</div>
+		</div>
+		<!-- Phần tìm kiếm -->
+		<!-- Phần List Contact -->
+		<div id="contacts">
+			<ul>
+				<li class="contact" *ngFor="let chat of filterChats" [routerLink]="[chat.id]">
+					<div class="wrap">
+						<span class="contact-status online"></span>
+						<img [src]="chat.avt" alt="" />
+						<div class="meta">
+							<p class="name">{{ chat.name }}</p>
+							<p class="preview">{{  chat.lastMesseage }}</p>
+						</div>
+						<div class="meta status">
+							<p class="time">14:18</p>
+							<p class="seen"> 
+								<span class="badge badge-light">9</span>
+								<span class="sr-only">unread messages</span>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- Phần List Contact -->
+	</div>
+</div>

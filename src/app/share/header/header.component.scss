@@ -1,0 +1,36 @@
+.nav {
+	height: 60px;
+	background-color: #ffffff;
+	box-shadow: 0 4px 6px -6px #222;
+}
+
+.nav-left {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	float: left;
+}
+
+.nav-left p {
+	font-size: 18px;
+	font-weight: 700;
+	color: #212121;
+}
+
+.nav-left div {
+	margin-left: 24px;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	float: right;
+}
+
+.nav-right img {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	margin-right: 23px;
+}

@@ -1,0 +1,12 @@
+.content-app {
+    display: flex;
+}
+.view {
+    // flex-grow: 1;
+    // position: relative;
+    // border-right: 2px solid red;
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    min-width: 0;
+}
