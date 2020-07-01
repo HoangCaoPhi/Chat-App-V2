@@ -1,5 +1,5 @@
 <div class="view">
-   <!-----------             Phan header Content    ----------->
+   <!-----------======================= HEADER CONTENT ==========================    ----------->
    <div class="header-content">
       <div class="head-left">
          <div class="avatar">
@@ -30,167 +30,99 @@
          </ul>
       </div>
    </div>
-   <!-----------             Phan header Content    ----------->
-
-   <!--                              Phan Content Message                       -->
-   <!-- <div class="content-messeage">
-      <div class="messages" #scrollframe>
-         <ul>
-            <li *ngFor="let messeage of messeages" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
-               <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-               <p> {{ messeage.content }} </p>
-            </li>
-         </ul>
-      </div>
-      <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm">
-         <div class="row send-view">
-            <div class="send"><img src="../../../assets/ICON/IconAppChat/10.svg" alt="send file"></div>
-            <div class="send"><img src="../../../assets/ICON/IconAppChat/9.svg" alt="send file"></div>
-            <div class="send">
-               <span class="buzz">
-                  <p>Buzz!</p>
-               </span>
-            </div>
-            <div class="send input-message">
-               <input type="text" class="form-control" name="message" id="input-message" ngModel
-                  placeholder="Nhập nội dung tin nhắn">
-            </div>
-         </div>
-      </form>
-   </div> -->
-   <!--                              Phan Content Message                       -->
-
-   <!--================================== PHAN THONG TIN ===========================================-->
-   <!-- <div class="col-sm-3 about" *ngIf="showRight">
-      <div class="info">
-         <div class="img-avatar">
-            <img src="{{ chat.avt }}" alt="avatar">
-         </div>
-         <h2> {{ chat.name }} </h2>
-         <p style="text-align: center;">{{ chat.phone }}</p>
-         <p style="text-align: center;">{{ chat.email }}</p>
-         <p class="line"></p>
-      </div>
-      <div class="share-file">
-         <div class="tittle">
-            <p>TỆP ĐÃ CHIA SẺ</p>
-            <span class="icon-dropdown" (click)="toggleFile()">
-               <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
-            </span>
-         </div>
-         <div class="file" *ngIf="showFile">
-            <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
-            <p><span>Noi dung hoi nghi.pdf</span></p>
-         </div>
-         <p class="line"></p>
-      </div>
-      <div class="share-img">
-         <div class="tittle">
-            <p>ẢNH ĐÃ CHIA SẺ</p>
-            <span class="icon-dropdown" (click)="toggleImg()">
-               <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
-            </span>
-         </div>
-         <div class="row img-share" *ngIf="showImg">
-            <div class="test">
-               <div class="share-test">
-                  <img src="../../../assets/IMG/Avatar/1.jpg" class="image-share img-responsive">
-               </div>
-               <div class="share-test">
-                  <img src="../../../assets/IMG/Avatar/2.jpg" class="image-share img-responsive">
-               </div>
-               <div class="share-test">
-                  <img src="../../../assets/IMG/Avatar/3.jpg" class="image-share img-responsive">
-               </div>
-            </div>
-
-         </div>
-      </div>
-   </div> -->
-   <!--================================== PHAN THONG TIN ===========================================-->
+   <!-----------=======================  END HEADER CONTENT ==========================    ----------->
    <div class="messeage">
+<!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
       <div class="info-messeage">
-          <div style="height: 760px;">
-             <div class="i" style="height: 100%;">
-                  <div style="overscroll-behavior: contain;">
-                     <div class="info-content">
-                        <div class="info-image">
-                            <div class="image">
-                                <img src="../../../assets/IMG/Avatar/1.jpg" alt="">
-                            </div>
+         <div style="height: 760px;">
+            <div class="i" style="height: 100%;">
+               <div style="overscroll-behavior: contain;">
+                  <div class="info-content">
+                     <div class="info-image">
+                        <div class="image">
+                           <img src="../../../assets/IMG/Avatar/1.jpg" alt="">
                         </div>
-                        <div class="info-status">
-                           <p style="text-align: center;">{{ chat.phone }}</p>
-                           <p style="text-align: center;">{{ chat.email }}</p>
-                           <p class="line"></p>
+                     </div>
+                     <div class="info-status">
+                        <p style="text-align: center;">{{ chat.phone }}</p>
+                        <p style="text-align: center;">{{ chat.email }}</p>
+                        <p class="line"></p>
+                     </div>
+                     <div class="share-file">
+                        <div class="tittle" (click)="toggleFile()">
+                           <p>TỆP ĐÃ CHIA SẺ</p>
+                           <span class="icon-dropdown">
+                              <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
+                           </span>
                         </div>
-                        <div class="share-file">
-                           <div class="tittle" (click)="toggleFile()">
-                              <p>TỆP ĐÃ CHIA SẺ</p>
-                              <span class="icon-dropdown">
-                                 <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
-                              </span>
-                           </div>
-                           <div class="file" *ngIf="showFile">
-                              <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
-                              <p><span>Noi dung hoi nghi.pdf</span></p>
-                           </div>
-                           <p class="line"></p>
+                        <div class="file" *ngIf="showFile">
+                           <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
+                           <p *ngFor="let file of this.chat.listMesseage">
+                              <span *ngIf="file.type == 'file'">{{ file.content }}</span>
+                           </p>
                         </div>
+                        <p class="line"></p>
+                     </div>
 
-                        <div class="share-img">
-                           <div class="tittle"  (click)="toggleImg()">
-                              <p>ẢNH ĐÃ CHIA SẺ</p>
-                              <span class="icon-dropdown">
-                                 <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
-                              </span>
-                           </div>
-                           <div class="img-share" *ngIf="showImg">
-                              <div class="test">
-                                 <div class="share-test">
-                                    <img src="../../../assets/IMG/Avatar/1.jpg" class="image-share img-responsive">
-                                 </div>
-                                 <div class="share-test">
-                                    <img src="../../../assets/IMG/Avatar/2.jpg" class="image-share img-responsive">
-                                 </div>
-                                 <div class="share-test">
-                                    <img src="../../../assets/IMG/Avatar/3.jpg" class="image-share img-responsive">
-                                 </div>
+                     <div class="share-img">
+                        <div class="tittle" (click)="toggleImg()">
+                           <p>ẢNH ĐÃ CHIA SẺ</p>
+                           <span class="icon-dropdown">
+                              <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
+                           </span>
+                        </div>
+                        <div class="img-share" *ngIf="showImg">
+                           <div class="test">
+                              <div class="share-test" *ngFor="let img of this.chat.listMesseage" class="img-list">
+                                 <img [src]="img.content" class="image-share img-responsive"
+                                    *ngIf="img.type == 'image'">
                               </div>
-                  
                            </div>
+                        </div>
                      </div>
                   </div>
-             </div>
-          </div>
-      </div>
-
-
-   </div>
-   <div class="content-messeage">
-      <div class="content" #scrollframe>
-         <div class="messages">
-            <ul>
-               <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
-                  <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                  <p> {{ messeage.content }} </p>
-               </li>
-            </ul>
+               </div>
+            </div>
          </div>
       </div>
-      <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm">
-      <div class="send-view">
-         <div class="send"><img src="../../../assets/ICON/IconAppChat/10.svg" alt="send file"></div>
-         <div class="send"><img src="../../../assets/ICON/IconAppChat/9.svg" alt="send file"></div>
-         <!-- <div class="send"><span class="buzz">
-                 <p>Buzz!</p>
-             </span></div> -->
-         <div class="send input-message">
-            <input type="text" class="form-control" name="message" id="input-message" ngModel
-            placeholder="Nhập nội dung tin nhắn">
-             <img src="../../../assets/ICON/IconAppChat/7.svg" alt="icon">
+<!-----------=======================   END THONG TIN MESSEAGE ==========================    ----------->
+
+<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
+      <div class="content-messeage">
+         <div class="content" #scrollframe>
+            <div class="messages">
+               <ul>
+                  <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
+                     <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                     <img class="img-preview" *ngIf="messeage.type === 'image'" [src]="messeage.content" />
+                     <a href="#" *ngIf="messeage.type === 'file'">{{ messeage.content }}</a>
+                     <p *ngIf="messeage.type === 'text'">{{ messeage.content }}</p>
+                  </li>
+               </ul>
+            </div>
          </div>
-     </div>
-   </form>
+         <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm">
+            <div class="send-view">
+               <label class="send">
+                  <img src="../../../assets/ICON/IconAppChat/10.svg" alt="send file">
+                  <input type="file">
+               </label>
+               <label class="send">
+                  <img src="../../../assets/ICON/IconAppChat/9.svg" alt="send file">
+                  <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+               </label>
+               <label class="send">
+                  <span class="buzz">
+                     <p>Buzz!</p>
+                  </span>
+               </label>
+               <div class="send input-message">
+                  <input type="text" class="form-control" name="message" id="input-message" ngModel
+                     placeholder="Nhập nội dung tin nhắn">
+                  <img src="../../../assets/ICON/IconAppChat/7.svg" alt="icon">
+               </div>
+            </div>
+         </form>
+      </div>
+<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
    </div>
-</div>

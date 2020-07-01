@@ -5,18 +5,21 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-@Component({
-  selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
-})
+class ImageSpinnet {
+  constructor(public src: string, public file: File) { }
+}
+
+  @Component({
+    selector: 'app-view',
+    templateUrl: './view.component.html',
+    styleUrls: ['./view.component.scss']
+  })
 export class ViewComponent implements OnInit {
 
-  chat: any;
+  chat: Chat;
   showFile: boolean = true;
   showImg: boolean = true;
   showRight: boolean = true;
-  messeages: any[];
   new: any;
   classView: any = 'col-sm-9 content-view';
 
@@ -25,26 +28,16 @@ export class ViewComponent implements OnInit {
     private chatService: ChatService,
   ) {
     route.params.subscribe(val => {
-      const id = +this.route.snapshot.paramMap.get('id');
-    //  console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap)}`);
-      this.chatService.getChat(id).subscribe(chat => this.chat = chat);   
-    //  console.log(this.chat);
+      this.getConversationById();
     });
   }
 
-  ngOnInit(): void {
-    // this.route.data
-    //   .subscribe((data: { chat: Chat }) => {
-    //     this.chat = data.chat;
-    //     this.messeages = data.chat.listMesseage;
-    //   });
+  ngOnInit(): void { }
+
+  getConversationById() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.chatService.getChat(id).subscribe(chat => this.chat = chat);
   }
- 
-   
-  // getParamId() {
-  //   const id = +this.route.snapshot.paramMap.get('id');
-  //   console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap.get('id'))}`);
-  // }
 
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
@@ -53,7 +46,8 @@ export class ViewComponent implements OnInit {
       id: this.chat.listMesseage.length + 1,
       content: sendForm.value.message,
       time: Date(),
-      fromMe: false
+      fromMe: false,
+      type: 'text'
     }
 
     if (this.new) {
@@ -61,7 +55,28 @@ export class ViewComponent implements OnInit {
       this.chat.listMesseage.push(this.new);
     }
   }
+  // Upload file
+  selectedFile: ImageSpinnet;
+  processFile(imageInput: any) {
+    debugger
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
 
+    reader.addEventListener('load', (event: any) => {
+      debugger
+      this.selectedFile = new ImageSpinnet(event.target.result, file);
+      let message: any = {
+        id: this.chat.listMesseage.length + 1,
+        content: this.selectedFile.src,
+        time: Date(),
+        type: "image",
+        fromMe: false,
+      };
+      this.chat.listMesseage.push(message)
+    });
+    reader.readAsDataURL(file);
+  }
+ // Show Hide
   toggleFile() {
     this.showFile = !this.showFile;
   }
@@ -76,8 +91,8 @@ export class ViewComponent implements OnInit {
     else {
       this.classView = "col-sm-9 content-view";
     }
-
   }
+ // Scoll bar messeage
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
 
@@ -106,3 +121,4 @@ export class ViewComponent implements OnInit {
     });
   }
 }
+

@@ -9,26 +9,25 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
 
+export class ListComponent implements OnInit {
   chats: Chat[];
   filterChats: Chat[] = [];
   checkActive: number = 0;
   idParam: number;
 
-  constructor(private chatService: ChatService, private route: ActivatedRoute,) {
+  constructor(private chatService: ChatService, private route: ActivatedRoute,) {}
 
+  // ===================== FILTER ==========================
+  _keySearchFilter = '';
+
+  get keySearchFilter(): string {
+    return this._keySearchFilter;
   }
 
-  _listFilter = '';
-
-  get listFilter(): string {
-    return this._listFilter;
-  }
-
-  set listFilter(value: string) {
-    this._listFilter = value;
-    this.filterChats = this.listFilter ? this.performFilter(this.listFilter) : this.chats;
+  set keySearchFilter(value: string) {
+    this._keySearchFilter = value;
+    this.filterChats = this.keySearchFilter ? this.performFilter(this.keySearchFilter) : this.chats;
     console.log(`This is list chat = ${JSON.stringify(this.filterChats)}`);
   }
 
@@ -38,18 +37,21 @@ export class ListComponent implements OnInit {
     return this.chats.filter((chat: any) =>
       chat.name.toLocaleLowerCase().indexOf(filterBy) > -1);
   }
+ // ===================== FILTER ================
 
   ngOnInit(): void {
+    this.getConvesation();
+    // this.idParam = +this.route.snapshot.firstChild.paramMap.get('id');
+    // console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.idParam)}`);
+  }
+  getConvesation() {
     this.chatService.getInfo().subscribe(
       (getChats) => {
         this.chats = getChats;
         this.filterChats = this.chats;
       }
     )
-    this.idParam = +this.route.snapshot.firstChild.paramMap.get('id');
-    console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.idParam)}`);
   }
-
   // ngClass
   getSeen(chat) {
     return {
@@ -76,6 +78,4 @@ export class ListComponent implements OnInit {
     this.getAmoutNewMesseage(chat);
     this.getActive(chat);
   }
-
-
 }

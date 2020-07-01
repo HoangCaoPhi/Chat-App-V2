@@ -1,19 +1,20 @@
 <div class="contact-líst">
 	<div class="contact-view">
-		<!-- Phần tìm kiếm -->
+<!-- ========================== SEARCH ===============================-->
 		<div class="row search">
 			<div class="col-sm-10">
 				<div class="input-contact">
 					<input type="text" class="form-control" placeholder="Tìm kiếm cuộc trò chuyện"
-						[(ngModel)]='listFilter'>
+						[(ngModel)]='keySearchFilter'>
 				</div>
 			</div>
 			<div class="col-sm-2 btn-add">
 				<img src="./../../../assets/ICON/IconboxChat/23.svg" alt="">
 			</div>
 		</div>
-		<!-- Phần tìm kiếm -->
-		<!-- Phần List Contact -->
+<!-- ========================== END SEARCH ===============================-->
+
+<!-- ========================== CONTACT LIST =============================-->
 		<div id="contacts">
 			<ul>
 				<li class="contact" 
@@ -21,25 +22,28 @@
 					[routerLink]="[chat.id]"
 					(click) = "seenMesseage(chat)"
 					[ngClass]="getActive(chat)">
-				>
+
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img [src]="chat.avt" alt="" />
+
 						<div class="meta">
 							<p class="name" [ngClass]="getSeen(chat)">{{ chat.name }}</p>
 							<p class="preview" [ngClass]="getSeen(chat)">{{  chat.lastMesseage }}</p>
 						</div>
+
 						<div class="meta status">
 							<p class="time">14:18</p>
 							<p>
 								<span class="badge badge-light"
-									[ngClass]="getAmoutNewMesseage(chat)">{{ chat.amoutNewMesseage }}</span>
+								[ngClass]="getAmoutNewMesseage(chat)">{{ chat.amoutNewMesseage }}</span>
 							</p>
 						</div>
+						
 					</div>
 				</li>
 			</ul>
 		</div>
-		<!-- Phần List Contact -->
+<!-- ========================== END CONTACT LIST =============================-->
 	</div>
 </div>

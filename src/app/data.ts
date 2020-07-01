@@ -14,34 +14,53 @@ export const Data: Chat[] = [
         listMesseage: [
             {
                 id: 1,
-                content: 'Hội nghị lãnh đạo vừa qua!',
+                content: 'Hội nghị lãnh đạo vừa qua! Hội lãnh đạo vừa qua! Hội nghị lãnh đạo vừa qua! Hội nghị lãnh đạo vừa qua! Hội nghị lãnh đạo vừa qua!',
                 time: '14:48',
+                type: 'text',
                 fromMe: false
             },
             {
                 id: 2,
                 content: 'Đã thống nhất',
                 time: '14:49',
+                type: 'text',
                 fromMe: false
             },
             {
                 id: 3,
-                content: 'Thế giới',
+                content: 'Thế giới Hội nghị lãnh đạo vừa qua! Hội lãnh đạo vừa qua! Hội nghị lãnh đạo vừa qua! Hội nghị lãnh đạo vừa qua! Hội nghị lãnh đạo vừa qua!',
                 time: '14:49',
+                type: 'text',
                 fromMe: true
             },
             {
                 id: 4,
                 content: 'Hom nay co di lam khong',
                 time: '14:49',
+                type: 'text',
                 fromMe: true
             },
             {
                 id: 5,
                 content: 'Hom nay co di lam khong',
                 time: '14:49',
+                type: 'text',
                 fromMe: false
             },
+            {
+                id: 6,
+                content: 'https://9mobi.vn/cf/images/2015/03/nkk/anh-dep-1.jpg',
+                time: '14:49',
+                type: 'image',
+                fromMe: true
+            },
+            {
+                id: 7,
+                content: 'PDF.dpf',
+                time: '14:49',
+                type: 'file',
+                fromMe: false
+            }
         ]
     },
     {
