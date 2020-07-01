@@ -11,10 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: ':id',
-        component: ViewComponent,
-        resolve: {
-          chat: ChatDetailService
-        }
+        component: ViewComponent
       }
     ]
   }

@@ -7,7 +7,8 @@ export const Data: Chat[] = [
         lastMesseage: 'Hom nay co di lam khong',
         lastTime: '14:68',
         avt: './../../../assets/IMG/Avatar/1.jpg',
-        notSeen: 4,
+        amoutNewMesseage: 4,
+        seenStatus: 1,
         phone: '0986789123',
         email: 'daoduckhiem@gmail.com',
         listMesseage: [
@@ -49,7 +50,8 @@ export const Data: Chat[] = [
         lastMesseage: 'Hom nay co di lam khong',
         lastTime: '14:68',
         avt: './../../../assets/IMG/Avatar/2.jpg',
-        notSeen: 4,
+        amoutNewMesseage: 0,
+        seenStatus: 0,
         phone: '09867891456',
         email: 'tranhaiduong@gmail.com',
         listMesseage: [
@@ -91,7 +93,8 @@ export const Data: Chat[] = [
         lastMesseage: 'Hom nay co di lam khong',
         lastTime: '14:68',
         avt: './../../../assets/IMG/Avatar/3.jpg',
-        notSeen: 4,
+        amoutNewMesseage: 5,
+        seenStatus: 1,
         phone: '09867891456',
         email: 'doducdung@gmail.com',
         listMesseage: [
@@ -133,7 +136,8 @@ export const Data: Chat[] = [
         lastMesseage: 'Bay gio may gio roi',
         lastTime: '14:68',
         avt: './../../../assets/IMG/Avatar/4.jpg',
-        notSeen: 4,
+        amoutNewMesseage: 0,
+        seenStatus: 0,
         phone: '0986789123',
         email: 'nguyenvanthe@gmail.com',
         listMesseage: [
@@ -175,7 +179,8 @@ export const Data: Chat[] = [
         lastMesseage: 'Hom nay co di lam khong',
         lastTime: '14:68',
         avt: './../../../assets/IMG/Avatar/5.jpg',
-        notSeen: 4,
+        amoutNewMesseage: 4,
+        seenStatus: 1,
         phone: '0986789123',
         email: 'daoduckhiem@gmail.com',
         listMesseage: [
@@ -217,7 +222,8 @@ export const Data: Chat[] = [
         lastMesseage: 'Hom nay co di lam khong',
         lastTime: '14:68',
         avt: './../../../assets/IMG/Avatar/2.jpg',
-        notSeen: 4,
+        amoutNewMesseage: 0,
+        seenStatus: 0,
         phone: '0986789123',
         email: 'daoduckhiem@gmail.com',
         listMesseage: [

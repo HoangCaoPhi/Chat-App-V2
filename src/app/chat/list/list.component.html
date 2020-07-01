@@ -16,19 +16,24 @@
 		<!-- Phần List Contact -->
 		<div id="contacts">
 			<ul>
-				<li class="contact" *ngFor="let chat of filterChats" [routerLink]="[chat.id]">
+				<li class="contact" 
+					*ngFor="let chat of filterChats" 
+					[routerLink]="[chat.id]"
+					(click) = "seenMesseage(chat)"
+					[ngClass]="getActive(chat)">
+				>
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img [src]="chat.avt" alt="" />
 						<div class="meta">
-							<p class="name">{{ chat.name }}</p>
-							<p class="preview">{{  chat.lastMesseage }}</p>
+							<p class="name" [ngClass]="getSeen(chat)">{{ chat.name }}</p>
+							<p class="preview" [ngClass]="getSeen(chat)">{{  chat.lastMesseage }}</p>
 						</div>
 						<div class="meta status">
 							<p class="time">14:18</p>
-							<p class="seen"> 
-								<span class="badge badge-light">9</span>
-								<span class="sr-only">unread messages</span>
+							<p>
+								<span class="badge badge-light"
+									[ngClass]="getAmoutNewMesseage(chat)">{{ chat.amoutNewMesseage }}</span>
 							</p>
 						</div>
 					</div>

@@ -205,15 +205,20 @@
 	width: 100%;
  }
  .content-messeage .content {
-    height: 708px;
+    height: 815px;
     position: relative;
     padding: 0 0 0 12px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
  }
+//  .content-messeage .content::-webkit-scrollbar { 
+//     width: 3px;
+// 	background: transparent;
+//  }
 
- .content-messeage .content:hover{
-    overflow-y: scroll;
- }
+//  .content-messeage .content:hover{
+//     overflow-y: scroll;
+//  }
  .content-messeage .send {
     border-top: none;
     position: relative;

@@ -171,7 +171,7 @@
       <div class="content" #scrollframe>
          <div class="messages">
             <ul>
-               <li *ngFor="let messeage of messeages" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
+               <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
                   <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                   <p> {{ messeage.content }} </p>
                </li>

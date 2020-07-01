@@ -5,7 +5,8 @@ export interface Chat {
     lastMesseage: string;
     avt: string;
     lastTime: string;
-    notSeen: number;
+    amoutNewMesseage: number;
+    seenStatus: number,
     phone?:string;
     email?:string;
     listMesseage: Messeage[];

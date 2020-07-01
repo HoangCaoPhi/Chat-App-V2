@@ -24,27 +24,33 @@ export class ViewComponent implements OnInit {
     private route: ActivatedRoute,
     private chatService: ChatService,
   ) {
-    // route.params.subscribe(val => {
-    //   const id = +this.route.snapshot.paramMap.get('id');
-    //   console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap)}`);
-    //   this.chatService.getChat(id).subscribe(chat => this.chat = chat);   
-    // });
+    route.params.subscribe(val => {
+      const id = +this.route.snapshot.paramMap.get('id');
+    //  console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap)}`);
+      this.chatService.getChat(id).subscribe(chat => this.chat = chat);   
+    //  console.log(this.chat);
+    });
   }
 
   ngOnInit(): void {
-    this.route.data
-      .subscribe((data: { chat: Chat }) => {
-        this.chat = data.chat;
-        this.messeages = data.chat.listMesseage;
-      });
+    // this.route.data
+    //   .subscribe((data: { chat: Chat }) => {
+    //     this.chat = data.chat;
+    //     this.messeages = data.chat.listMesseage;
+    //   });
   }
-
+ 
+   
+  // getParamId() {
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.route.snapshot.paramMap.get('id'))}`);
+  // }
 
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
     this.new =
     {
-      id: this.messeages.length + 1,
+      id: this.chat.listMesseage.length + 1,
       content: sendForm.value.message,
       time: Date(),
       fromMe: false
