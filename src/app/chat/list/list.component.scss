@@ -6,6 +6,8 @@
 	width: auto;
 	position: relative;
 	min-width: 300px;
+	flex: 0 0 25%;
+    max-width: 420px;
 
 	.contact-líst:hover {
 		overflow-y: scroll;
