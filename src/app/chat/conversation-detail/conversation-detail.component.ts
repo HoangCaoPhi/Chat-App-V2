@@ -10,9 +10,9 @@ class ImageSpinnet {
 }
 
   @Component({
-    selector: 'app-view',
-    templateUrl: './view.component.html',
-    styleUrls: ['./view.component.scss']
+    selector: 'app-conversation-detail',
+    templateUrl: './conversation-detail.component.html',
+    styleUrls: ['./conversation-detail.component.scss']
   })
 export class ViewComponent implements OnInit {
 

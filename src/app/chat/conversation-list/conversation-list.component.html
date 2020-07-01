@@ -26,7 +26,8 @@
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img [src]="chat.avt" alt="" />
-
+						<img class="green" src="../../../assets/images/green_sphere.svg"
+						alt="avatar-conversation">
 						<div class="meta">
 							<p class="name" [ngClass]="getSeen(chat)">{{ chat.name }}</p>
 							<p class="preview" [ngClass]="getSeen(chat)">{{  chat.lastMesseage }}</p>
@@ -35,7 +36,7 @@
 						<div class="meta status">
 							<p class="time">14:18</p>
 							<p>
-								<span class="badge badge-light"
+								<span class="badge badge-light newMesseage" 
 								[ngClass]="getAmoutNewMesseage(chat)">{{ chat.amoutNewMesseage }}</span>
 							</p>
 						</div>

@@ -15,7 +15,7 @@
     padding-left: 16px;
 }
 .view .header-content .head-left {
-	align-items: center;
+    align-items: center;
     display: flex;
     font-size: 14px;
     padding: 0;
@@ -32,13 +32,15 @@
 	border-radius: 50%;
 }
 .view .header-content .head-left .info{
-	align-items: flex-start;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     height: 32px;
     justify-content: center;
 }
 .view .header-content .head-left .info .info-username {
+    display: block;
+    white-space: nowrap;
 	font-size: 15px;
     font-weight: bold;
 }
@@ -46,8 +48,14 @@
 	color: rgba(0, 0, 0, .40);
 	font-size: 12px;
 	font-weight: normal;
-	margin-top: 2px;
-	vertical-align: middle;
+	margin: 2px 0px 10px;
+    vertical-align: middle;
+    line-height: 17.1492px;
+    position: relative; 
+    left: 0px; 
+    top: -7px;
+
+    
 }
 
 .view .header-content .head-right ul{
@@ -86,6 +94,7 @@
     flex: 0 2 33.33%;
     max-width: 420px;
     min-width: 200px;
+    background-color: #f8f8f8;
 }
 .messeage .info-messeage .i {
     direction: ltr;
@@ -130,17 +139,38 @@
     text-align: center;
     white-space: initial;
  }
+ .info-status p:nth-child(1) {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #212121;
+ }
+ .info-status p:nth-child(2) {
+    font-size: 13px;
+    letter-spacing: -.13px;
+    color: #666666;
+ }
+ .info-status p:nth-child(3) {
+    font-size: 13px;
+    letter-spacing: -.13px;
+    color: #666666;
+ }
                 /*======== FILE  SHARE ===== */
 .share-file,
 .share-img {
 	margin: 0 auto;
 	width: 80%;
 }
-.tittle {
+.title {
 	display: flex;
 	align-items: center;
 }
-.tittle img {
+.title .name-share {
+    font-size: 13px;
+    letter-spacing: -.13px;
+    color: #666666;
+}
+.title img {
 	width: 16px;
 	height: 16px;
 }
@@ -184,10 +214,10 @@
     margin-right: 10px;
 
 }
-.share-file .tittle:hover {
+.share-file .title:hover {
     cursor: pointer;
 }
-.share-img .tittle:hover {
+.share-img .title:hover {
     cursor: pointer;
 }
 /*=============================================== END ABOUT MESSEAGE ========================== */ 

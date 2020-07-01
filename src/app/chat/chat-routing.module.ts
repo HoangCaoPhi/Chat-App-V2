@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ViewComponent } from './view/view.component';
-import { ChatDetailService } from '../_services/chat-detail.service';
+import { ViewComponent } from './conversation-detail/conversation-detail.component';
 
 const routes: Routes = [
   {

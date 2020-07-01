@@ -5,9 +5,9 @@ import { ChatService } from '../../_services/chat.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: 'app-conversation-list',
+  templateUrl: './conversation-list.component.html',
+  styleUrls: ['./conversation-list.component.scss']
 })
 
 export class ListComponent implements OnInit {
