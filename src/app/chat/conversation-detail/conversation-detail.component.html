@@ -7,9 +7,9 @@
          </div>
          <div class="info">
             <h2 class="info-username">
-                <span>
+               <span>
                   {{ chat.name }}
-                </span>
+               </span>
             </h2>
             <p class="info-active" *ngIf="!chat.isActive">hoạt động 12 phút trước</p>
             <p class="info-active" *ngIf="chat.isActive">Dang hoat dong</p>
@@ -38,7 +38,7 @@
    </div>
    <!-----------=======================  END HEADER CONTENT ==========================    ----------->
    <div class="messeage">
-<!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
+      <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
       <div class="info-messeage" *ngIf="showAboutRight">
          <div style="height: 760px;">
             <div class="i" style="height: 100%;">
@@ -62,13 +62,13 @@
                               <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
                            </span>
                         </div>
-                        <div *ngFor="let file of this.chat.listMesseage"  >
-                             <div class="file" *ngIf="file.type === 'file' &&  showFile">
-                                 <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
-                                 <p>
-                                    <span >{{ file.content }}</span>
-                                 </p>
-                             </div>
+                        <div *ngFor="let file of this.chat.listMesseage">
+                           <div class="file" *ngIf="file.type === 'file' &&  showFile">
+                              <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
+                              <p>
+                                 <span>{{ file.content }}</span>
+                              </p>
+                           </div>
                         </div>
                         <p class="line"></p>
                      </div>
@@ -88,11 +88,13 @@
                               </div>
                            </div> -->
                            <div class="row">
-                              <div class="col-md-4 col-sm-6 col-xs-12 bottom-25" *ngFor="let img of getImageMessegae(this.chat.listMesseage)">
-                                 <img class="image-share img-responsive"
-                                 *ngIf="img.type === 'image'" [src]="img.content" >
+                              <div class="col-md-4 col-sm-6 col-xs-12 bottom-25"
+                                 *ngFor="let img of getImageMessegae(this.chat.listMesseage)">
+                                 <img class="image-share img-responsive" *ngIf="img.type === 'image'"
+                                    [src]="img.content">
                               </div>
-                            </div>
+                           </div>
+
                         </div>
                      </div>
                   </div>
@@ -100,20 +102,37 @@
             </div>
          </div>
       </div>
-<!-----------=======================   END THONG TIN MESSEAGE ==========================    ----------->
+      <!-----------=======================   END THONG TIN MESSEAGE ==========================    ----------->
 
-<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
+      <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
       <div class="content-messeage">
          <div class="content" #scrollframe>
             <div class="messages">
                <ul>
                   <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
                      <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                     <img class="img-preview" *ngIf="messeage.type === 'image'" [src]="messeage.content" />
-                     <a href="#" *ngIf="messeage.type === 'file'" (click)="openFile(messeage.url)" >{{ messeage.content }}</a>
+                     <img class="img-preview" *ngIf="messeage.type === 'image'" [src]="messeage.content"
+                        data-toggle="modal" data-target="#myModal" />
+                     <a href="#" *ngIf="messeage.type === 'file'"
+                        (click)="openFile(messeage.url)">{{ messeage.content }}</a>
                      <p *ngIf="messeage.type === 'text'">{{ messeage.content }}</p>
                   </li>
                </ul>
+            </div>
+         </div>
+         <!-- Modal -->
+         <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+
+               <!-- Modal content-->
+               <div class="modal-content center">
+                  <div class="modal-body">
+                     <img
+                        src="https://i.picsum.photos/id/251/1200/768.jpg?hmac=mXTyjb16DN7BYSqYAdB6lhdEXHGQyjiXM4MAosr6dpU"
+                        alt="">
+                  </div>
+               </div>
+
             </div>
          </div>
          <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm">
@@ -139,5 +158,5 @@
             </div>
          </form>
       </div>
-<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
+      <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
    </div>

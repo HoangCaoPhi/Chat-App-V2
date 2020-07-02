@@ -159,5 +159,6 @@ export class ViewComponent implements OnInit {
       behavior: 'smooth'
     });
   }
+ 
 }
 
