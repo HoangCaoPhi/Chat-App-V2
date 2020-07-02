@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Chat } from '../../_models/chat';
 import { ChatService } from '../../_services/chat.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ComponentShareService } from '@app/_services/component-share.service';
 
 @Component({
   selector: 'app-conversation-list',
@@ -16,7 +18,9 @@ export class ListComponent implements OnInit {
   checkActive: number = 0;
   idParam: number;
 
-  constructor(private chatService: ChatService, private route: ActivatedRoute,) {}
+  constructor(private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService) {
+    this.getParam();
+  }
 
   // ===================== FILTER ==========================
   _keySearchFilter = '';
@@ -37,12 +41,10 @@ export class ListComponent implements OnInit {
     return this.chats.filter((chat: any) =>
       chat.name.toLocaleLowerCase().indexOf(filterBy) > -1);
   }
- // ===================== FILTER ================
+  // ===================== FILTER ================
 
   ngOnInit(): void {
     this.getConvesation();
-    // this.idParam = +this.route.snapshot.firstChild.paramMap.get('id');
-    // console.log(`this.route.snapshot.paramMap = ${JSON.stringify(this.idParam)}`);
   }
   getConvesation() {
     this.chatService.getInfo().subscribe(
@@ -64,11 +66,7 @@ export class ListComponent implements OnInit {
       'not-amout': chat.amoutNewMesseage === 0
     }
   }
-  getActive(chat) {
-    return {
-      'selected': this.checkActive === 1 && chat.id === this.idParam
-    }
-  }
+
   seenMesseage(chat) {
     chat.seenStatus = 0;
     chat.amoutNewMesseage = 0;
@@ -76,6 +74,29 @@ export class ListComponent implements OnInit {
 
     this.getSeen(chat);
     this.getAmoutNewMesseage(chat);
-    this.getActive(chat);
+  }
+
+  getActive(chat) {
+    if (chat.id === this.count) {
+      this.seenMesseage(chat);
+    }
+    return {
+      'selected': chat.id === this.count
+    }
+  }
+  // Du lieu duoc lay tu Content Messeage
+  count: number;
+
+  valueFromChildSubscription: Subscription;
+  getParam() {
+    this.valueFromChildSubscription = this.componentShareService.ValueFromChild.subscribe(
+      data => {
+        this.count = data;
+        console.log("This is a conversation id" + this.count);
+      }
+    );
+  }
+  ngOnDestroy() {
+    this.valueFromChildSubscription.unsubscribe();
   }
 }

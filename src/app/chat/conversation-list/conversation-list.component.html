@@ -1,6 +1,6 @@
 <div class="contact-líst">
 	<div class="contact-view">
-<!-- ========================== SEARCH ===============================-->
+		<!-- ========================== SEARCH ===============================-->
 		<div class="row search">
 			<div class="col-sm-10">
 				<div class="input-contact">
@@ -12,22 +12,18 @@
 				<img src="./../../../assets/ICON/IconboxChat/23.svg" alt="">
 			</div>
 		</div>
-<!-- ========================== END SEARCH ===============================-->
+		<!-- ========================== END SEARCH ===============================-->
 
-<!-- ========================== CONTACT LIST =============================-->
+		<!-- ========================== CONTACT LIST =============================-->
 		<div id="contacts">
 			<ul>
-				<li class="contact" 
-					*ngFor="let chat of filterChats" 
-					[routerLink]="[chat.id]"
-					(click) = "seenMesseage(chat)"
-					[ngClass]="getActive(chat)">
+				<li class="contact" *ngFor="let chat of filterChats" [routerLink]="[chat.id]"
+					(click)="seenMesseage(chat)" [ngClass]="getActive(chat)">
 
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img [src]="chat.avt" alt="" />
-						<img class="green" src="../../../assets/images/green_sphere.svg"
-						alt="avatar-conversation">
+						<img class="green" src="../../../assets/images/green_sphere.svg" alt="avatar-conversation" *ngIf = "chat.isActive">
 						<div class="meta">
 							<p class="name" [ngClass]="getSeen(chat)">{{ chat.name }}</p>
 							<p class="preview" [ngClass]="getSeen(chat)">{{  chat.lastMesseage }}</p>
@@ -36,15 +32,15 @@
 						<div class="meta status">
 							<p class="time">14:18</p>
 							<p>
-								<span class="badge badge-light newMesseage" 
-								[ngClass]="getAmoutNewMesseage(chat)">{{ chat.amoutNewMesseage }}</span>
+								<span class="badge badge-light newMesseage"
+									[ngClass]="getAmoutNewMesseage(chat)">{{ chat.amoutNewMesseage }}</span>
 							</p>
 						</div>
-						
+
 					</div>
 				</li>
 			</ul>
 		</div>
-<!-- ========================== END CONTACT LIST =============================-->
+		<!-- ========================== END CONTACT LIST =============================-->
 	</div>
 </div>

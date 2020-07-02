@@ -7,6 +7,7 @@ export interface Chat {
     lastTime: string;
     amoutNewMesseage: number;
     seenStatus: number,
+    isActive ?: boolean,
     phone?:string;
     email?:string;
     listMesseage: Messeage[];

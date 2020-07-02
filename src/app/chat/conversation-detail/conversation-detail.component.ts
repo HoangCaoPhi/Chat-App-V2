@@ -1,31 +1,35 @@
-import { Component, OnInit, Input, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChildren, QueryList, EventEmitter, Output } from '@angular/core';
 import { Chat } from '../../_models/chat';
 import { ChatService } from '../../_services/chat.service';
+import { ComponentShareService } from '../../_services/component-share.service';
+
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-class ImageSpinnet {
+class FileSpinnet {
   constructor(public src: string, public file: File) { }
 }
 
-  @Component({
-    selector: 'app-conversation-detail',
-    templateUrl: './conversation-detail.component.html',
-    styleUrls: ['./conversation-detail.component.scss']
-  })
+@Component({
+  selector: 'app-conversation-detail',
+  templateUrl: './conversation-detail.component.html',
+  styleUrls: ['./conversation-detail.component.scss']
+})
 export class ViewComponent implements OnInit {
 
   chat: Chat;
+  converstationId: number;
   showFile: boolean = true;
   showImg: boolean = true;
-  showRight: boolean = true;
+  showAboutRight: boolean = true;
   new: any;
   classView: any = 'col-sm-9 content-view';
 
   constructor(
     private route: ActivatedRoute,
     private chatService: ChatService,
+    private componentShareService: ComponentShareService
   ) {
     route.params.subscribe(val => {
       this.getConversationById();
@@ -36,9 +40,18 @@ export class ViewComponent implements OnInit {
 
   getConversationById() {
     const id = +this.route.snapshot.paramMap.get('id');
+    console.log("detail id " + id);
+    this.componentShareService.notifyCountValue(id);
     this.chatService.getChat(id).subscribe(chat => this.chat = chat);
   }
 
+  // @Output() getParam = new EventEmitter<number>();
+  // getIdConversation() {
+  //     this.getParam.emit(this.converstationId);
+  // }
+  // sendConversationId() {
+
+  // }
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
     this.new =
@@ -56,15 +69,15 @@ export class ViewComponent implements OnInit {
     }
   }
   // Upload file
-  selectedFile: ImageSpinnet;
-  processFile(imageInput: any) {
+  selectedFile: FileSpinnet;
+  processImageFile(imageInput: any) {
     debugger
     const file: File = imageInput.files[0];
     const reader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
       debugger
-      this.selectedFile = new ImageSpinnet(event.target.result, file);
+      this.selectedFile = new FileSpinnet(event.target.result, file);
       let message: any = {
         id: this.chat.listMesseage.length + 1,
         content: this.selectedFile.src,
@@ -76,7 +89,30 @@ export class ViewComponent implements OnInit {
     });
     reader.readAsDataURL(file);
   }
- // Show Hide
+
+  processFile(fileInput: any) {
+    const file: File = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      debugger
+      this.selectedFile = new FileSpinnet(event.target.result, file);
+      let message: any = {
+        id: this.chat.listMesseage.length + 1,
+        content: this.selectedFile.file.name,
+        url: this.selectedFile.src,
+        time: Date(),
+        type: "file",
+        fromMe: false,
+      };
+      this.chat.listMesseage.push(message)
+    });
+    reader.readAsDataURL(file);
+  }
+  openFile(url: string) {
+    window.open(url, "");
+  }
+  // Show Hide
   toggleFile() {
     this.showFile = !this.showFile;
   }
@@ -84,15 +120,18 @@ export class ViewComponent implements OnInit {
     this.showImg = !this.showImg;
   }
   toggleInfo() {
-    this.showRight = !this.showRight;
-    if (!this.showRight) {
+    this.showAboutRight = !this.showAboutRight;
+    if (!this.showAboutRight) {
       this.classView = "col-sm-12 content-view";
     }
     else {
       this.classView = "col-sm-9 content-view";
     }
   }
- // Scoll bar messeage
+  getImageMessegae(img) {
+    return img.filter(image => image.type === 'image');
+  }
+  // Scoll bar messeage
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
 

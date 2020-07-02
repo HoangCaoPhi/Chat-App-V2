@@ -94,6 +94,7 @@
     flex: 0 2 33.33%;
     max-width: 420px;
     min-width: 200px;
+    // overflow-y: scroll;
     background-color: #f8f8f8;
 }
 .messeage .info-messeage .i {
@@ -181,14 +182,16 @@
 .file {
 	font-size: 13px;
 	letter-spacing: -.13px;
-	color: #666666;
+    color: #666666;
+    display: flex;
+    cursor: pointer;
 }
 .file p {
 	padding: 6px 5px;
 }
 
-.file {
-	display: flex;
+.file p span {
+    color: rgb(53, 127, 210);
 }
 
 .file img {
@@ -202,18 +205,22 @@
 }
 
 .image-share {
-	width: 64px;
-	height: 64px;
+	width: 100px;
+	height: 100px;
 }
- .test {
-	display: flex;
-	margin: 10px auto;
-	margin-left: 15px;
+.bottom-25 {
+    margin-bottom: 25px;
+    cursor: pointer;
 }
-.share-test {
-    margin-right: 10px;
-
-}
+//  .test {
+// 	display: flex;
+// 	margin: 10px auto;
+// 	margin-left: 15px;
+// }
+// .share-test {
+//     margin-right: 10px;
+//     flex: 30%;
+// }
 .share-file .title:hover {
     cursor: pointer;
 }
@@ -325,12 +332,16 @@
     float: left;
     width: 350px;
     height: 350px;
+    cursor: pointer;
 }
 .messages ul li.replies .img-preview {
     border-radius: 5px;
     float: right;
-    width: auto;
-    max-height: 400px;;
+    width: 350px;
+    height: 350px;
+    cursor: pointer;
+    // width: auto;
+    // max-height: 400px;;
 }
 /*=============================================== END CONTENT MESSEAGE ========================== */ 
 .content-messeage .send {

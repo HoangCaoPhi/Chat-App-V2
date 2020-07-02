@@ -11,6 +11,7 @@ export const Data: Chat[] = [
         seenStatus: 1,
         phone: '0986789123',
         email: 'daoduckhiem@gmail.com',
+        isActive: true,
         listMesseage: [
             {
                 id: 1,
@@ -60,6 +61,27 @@ export const Data: Chat[] = [
                 time: '14:49',
                 type: 'file',
                 fromMe: false
+            },
+            {
+                id: 8,
+                content: 'https://thuthuatnhanh.com/wp-content/uploads/2018/07/hinh-anh-thien-nhien-phong-canh-dep-nhat.jpg',
+                time: '14:49',
+                type: 'image',
+                fromMe: true
+            },
+            {
+                id: 9,
+                content: 'https://i.pinimg.com/originals/a0/dc/35/a0dc35e337a9c7bf922bf5edc022236d.jpg',
+                time: '14:49',
+                type: 'image',
+                fromMe: false
+            },
+            {
+                id: 10,
+                content: 'https://aphoto.vn/wp-content/uploads/2016/07/cach-chup-hinh-dep-bang-dien-thoai.jpg',
+                time: '14:49',
+                type: 'image',
+                fromMe: true
             }
         ]
     },
@@ -73,6 +95,7 @@ export const Data: Chat[] = [
         seenStatus: 0,
         phone: '09867891456',
         email: 'tranhaiduong@gmail.com',
+        isActive: false,
         listMesseage: [
             {
                 id: 1,
@@ -116,6 +139,7 @@ export const Data: Chat[] = [
         seenStatus: 1,
         phone: '09867891456',
         email: 'doducdung@gmail.com',
+        isActive: true,
         listMesseage: [
             {
                 id: 1,
@@ -159,6 +183,7 @@ export const Data: Chat[] = [
         seenStatus: 0,
         phone: '0986789123',
         email: 'nguyenvanthe@gmail.com',
+        isActive: false,
         listMesseage: [
             {
                 id: 1,
@@ -202,6 +227,7 @@ export const Data: Chat[] = [
         seenStatus: 1,
         phone: '0986789123',
         email: 'daoduckhiem@gmail.com',
+        isActive: true,
         listMesseage: [
             {
                 id: 1,

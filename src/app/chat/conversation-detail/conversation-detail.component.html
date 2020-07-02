@@ -11,24 +11,25 @@
                   {{ chat.name }}
                 </span>
             </h2>
-            <p class="info-active">hoạt động 12 phút trước</p>
+            <p class="info-active" *ngIf="!chat.isActive">hoạt động 12 phút trước</p>
+            <p class="info-active" *ngIf="chat.isActive">Dang hoat dong</p>
          </div>
       </div>
       <div class="head-right">
          <ul>
             <li>
-               <a href="">
+               <a>
                   <img src="./../../../assets/ICON/IconboxChat/8.svg" alt="search-icon" style="width: 20px;
                   height: 20px;">
                </a>
             </li>
-            <li>
-               <a href="">
-                  <img src="./../../../assets/ICON/IconAppChat/5.svg" alt="about-icon" (click)="toggleInfo()">
+            <li style="cursor: pointer;" (click)="toggleInfo()">
+               <a>
+                  <img src="./../../../assets/ICON/IconAppChat/5.svg" alt="about-icon">
                </a>
             </li>
             <li>
-               <a href="">
+               <a>
                   <img src="./../../../assets/ICON/IconAppChat/2.svg" alt="more-icon">
                </a>
             </li>
@@ -38,7 +39,7 @@
    <!-----------=======================  END HEADER CONTENT ==========================    ----------->
    <div class="messeage">
 <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
-      <div class="info-messeage">
+      <div class="info-messeage" *ngIf="showAboutRight">
          <div style="height: 760px;">
             <div class="i" style="height: 100%;">
                <div style="overscroll-behavior: contain;">
@@ -61,11 +62,13 @@
                               <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
                            </span>
                         </div>
-                        <div class="file" *ngIf="showFile">
-                           <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
-                           <p *ngFor="let file of this.chat.listMesseage">
-                              <span *ngIf="file.type == 'file'">{{ file.content }}</span>
-                           </p>
+                        <div *ngFor="let file of this.chat.listMesseage"  >
+                             <div class="file" *ngIf="file.type === 'file' &&  showFile">
+                                 <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
+                                 <p>
+                                    <span >{{ file.content }}</span>
+                                 </p>
+                             </div>
                         </div>
                         <p class="line"></p>
                      </div>
@@ -78,12 +81,18 @@
                            </span>
                         </div>
                         <div class="img-share" *ngIf="showImg">
-                           <div class="test">
-                              <div class="share-test" *ngFor="let img of this.chat.listMesseage" class="img-list">
+                           <!-- <div class="row">
+                              <div class="col-sm-4"  *ngFor="let img of this.chat.listMesseage">
                                  <img [src]="img.content" class="image-share img-responsive"
-                                    *ngIf="img.type == 'image'">
+                                    *ngIf="img.type === 'image'">
                               </div>
-                           </div>
+                           </div> -->
+                           <div class="row">
+                              <div class="col-md-4 col-sm-6 col-xs-12 bottom-25" *ngFor="let img of getImageMessegae(this.chat.listMesseage)">
+                                 <img class="image-share img-responsive"
+                                 *ngIf="img.type === 'image'" [src]="img.content" >
+                              </div>
+                            </div>
                         </div>
                      </div>
                   </div>
@@ -101,7 +110,7 @@
                   <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
                      <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                      <img class="img-preview" *ngIf="messeage.type === 'image'" [src]="messeage.content" />
-                     <a href="#" *ngIf="messeage.type === 'file'">{{ messeage.content }}</a>
+                     <a href="#" *ngIf="messeage.type === 'file'" (click)="openFile(messeage.url)" >{{ messeage.content }}</a>
                      <p *ngIf="messeage.type === 'text'">{{ messeage.content }}</p>
                   </li>
                </ul>
@@ -111,11 +120,11 @@
             <div class="send-view">
                <label class="send">
                   <img src="../../../assets/ICON/IconAppChat/10.svg" alt="send file">
-                  <input type="file">
+                  <input #fileInput type="file" (change)="processFile(fileInput)">
                </label>
                <label class="send">
                   <img src="../../../assets/ICON/IconAppChat/9.svg" alt="send file">
-                  <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+                  <input #imageInput type="file" accept="image/*" (change)="processImageFile(imageInput)">
                </label>
                <label class="send">
                   <span class="buzz">
