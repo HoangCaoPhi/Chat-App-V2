@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home';
+import { AppComponent } from './app.component';
 import { LoginComponent } from './login';
 import { AuthGuard } from './_helpers';
 
@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule),
     canActivate: [AuthGuard]
   },
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: AppComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '/chat' }

@@ -9,7 +9,7 @@
 				</div>
 			</div>
 			<div class="col-sm-2 btn-add">
-				<img src="./../../../assets/ICON/IconboxChat/23.svg" alt="">
+				<img src="/assets/ICON/IconboxChat/23.svg" alt="">
 			</div>
 		</div>
 		<!-- ========================== END SEARCH ===============================-->
@@ -23,7 +23,8 @@
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img [src]="chat.avt" alt="" />
-						<img class="green" src="../../../assets/images/green_sphere.svg" alt="avatar-conversation" *ngIf = "chat.isActive">
+						<img class="green" src="/assets/images/green_sphere.svg" alt="avatar-conversation"
+							*ngIf="chat.isActive">
 						<div class="meta">
 							<p class="name" [ngClass]="getSeen(chat)">{{ chat.name }}</p>
 							<p class="preview" [ngClass]="getSeen(chat)">{{  chat.lastMesseage }}</p>

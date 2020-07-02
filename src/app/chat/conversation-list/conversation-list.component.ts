@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Chat } from '../../_models/chat';
-import { ChatService } from '../../_services/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ComponentShareService } from '@app/_services/component-share.service';
+
+import { ComponentShareService } from '@app/services/component-share.service';
+import { Chat } from '../../_models/chat';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-conversation-list',
@@ -22,7 +22,12 @@ export class ListComponent implements OnInit {
     this.getParam();
   }
 
-  // ===================== FILTER ==========================
+  ngOnInit(): void {
+    this.getConvesation();
+  }
+  /*
+      Chức năng filter cuộc trò chuyện 
+  */
   _keySearchFilter = '';
 
   get keySearchFilter(): string {
@@ -41,11 +46,10 @@ export class ListComponent implements OnInit {
     return this.chats.filter((chat: any) =>
       chat.name.toLocaleLowerCase().indexOf(filterBy) > -1);
   }
-  // ===================== FILTER ================
 
-  ngOnInit(): void {
-    this.getConvesation();
-  }
+  /*
+          Lấy các cuộc trò chuyện
+   */
   getConvesation() {
     this.chatService.getInfo().subscribe(
       (getChats) => {
@@ -54,7 +58,9 @@ export class ListComponent implements OnInit {
       }
     )
   }
-  // ngClass
+  /* 
+        Them class vao DOM khi seen tin nhắn
+  */
   getSeen(chat) {
     return {
       'seen': !chat.seenStatus,
@@ -84,7 +90,9 @@ export class ListComponent implements OnInit {
       'selected': chat.id === this.count
     }
   }
-  // Du lieu duoc lay tu Content Messeage
+  /*
+        Lấy id và active thanh những cuộc trò chuyện
+  */
   count: number;
 
   valueFromChildSubscription: Subscription;

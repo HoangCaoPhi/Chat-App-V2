@@ -19,18 +19,20 @@
          <ul>
             <li>
                <a>
-                  <img src="./../../../assets/ICON/IconboxChat/8.svg" alt="search-icon" style="width: 20px;
+                  <img src="/assets/ICON/IconboxChat/8.svg" alt="search-icon" style="width: 20px;
                   height: 20px;">
                </a>
             </li>
             <li style="cursor: pointer;" (click)="toggleInfo()">
                <a>
-                  <img src="./../../../assets/ICON/IconAppChat/5.svg" alt="about-icon">
+                  <img 
+                     [src]="showAboutRight ? '/assets/ICON/IconAppChat/5.svg' : '/assets/ICON/IconAppChat/6.svg'" 
+                     alt="about-icon">
                </a>
             </li>
             <li>
                <a>
-                  <img src="./../../../assets/ICON/IconAppChat/2.svg" alt="more-icon">
+                  <img src="/assets/ICON/IconAppChat/2.svg" alt="more-icon">
                </a>
             </li>
          </ul>
@@ -40,13 +42,13 @@
    <div class="messeage">
       <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
       <div class="info-messeage" *ngIf="showAboutRight">
-         <div style="height: 760px;">
+         <!-- <div style="height: 760px;">
             <div class="i" style="height: 100%;">
-               <div style="overscroll-behavior: contain;">
+               <div style="overscroll-behavior: contain;"> -->
                   <div class="info-content">
                      <div class="info-image">
                         <div class="image">
-                           <img src="../../../assets/IMG/Avatar/1.jpg" alt="">
+                           <img src="/assets/IMG/Avatar/1.jpg" alt="">
                         </div>
                      </div>
                      <div class="info-status">
@@ -59,12 +61,12 @@
                         <div class="title" (click)="toggleFile()">
                            <p class="name-share">TỆP ĐÃ CHIA SẺ</p>
                            <span class="icon-dropdown">
-                              <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
+                              <img [src]="showFile ? '/assets/ICON/IconAppChat/13.svg' : '/assets/ICON/IconAppChat/19.svg'">
                            </span>
                         </div>
                         <div *ngFor="let file of this.chat.listMesseage">
                            <div class="file" *ngIf="file.type === 'file' &&  showFile">
-                              <p><span><img src="./../../../assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
+                              <p><span><img src="/assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
                               <p>
                                  <span>{{ file.content }}</span>
                               </p>
@@ -77,27 +79,27 @@
                         <div class="title" (click)="toggleImg()">
                            <p class="name-share">ẢNH ĐÃ CHIA SẺ</p>
                            <span class="icon-dropdown">
-                              <img src="./../../../assets/ICON/IconAppChat/13.svg" alt="dropdown">
+                              <img 
+                                 [src]="showImg ? '/assets/ICON/IconAppChat/13.svg' : '/assets/ICON/IconAppChat/19.svg'">
                            </span>
                         </div>
                         <div class="img-share" *ngIf="showImg">
-                           <!-- <div class="row">
-                              <div class="col-sm-4"  *ngFor="let img of this.chat.listMesseage">
-                                 <img [src]="img.content" class="image-share img-responsive"
-                                    *ngIf="img.type === 'image'">
-                              </div>
-                           </div> -->
                            <div class="row">
-                              <div class="col-md-4 col-sm-6 col-xs-12 bottom-25"
+                              <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 bottom-25"
                                  *ngFor="let img of getImageMessegae(this.chat.listMesseage)">
-                                 <img class="image-share img-responsive" *ngIf="img.type === 'image'"
-                                    [src]="img.content">
+                                 <img 
+                                     class="image-share img-responsive" 
+                                     *ngIf="img.type === 'image'"
+                                     [src]="img.content"   
+                                     data-toggle="modal" 
+                                     data-target="#myModal"
+                                     (click)="watchImagePreview(img.content)">     
                               </div>
                            </div>
 
-                        </div>
+                        <!-- </div>
                      </div>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </div>
@@ -111,11 +113,17 @@
                <ul>
                   <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
                      <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                     <img class="img-preview" *ngIf="messeage.type === 'image'" [src]="messeage.content"
-                        data-toggle="modal" data-target="#myModal" />
-                     <a href="#" *ngIf="messeage.type === 'file'"
-                        (click)="openFile(messeage.url)">{{ messeage.content }}</a>
-                     <p *ngIf="messeage.type === 'text'">{{ messeage.content }}</p>
+                     <img 
+                           class="img-preview"
+                           *ngIf="messeage.type === 'image'" 
+                           [src]="messeage.content"
+                           (click)="watchImagePreview(messeage.content)"
+                           data-toggle="modal" 
+                           data-target="#myModal" />
+
+                        <a *ngIf="messeage.type === 'file'"
+                           (click)="openFile(messeage.url)">{{ messeage.content }}</a>
+                        <p *ngIf="messeage.type === 'text'">{{ messeage.content }}</p>
                   </li>
                </ul>
             </div>
@@ -123,26 +131,25 @@
          <!-- Modal -->
          <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
-
                <!-- Modal content-->
                <div class="modal-content center">
                   <div class="modal-body">
                      <img
-                        src="https://i.picsum.photos/id/251/1200/768.jpg?hmac=mXTyjb16DN7BYSqYAdB6lhdEXHGQyjiXM4MAosr6dpU"
+                        src="{{  imagePreview }}"
                         alt="">
                   </div>
                </div>
-
             </div>
          </div>
+            <!-- Modal -->
          <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm">
             <div class="send-view">
                <label class="send">
-                  <img src="../../../assets/ICON/IconAppChat/10.svg" alt="send file">
+                  <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
                   <input #fileInput type="file" (change)="processFile(fileInput)">
                </label>
                <label class="send">
-                  <img src="../../../assets/ICON/IconAppChat/9.svg" alt="send file">
+                  <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
                   <input #imageInput type="file" accept="image/*" (change)="processImageFile(imageInput)">
                </label>
                <label class="send">
@@ -153,7 +160,7 @@
                <div class="send input-message">
                   <input type="text" class="form-control" name="message" id="input-message" ngModel
                      placeholder="Nhập nội dung tin nhắn">
-                  <img src="../../../assets/ICON/IconAppChat/7.svg" alt="icon">
+                  <img src="/assets/ICON/IconAppChat/7.svg" alt="icon">
                </div>
             </div>
          </form>

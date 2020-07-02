@@ -10,12 +10,12 @@ import { AppComponent } from './app.component';
 import { appRoutingModule } from './app-routing.module';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { HomeComponent } from './home';
+
 import { LoginComponent } from './login';
 
  
 import { ChatModule } from './chat/chat.module';
-import { ChatService } from './_services/chat.service';
+import { ChatService } from './services/chat.service';
 
 @NgModule({
     imports: [
@@ -27,7 +27,6 @@ import { ChatService } from './_services/chat.service';
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
         LoginComponent
     ],
     providers: [

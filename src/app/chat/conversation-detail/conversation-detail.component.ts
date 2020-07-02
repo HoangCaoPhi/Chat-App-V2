@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ElementRef, ViewChildren, QueryList, EventEmitter, Output } from '@angular/core';
-import { Chat } from '../../_models/chat';
-import { ChatService } from '../../_services/chat.service';
-import { ComponentShareService } from '../../_services/component-share.service';
-
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core'
+
+import { Chat } from '../../_models/chat';
+import { ChatService } from '../../services/chat.service';
+import { ComponentShareService } from '../../services/component-share.service';
+
 
 class FileSpinnet {
   constructor(public src: string, public file: File) { }
@@ -23,7 +24,8 @@ export class ViewComponent implements OnInit {
   showFile: boolean = true;
   showImg: boolean = true;
   showAboutRight: boolean = true;
-  new: any;
+  newMesseage: any;
+  imagePreview: any;
   classView: any = 'col-sm-9 content-view';
 
   constructor(
@@ -45,16 +47,13 @@ export class ViewComponent implements OnInit {
     this.chatService.getChat(id).subscribe(chat => this.chat = chat);
   }
 
-  // @Output() getParam = new EventEmitter<number>();
-  // getIdConversation() {
-  //     this.getParam.emit(this.converstationId);
-  // }
-  // sendConversationId() {
-
-  // }
+  /**   
+         Gửi tin nhắn 
+  */
+ 
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
-    this.new =
+    this.newMesseage =
     {
       id: this.chat.listMesseage.length + 1,
       content: sendForm.value.message,
@@ -63,12 +62,17 @@ export class ViewComponent implements OnInit {
       type: 'text'
     }
 
-    if (this.new) {
+    if (this.newMesseage) {
       console.log(this.chat.listMesseage);
-      this.chat.listMesseage.push(this.new);
+      this.chat.listMesseage.push(this.newMesseage);
+     
     }
+    sendForm.reset();
+      
   }
-  // Upload file
+  /**   
+         Upload file 
+  */
   selectedFile: FileSpinnet;
   processImageFile(imageInput: any) {
     debugger
@@ -112,7 +116,9 @@ export class ViewComponent implements OnInit {
   openFile(url: string) {
     window.open(url, "");
   }
-  // Show Hide
+/* 
+            Show Hide trên giao diện
+*/
   toggleFile() {
     this.showFile = !this.showFile;
   }
@@ -131,7 +137,10 @@ export class ViewComponent implements OnInit {
   getImageMessegae(img) {
     return img.filter(image => image.type === 'image');
   }
-  // Scoll bar messeage
+
+  /*
+      Scollbar Tin nhắn  
+  */
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
 
@@ -159,6 +168,11 @@ export class ViewComponent implements OnInit {
       behavior: 'smooth'
     });
   }
+
+  watchImagePreview(src) {
+      this.imagePreview = src;
+  }
+
  
 }
 
