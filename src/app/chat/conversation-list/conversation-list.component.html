@@ -17,7 +17,7 @@
 		<!-- ========================== CONTACT LIST =============================-->
 		<div id="contacts">
 			<ul>
-				<li class="contact" *ngFor="let chat of filterChats" [routerLink]="[chat.id]"
+				<li class="contact" *ngFor="let chat of sortCoversation" [routerLink]="[chat.id]"
 					(click)="seenMesseage(chat)" [ngClass]="getActive(chat)">
 
 					<div class="wrap">
@@ -32,7 +32,7 @@
 
 						<div class="meta status">
 							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 0">{{  chat.lastTime |  date:'HH:MM'  }}</p>
-							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 1">{{  chat.lastTime |  date:'EEEE'  }}</p>
+							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 1">{{  chat.lastTime |  date: 'EEE'  }}</p>
 							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 2">{{  chat.lastTime |  date }}</p>
 							<p>
 								<span class="badge badge-light newMesseage"

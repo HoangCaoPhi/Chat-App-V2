@@ -66,7 +66,9 @@
                         </div>
                         <div *ngFor="let file of this.chat.listMesseage">
                            <div class="file" *ngIf="file.type === 'file' &&  showFile">
-                              <p><span><img src="/assets/ICON/IconboxChat/pdf-icon.svg" alt=""></span></p>
+                              <span *ngIf="file.typeofFile === 'pdf'"><img src="../../../assets/ICON//IconboxChat/pdf-icon.svg" alt="PDF"></span>
+                              <span *ngIf="file.typeofFile === 'docx'"><img src="../../../assets/ICON/IconboxChat/docx-icon.svg" alt="DOCX"></span>
+                              <span *ngIf="file.typeofFile === 'pptx'"><img src="../../../assets/ICON/IconboxChat/pptx-icon.svg" alt="PowerPoint"></span>
                               <p>
                                  <span>{{ file.content }}</span>
                               </p>

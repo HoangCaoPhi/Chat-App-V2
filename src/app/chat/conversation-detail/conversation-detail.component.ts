@@ -50,12 +50,12 @@ export class ViewComponent implements OnInit {
     this.chatService.getChat(id).subscribe(chat => this.chat = chat);
   }
 
- 
+
 
   /**   
          Gửi tin nhắn 
   */
- 
+
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
     this.newMesseage =
@@ -70,10 +70,10 @@ export class ViewComponent implements OnInit {
     if (this.newMesseage) {
       console.log(this.chat.listMesseage);
       this.chat.listMesseage.push(this.newMesseage);
-     
+
     }
     sendForm.reset();
-      
+
   }
   /**   
          Upload file 
@@ -105,6 +105,34 @@ export class ViewComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
       debugger
+      let type_of_file: string = '';
+
+      switch (fileInput.files[0].name.split(".").pop()) {
+        case 'doc': {
+          type_of_file = 'docx';
+          break;
+        }
+
+        case 'docx': {
+          type_of_file = 'docx';
+          break;
+        }
+
+        case 'pdf': {
+          type_of_file = 'pdf';
+          break;
+        }
+
+        case 'ppt': case 'pptx': {
+          type_of_file = 'pptx';
+          break;
+        }
+
+        default: {
+          type_of_file = 'xlsx';
+          break;
+        }
+      }
       this.selectedFile = new FileSpinnet(event.target.result, file);
       let message: any = {
         id: this.chat.listMesseage.length + 1,
@@ -112,6 +140,7 @@ export class ViewComponent implements OnInit {
         url: this.selectedFile.src,
         time: Date(),
         type: "file",
+        typeofFile: type_of_file,
         fromMe: false,
       };
       this.chat.listMesseage.push(message)
@@ -121,9 +150,9 @@ export class ViewComponent implements OnInit {
   openFile(url: string) {
     window.open(url, "");
   }
-/* 
-            Show Hide trên giao diện
-*/
+  /* 
+              Show Hide trên giao diện
+  */
   toggleFile() {
     this.showFile = !this.showFile;
   }
@@ -175,9 +204,9 @@ export class ViewComponent implements OnInit {
   }
 
   watchImagePreview(src) {
-      this.imagePreview = src;
+    this.imagePreview = src;
   }
 
- 
+
 }
 

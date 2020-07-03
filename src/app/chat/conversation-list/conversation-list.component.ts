@@ -59,6 +59,11 @@ export class ListComponent implements OnInit {
       }
     )
   }
+  get sortCoversation() {
+    return this.filterChats.sort((a, b) => {
+      return <any>new Date(b.lastTime) - <any>new Date(a.lastTime);
+    });
+  }
   /* 
         Them class vao DOM khi seen tin nhắn
   */
@@ -130,12 +135,11 @@ export class ListComponent implements OnInit {
    if(timeSub <= 1) {
       return 0;
    }
-   else if(timeSub => 1 && timeSub <= 8) {
+   else if(timeSub > 1 && timeSub <= 8) {
       return 1;
    }
-   else if(timeSub => 8) {
+   else if(timeSub > 8) {
       return 2;
    }
-
  }
 }

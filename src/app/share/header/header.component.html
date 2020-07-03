@@ -9,8 +9,12 @@
       </div>
 
       <div class="nav-right">
-         <img src="../../../assets/IMG/Avatar/3.jpg" alt="message-icon">
-         <a class="nav-item nav-link" (click)="logout()">Logout</a>
+         <div class="dropdown">
+               <img src="../../../assets/IMG/Avatar/3.jpg" alt="message-icon"  data-toggle="dropdown">
+               <ul class="dropdown-menu">
+                  <li><a (click)="logout()">Logout</a></li>
+               </ul>
+         </div>
       </div>
    </div>
 </div>

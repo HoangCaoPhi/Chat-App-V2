@@ -4,6 +4,7 @@ export interface Messeage {
     content: string;
     time: string;
     type ?: string;
+    typeofFile ?: string;
     url ?: string;
     fromMe: boolean;
   }
