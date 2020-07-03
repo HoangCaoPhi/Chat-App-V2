@@ -21,9 +21,12 @@ export class ViewComponent implements OnInit {
 
   chat: Chat;
   converstationId: number;
+  avatarSender: string;
+
   showFile: boolean = true;
   showImg: boolean = true;
   showAboutRight: boolean = true;
+
   newMesseage: any;
   imagePreview: any;
   classView: any = 'col-sm-9 content-view';
@@ -46,6 +49,8 @@ export class ViewComponent implements OnInit {
     this.componentShareService.notifyCountValue(id);
     this.chatService.getChat(id).subscribe(chat => this.chat = chat);
   }
+
+ 
 
   /**   
          Gửi tin nhắn 

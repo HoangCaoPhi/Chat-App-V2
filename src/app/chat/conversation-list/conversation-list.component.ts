@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getConvesation();
+    this.calculateDiff('Thursday 2020-07-02 10:00:00');
   }
   /*
       Chức năng filter cuộc trò chuyện 
@@ -107,4 +108,34 @@ export class ListComponent implements OnInit {
   ngOnDestroy() {
     this.valueFromChildSubscription.unsubscribe();
   }
+  /* Xử lý date 
+  */
+
+ calculateDiff(dateSent){
+  let currentDate = new Date();
+  dateSent = new Date(dateSent);
+
+  return Math.floor(
+    (Date.UTC(currentDate.getFullYear(), 
+     currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), 
+     dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+ }
+ /*
+      return 0 tra ve giờ
+      return 1 trả về thứ
+      return 2 trả về ngày
+  */
+ caculateLastTime(time) {
+   let timeSub = this.calculateDiff(time);
+   if(timeSub <= 1) {
+      return 0;
+   }
+   else if(timeSub => 1 && timeSub <= 8) {
+      return 1;
+   }
+   else if(timeSub => 8) {
+      return 2;
+   }
+
+ }
 }

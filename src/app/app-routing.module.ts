@@ -12,7 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule),
     canActivate: [AuthGuard]
   },
-  { path: '', component: AppComponent, canActivate: [AuthGuard] },
+  { 
+    path: '', 
+    redirectTo: '/chat/1' ,   
+    pathMatch: 'full', 
+    canActivate: [AuthGuard]
+   },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '/chat' }

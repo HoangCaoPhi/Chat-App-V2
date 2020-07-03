@@ -5,7 +5,7 @@ export const Data: Chat[] = [
         id: 1,
         name: 'Đào Đức Khiêm',
         lastMesseage: 'Chiều 4h anh Hưng training nhé',
-        lastTime: '14:68',
+        lastTime: new Date('Friday 2020/07/03 10:04:00'),
         avt: './../../../assets/IMG/Avatar/1.jpg',
         amoutNewMesseage: 4,
         seenStatus: 1,
@@ -50,7 +50,7 @@ export const Data: Chat[] = [
             },
             {
                 id: 6,
-                content: 'https://media.metrip.vn/upload_photos/g4/32177/s256x256/usr-photo-be756924f27e11e9a17998be9447cc1d.jpg',
+                content: 'https://1.bp.blogspot.com/-tsOrgcfBCP0/Xb-Me9pmc9I/AAAAAAAASps/dooS64jTRbQpYTU83GdTUl3MJP09nKXVACLcBGAsYHQ/s1600/Hinh-anh-hoa-dep-nhat-Wap102%2B%25283%2529.jpg',
                 time: '14:49',
                 type: 'image',
                 fromMe: true
@@ -82,6 +82,13 @@ export const Data: Chat[] = [
                 time: '14:49',
                 type: 'image',
                 fromMe: true
+            },
+            {
+                id: 11,
+                content: 'Chiều 4h anh Hưng trainning nhé!',
+                time: '14:48',
+                type: 'text',
+                fromMe: false
             }
         ]
     },
@@ -89,7 +96,7 @@ export const Data: Chat[] = [
         id: 2,
         name: 'Trần Hải Dương',
         lastMesseage: 'Hôm nay có đi làm không',
-        lastTime: '14:68',
+        lastTime: new Date('Thusday 2020/07/02 21:04:00'),
         avt: './../../../assets/IMG/Avatar/2.jpg',
         amoutNewMesseage: 0,
         seenStatus: 0,
@@ -152,6 +159,13 @@ export const Data: Chat[] = [
                 time: '14:49',
                 type: 'image',
                 fromMe: true
+            },
+            {
+                id: 9,
+                content: 'Hôm nay có đi làm không',
+                time: '14:48',
+                type: 'text',
+                fromMe: false
             }
         ]
     },
@@ -159,7 +173,7 @@ export const Data: Chat[] = [
         id: 3,
         name: 'Đỗ Đức Dũng',
         lastMesseage: 'Hom nay co di lam khong',
-        lastTime: '14:68',
+        lastTime: new Date('Wednesday 2020/07/01 10:04:00'),
         avt: './../../../assets/IMG/Avatar/3.jpg',
         amoutNewMesseage: 5,
         seenStatus: 1,
@@ -204,7 +218,7 @@ export const Data: Chat[] = [
             },
             {
                 id: 6,
-                content: 'https://media.metrip.vn/upload_photos/g4/32177/s256x256/usr-photo-be756924f27e11e9a17998be9447cc1d.jpg',
+                content: 'https://1.bp.blogspot.com/-tsOrgcfBCP0/Xb-Me9pmc9I/AAAAAAAASps/dooS64jTRbQpYTU83GdTUl3MJP09nKXVACLcBGAsYHQ/s1600/Hinh-anh-hoa-dep-nhat-Wap102%2B%25283%2529.jpg',
                 time: '14:49',
                 type: 'image',
                 fromMe: true
@@ -236,6 +250,13 @@ export const Data: Chat[] = [
                 time: '14:49',
                 type: 'image',
                 fromMe: true
+            },
+            {
+                id: 11,
+                content: 'Hom nay co di lam khong',
+                time: '14:48',
+                type: 'text',
+                fromMe: false
             }
         ]
     },
@@ -243,7 +264,7 @@ export const Data: Chat[] = [
         id: 4,
         name: 'Nguyễn Văn Thế',
         lastMesseage: 'Ok',
-        lastTime: '14:68',
+        lastTime: new Date('Tuesday 2020/06/30 10:04:00'),
         avt: './../../../assets/IMG/Avatar/4.jpg',
         amoutNewMesseage: 0,
         seenStatus: 0,
@@ -288,7 +309,7 @@ export const Data: Chat[] = [
             },
             {
                 id: 6,
-                content: 'https://media.metrip.vn/upload_photos/g4/32177/s256x256/usr-photo-be756924f27e11e9a17998be9447cc1d.jpg',
+                content: 'https://1.bp.blogspot.com/-tsOrgcfBCP0/Xb-Me9pmc9I/AAAAAAAASps/dooS64jTRbQpYTU83GdTUl3MJP09nKXVACLcBGAsYHQ/s1600/Hinh-anh-hoa-dep-nhat-Wap102%2B%25283%2529.jpg',
                 time: '14:49',
                 type: 'image',
                 fromMe: true
@@ -321,13 +342,21 @@ export const Data: Chat[] = [
                 type: 'image',
                 fromMe: true
             }
+            ,
+            {
+                id: 10,
+                content: 'OK',
+                time: '14:49',
+                type: 'text',
+                fromMe: true
+            }
         ]
     },
     {
         id: 5,
         name: 'Nguyễn Thế Nam',
         lastMesseage: 'Đi seminar đi',
-        lastTime: '14:68',
+        lastTime: new Date('2016-01-05T09:05:05.035Z'),
         avt: './../../../assets/IMG/Avatar/5.jpg',
         amoutNewMesseage: 4,
         seenStatus: 1,
@@ -372,7 +401,7 @@ export const Data: Chat[] = [
             },
             {
                 id: 6,
-                content: 'https://media.metrip.vn/upload_photos/g4/32177/s256x256/usr-photo-be756924f27e11e9a17998be9447cc1d.jpg',
+                content: 'https://1.bp.blogspot.com/-tsOrgcfBCP0/Xb-Me9pmc9I/AAAAAAAASps/dooS64jTRbQpYTU83GdTUl3MJP09nKXVACLcBGAsYHQ/s1600/Hinh-anh-hoa-dep-nhat-Wap102%2B%25283%2529.jpg',
                 time: '14:49',
                 type: 'image',
                 fromMe: true
@@ -404,6 +433,13 @@ export const Data: Chat[] = [
                 time: '14:49',
                 type: 'image',
                 fromMe: true
+            },
+            {
+                id: 1,
+                content: 'Đi seminar đi',
+                time: '14:48',
+                type: 'text',
+                fromMe: false
             }
         ]
     },
@@ -411,7 +447,7 @@ export const Data: Chat[] = [
         id: 6,
         name: 'Nguyễn Tiến Thành',
         lastMesseage: 'Hôm nay đi nhậu nhé',
-        lastTime: '14:68',
+        lastTime: new Date('2016-01-05T10:05:05.035Z'),
         avt: './../../../assets/IMG/Avatar/2.jpg',
         amoutNewMesseage: 0,
         seenStatus: 0,
@@ -455,7 +491,7 @@ export const Data: Chat[] = [
             },
             {
                 id: 6,
-                content: 'https://media.metrip.vn/upload_photos/g4/32177/s256x256/usr-photo-be756924f27e11e9a17998be9447cc1d.jpg',
+                content: 'https://1.bp.blogspot.com/-tsOrgcfBCP0/Xb-Me9pmc9I/AAAAAAAASps/dooS64jTRbQpYTU83GdTUl3MJP09nKXVACLcBGAsYHQ/s1600/Hinh-anh-hoa-dep-nhat-Wap102%2B%25283%2529.jpg',
                 time: '14:49',
                 type: 'image',
                 fromMe: true
@@ -466,7 +502,14 @@ export const Data: Chat[] = [
                 time: '14:49',
                 type: 'file',
                 fromMe: false
-            } 
+            },
+            {
+                id: 8,
+                content: 'Hôm nay đi nhậu nhé',
+                time: '14:49',
+                type: 'text',
+                fromMe: false
+            }
         ]
     }
 ];

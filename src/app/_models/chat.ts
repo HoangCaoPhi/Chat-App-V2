@@ -4,7 +4,7 @@ export interface Chat {
     name: string;
     lastMesseage: string;
     avt: string;
-    lastTime: string;
+    lastTime: Date;
     amoutNewMesseage: number;
     seenStatus: number,
     isActive ?: boolean,

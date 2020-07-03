@@ -12,7 +12,7 @@
                </span>
             </h2>
             <p class="info-active" *ngIf="!chat.isActive">hoạt động 12 phút trước</p>
-            <p class="info-active" *ngIf="chat.isActive">Dang hoat dong</p>
+            <p class="info-active" *ngIf="chat.isActive">Đang hoạt động</p>
          </div>
       </div>
       <div class="head-right">
@@ -48,7 +48,7 @@
                   <div class="info-content">
                      <div class="info-image">
                         <div class="image">
-                           <img src="/assets/IMG/Avatar/1.jpg" alt="">
+                           <img src="{{ chat.avt }}" alt="">
                         </div>
                      </div>
                      <div class="info-status">
@@ -112,7 +112,8 @@
             <div class="messages">
                <ul>
                   <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
-                     <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                     <img *ngIf = "messeage.fromMe" src="{{ chat.avt }}" alt="" />
+                     <img *ngIf = "!messeage.fromMe" src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                      <img 
                            class="img-preview"
                            *ngIf="messeage.type === 'image'" 
@@ -130,9 +131,9 @@
          </div>
          <!-- Modal -->
          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                <!-- Modal content-->
-               <div class="modal-content center">
+               <div class="modal-content center" role="document">
                   <div class="modal-body">
                      <img
                         src="{{  imagePreview }}"
