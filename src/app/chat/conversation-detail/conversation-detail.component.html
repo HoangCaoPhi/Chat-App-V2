@@ -61,7 +61,13 @@
                         <div class="title" (click)="toggleFile()">
                            <p class="name-share">TỆP ĐÃ CHIA SẺ</p>
                            <span class="icon-dropdown">
-                              <img [src]="showFile ? '/assets/ICON/IconAppChat/13.svg' : '/assets/ICON/IconAppChat/19.svg'">
+                              <img 
+                                 *ngIf = "showFile"
+                                  src="/assets/ICON/IconAppChat/13.svg">
+                              <img 
+                                 *ngIf = "!showFile"
+                                  src="/assets/ICON/IconAppChat/19.svg" 
+                                  style=" transform: rotate(180deg);">
                            </span>
                         </div>
                         <div *ngFor="let file of this.chat.listMesseage">
@@ -81,8 +87,11 @@
                         <div class="title" (click)="toggleImg()">
                            <p class="name-share">ẢNH ĐÃ CHIA SẺ</p>
                            <span class="icon-dropdown">
-                              <img 
-                                 [src]="showImg ? '/assets/ICON/IconAppChat/13.svg' : '/assets/ICON/IconAppChat/19.svg'">
+                              <img *ngIf = "showImg"
+                                    src="/assets/ICON/IconAppChat/13.svg" >
+                              <img *ngIf = "!showImg"
+                                    src="/assets/ICON/IconAppChat/19.svg" 
+                                    style=" transform: rotate(180deg);">
                            </span>
                         </div>
                         <div class="img-share" *ngIf="showImg">
@@ -145,7 +154,7 @@
             </div>
          </div>
             <!-- Modal -->
-         <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm">
+         <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm"  autocomplete="off">
             <div class="send-view">
                <label class="send">
                   <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">

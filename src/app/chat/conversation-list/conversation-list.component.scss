@@ -113,6 +113,10 @@
 					.seen {
 						font-size: 11px;
 					}
+				    p span {
+						float: right;
+						margin-top: 5px;
+					}
 				}
 
 				.meta {
@@ -194,6 +198,7 @@
 }
 .selected {
 	background-color: rgba(255, 255, 255, .15);
+	border-left: 4px solid #2196f3;
 }
 .newMesseage {
 	font-size: 9px; 
