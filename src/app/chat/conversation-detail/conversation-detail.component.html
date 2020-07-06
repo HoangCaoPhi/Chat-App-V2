@@ -135,7 +135,16 @@
 
                         <a *ngIf="messeage.type === 'file'"
                            (click)="openFile(messeage.url)">{{ messeage.content }}</a>
-                        <p *ngIf="messeage.type === 'text'">{{ messeage.content }}</p>
+                        <p 
+                           *ngIf="messeage.type === 'text' && messeage.fromMe" 
+                           data-toggle="tooltip" data-placement="left"
+                           title="{{ messeage.time | date:'medium' }}"
+                           >{{ messeage.content }}</p>
+                        <p 
+                           *ngIf="messeage.type === 'text' && !messeage.fromMe" 
+                           data-toggle="tooltip" data-placement="right"
+                           title="{{ messeage.time | date:'medium' }}"
+                           >{{ messeage.content }}</p>
                   </li>
                </ul>
             </div>
@@ -179,3 +188,8 @@
       </div>
       <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
    </div>
+   <script>
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+      });
+   </script>
