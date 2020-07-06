@@ -15,7 +15,8 @@ import { LoginComponent } from './login';
 
  
 import { ChatModule } from './chat/chat.module';
-import { ChatService } from './services/chat.service';
+import { ChatService } from './services/chat.service';;
+
 
 @NgModule({
     imports: [
@@ -28,7 +29,7 @@ import { ChatService } from './services/chat.service';
     declarations: [
         AppComponent,
         LoginComponent
-    ],
+   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -5,14 +5,8 @@ import { ViewComponent } from './conversation-detail/conversation-detail.compone
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
-    children: [
-      {
-        path: ':id',
-        component: ViewComponent
-      }
-    ]
+    path: ':id',
+    component: HomeComponent
   }
 ];
 

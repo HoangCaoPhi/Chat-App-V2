@@ -4,6 +4,16 @@
       <app-conversation-list></app-conversation-list>
    </div>
    <div class="view">
-      <router-outlet></router-outlet>
+      <div class="view">
+         <!-----------======================= HEADER CONTENT ==========================    ----------->
+         <app-conversation-header></app-conversation-header>
+         <!-----------=======================  END HEADER CONTENT ==========================    ----------->
+         <div class="messeage">
+            <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
+            <app-conversation-about></app-conversation-about>
+              <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
+            <app-conversation-detail></app-conversation-detail>
+         </div>
+      </div>
    </div>
 </div>
