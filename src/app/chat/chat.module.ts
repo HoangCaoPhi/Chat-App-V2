@@ -8,11 +8,12 @@ import { HomeComponent } from './home/home.component';
 import { ListComponent } from './conversation-list/conversation-list.component';
 import { ViewComponent } from './conversation-detail/conversation-detail.component';
 
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { ConversationAboutComponent } from './conversation-about/conversation-about.component'
 
 
 @NgModule({
-  declarations: [HomeComponent, ListComponent, ViewComponent],
+  declarations: [HomeComponent, ListComponent, ViewComponent, ConversationAboutComponent],
   imports: [
     CommonModule,
     ChatRoutingModule,
