@@ -41,7 +41,9 @@ export class ViewComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+      // this.addTimeDiff();
+  }
 
   getConversationById() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -207,6 +209,17 @@ export class ViewComponent implements OnInit {
     this.imagePreview = src;
   }
 
+  addTimeDiff(messages){
+    for(let i = 1 ; i < messages.length ; i++){
+      console.log(messages[i].time, messages[i-1].time)
+      messages[i].timeDiff = this.timeBetween(messages[i-1].time, messages[i].time)
+    }
+  }
+  timeBetween(dateSent1, dateSent2){
+    dateSent1 = new Date(dateSent1);
+    dateSent2 = new Date(dateSent2);
+    return (dateSent2.getTime() - dateSent1.getTime())/(1000 * 60);
+   }
 
 }
 

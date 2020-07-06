@@ -20,6 +20,7 @@
 				<li class="contact" *ngFor="let chat of sortCoversation" [routerLink]="[chat.id]"
 					(click)="seenMesseage(chat)" [ngClass]="getActive(chat)">
 
+
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img [src]="chat.avt" alt="" />

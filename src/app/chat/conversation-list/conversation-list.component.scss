@@ -3,7 +3,7 @@
 	background-color: #0a1d3b;
 	overflow: hidden;
 	padding-right: 0px;
-	width: auto;
+	width: 318px;
 	position: relative;
 
 
@@ -67,6 +67,9 @@
 
 	ul {
 		li.contact {
+			// border-left: 4px solid #0a1d3b ;
+			// border-left: 4px solid #0a1d3b;
+
 			.wrap {
 				margin-left: 14px;
 				display: flex;
@@ -180,10 +183,12 @@
 			 display: none;
    }
    #contacts ul li.contact .wrap img {
-	   		align-items: center;
+			   align-items: center;
+			   margin-bottom: 18px;
    }
    .contact-líst {
-		    min-width: 0px;
+			min-width: 0px;
+			width: auto;
    }
    #contacts .contact .wrap .green {
 	height: 12px;
@@ -196,6 +201,9 @@
 .not-amout {
 	display: none;
 }
+.contact {
+	border-left: 4px solid #0a1d3b;
+}
 .selected {
 	background-color: rgba(255, 255, 255, .15);
 	border-left: 4px solid #2196f3;
@@ -207,3 +215,4 @@
 	left: 0px;
 	top: -5px
 }
+ 

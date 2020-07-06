@@ -5,7 +5,7 @@ export const Data: Chat[] = [
         id: 1,
         name: 'Đào Đức Khiêm',
         lastMesseage: 'Chiều 4h anh Hưng training nhé',
-        lastTime: new Date('Friday 2020/07/03 10:04:00'),
+        lastTime: new Date('Friday 2020/07/06 10:04:00'),
         avt: './../../../assets/IMG/Avatar/1.jpg',
         amoutNewMesseage: 4,
         seenStatus: 1,
