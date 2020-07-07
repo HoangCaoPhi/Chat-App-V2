@@ -19,12 +19,12 @@ export class ListComponent implements OnInit {
   idParam: number;
 
   constructor(private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService) {
+    // Nhận id của contact-detail gửi đến
     this.getParam();
   }
 
   ngOnInit(): void {
     this.getConvesation();
-    this.calculateDiff('Thursday 2020-07-02 10:00:00');
   }
   /*
       Chức năng filter cuộc trò chuyện 
@@ -59,6 +59,9 @@ export class ListComponent implements OnInit {
       }
     )
   }
+  /*
+        Sắp xếp cuộc trò chuyện theo thời gian gửi sau cùng 
+  */
   get sortCoversation() {
     return this.filterChats.sort((a, b) => {
       return <any>new Date(b.lastTime) - <any>new Date(a.lastTime);

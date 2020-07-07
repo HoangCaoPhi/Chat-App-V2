@@ -9,6 +9,7 @@ export class ComponentShareService {
   constructor() { }
 
   private getConversationId = new Subject<any>();
+  
 
   public get ValueFromChild() {
     return this.getConversationId;

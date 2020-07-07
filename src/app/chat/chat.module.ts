@@ -10,11 +10,10 @@ import { ViewComponent } from './conversation-detail/conversation-detail.compone
 
 import { FormsModule } from '@angular/forms';
 import { ConversationAboutComponent } from './conversation-about/conversation-about.component';
-import { ConversationHeaderComponent } from './conversation-header/conversation-header.component'
 
 
 @NgModule({
-  declarations: [HomeComponent, ListComponent, ViewComponent, ConversationAboutComponent, ConversationHeaderComponent],
+  declarations: [HomeComponent, ListComponent, ViewComponent, ConversationAboutComponent],
   imports: [
     CommonModule,
     ChatRoutingModule,

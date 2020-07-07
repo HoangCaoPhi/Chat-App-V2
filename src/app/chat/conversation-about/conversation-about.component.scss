@@ -1,19 +1,12 @@
 /*=============================================== ABOUT MESSEAGE ========================== */ 
-.info-messeage {
-    border-left: 1px solid rgba(0, 0, 0, .10);
-    flex: 0 2 33.33%;
-    max-width: 420px;
-    min-width: 200px;
-    overflow-y: auto;
-    background-color: #f8f8f8;
-}
-.info-messeage .i {
+
+ .i {
     direction: ltr;
     height: 100%;
     overflow: hidden;
     position: relative;
 }
-.info-messeage .info-content {
+ .info-content {
     margin-right: -12px;
     direction: ltr;
     position: relative;
@@ -21,17 +14,17 @@
     margin: 0 auto;
     padding-top: 14px;
 }
-.info-messeage .info-content .info-image {
+ .info-content .info-image {
     align-items: center;
     flex-direction: column;
     display: flex;
     padding: 0 14px 16px 14px;
     word-break: break-word;
 }
-.info-messeage .info-content .info-image .image{
+ .info-content .info-image .image{
     position: relative;
  }
- .info-messeage .info-content .info-image .image img{
+  .info-content .info-image .image img{
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -126,15 +119,7 @@
     margin-bottom: 25px;
     cursor: pointer;
 }
-//  .test {
-// 	display: flex;
-// 	margin: 10px auto;
-// 	margin-left: 15px;
-// }
-// .share-test {
-//     margin-right: 10px;
-//     flex: 30%;
-// }
+
 .share-file .title:hover {
     cursor: pointer;
 }

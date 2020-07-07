@@ -19,17 +19,12 @@ class FileSpinnet {
 })
 export class ViewComponent implements OnInit {
 
-  chat: Chat;
-  converstationId: number;
-  avatarSender: string;
-
-  showFile: boolean = true;
-  showImg: boolean = true;
   showAboutRight: boolean = true;
-
+  chat: Chat;
+  avatarSender: string;
   newMesseage: any;
   imagePreview: any;
-  classView: any = 'col-sm-9 content-view';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -41,38 +36,38 @@ export class ViewComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { 
-      // this.addTimeDiff();
+  ngOnInit(): void {
+
   }
+  /*
+       Lấy cuộc hội thoại với route id     
+  */
 
   getConversationById() {
     const id = +this.route.snapshot.paramMap.get('id');
     console.log("detail id " + id);
+    // Gửi dữ liệu lên service share-component để gửi đến contact list
     this.componentShareService.notifyCountValue(id);
+    // Lấy các cuộc hôi thoại với id tương ứng
     this.chatService.getChat(id).subscribe(chat => this.chat = chat);
   }
-
-
 
   /**   
          Gửi tin nhắn 
   */
 
   sendMesseage(sendForm: NgForm) {
-    console.log(sendForm.value);
-    this.newMesseage =
-    {
-      id: this.chat.listMesseage.length + 1,
-      content: sendForm.value.message,
-      time: Date(),
-      fromMe: false,
-      type: 'text'
-    }
-
-    if (this.newMesseage) {
-      console.log(this.chat.listMesseage);
+    // console.log(sendForm.value);
+    if (sendForm.value) {
+      this.newMesseage =
+      {
+        id: this.chat.listMesseage.length + 1,
+        content: sendForm.value.message,
+        time: Date(),
+        fromMe: false,
+        type: 'text'
+      }
       this.chat.listMesseage.push(this.newMesseage);
-
     }
     sendForm.reset();
 
@@ -153,29 +148,18 @@ export class ViewComponent implements OnInit {
     window.open(url, "");
   }
   /* 
-              Show Hide trên giao diện
+        Ẩn hay Hiển thị phần thông tin tin nhắn
   */
-  toggleFile() {
-    this.showFile = !this.showFile;
-  }
-  toggleImg() {
-    this.showImg = !this.showImg;
-  }
+
   toggleInfo() {
     this.showAboutRight = !this.showAboutRight;
-    if (!this.showAboutRight) {
-      this.classView = "col-sm-12 content-view";
-    }
-    else {
-      this.classView = "col-sm-9 content-view";
-    }
   }
   getImageMessegae(img) {
     return img.filter(image => image.type === 'image');
   }
 
   /*
-      Scollbar Tin nhắn  
+      Tự động Scollbar khi gửi tin nhắn
   */
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
@@ -205,21 +189,12 @@ export class ViewComponent implements OnInit {
     });
   }
 
+  /*
+      Xem trước hình ảnh
+   */
   watchImagePreview(src) {
     this.imagePreview = src;
   }
-
-  addTimeDiff(messages){
-    for(let i = 1 ; i < messages.length ; i++){
-      console.log(messages[i].time, messages[i-1].time)
-      messages[i].timeDiff = this.timeBetween(messages[i-1].time, messages[i].time)
-    }
-  }
-  timeBetween(dateSent1, dateSent2){
-    dateSent1 = new Date(dateSent1);
-    dateSent2 = new Date(dateSent2);
-    return (dateSent2.getTime() - dateSent1.getTime())/(1000 * 60);
-   }
 
 }
 

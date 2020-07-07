@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Chat } from '@app/_models/chat';
 
 @Component({
   selector: 'app-conversation-about',
@@ -12,4 +13,26 @@ export class ConversationAboutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showFile: boolean = true;
+  showImg: boolean = true;
+  imagePreview: any;
+  
+  // Ẩn hiện file và hình ảnh chung
+  toggleFile() {
+    this.showFile = !this.showFile;
+  }
+  toggleImg() {
+    this.showImg = !this.showImg;
+  }
+
+  @Input() chat:Chat;
+
+  // Lây danh sách tin nhắn hình ảnh chung 
+  getImageMessegae(img) {
+    return img.filter(image => image.type === 'image');
+  }
+
+  watchImagePreview(src) {
+    this.imagePreview = src;
+  }
 }

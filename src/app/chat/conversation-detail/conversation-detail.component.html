@@ -1,79 +1,111 @@
-
-      <!-----------=======================   END THONG TIN MESSEAGE ==========================    ----------->
-
-      <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
-      <div class="content-messeage">
-         <div class="content" #scrollframe>
-            <div class="messages">
-               <ul>
-                  <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
-                     <img *ngIf = "messeage.fromMe" src="{{ chat.avt }}" alt="" />
-                     <img *ngIf = "!messeage.fromMe" src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                     <img 
-                           class="img-preview"
-                           *ngIf="messeage.type === 'image'" 
-                           [src]="messeage.content"
-                           (click)="watchImagePreview(messeage.content)"
-                           data-toggle="modal" 
-                           data-target="#myModal" />
-
-                        <a *ngIf="messeage.type === 'file'"
-                           (click)="openFile(messeage.url)">{{ messeage.content }}</a>
-                        <p 
-                           *ngIf="messeage.type === 'text' && messeage.fromMe" 
-                           data-toggle="tooltip" data-placement="left"
-                           title="{{ messeage.time | date:'medium' }}"
-                           >{{ messeage.content }}</p>
-                        <p 
-                           *ngIf="messeage.type === 'text' && !messeage.fromMe" 
-                           data-toggle="tooltip" data-placement="right"
-                           title="{{ messeage.time | date:'medium' }}"
-                           >{{ messeage.content }}</p>
-                  </li>
-               
-               </ul>
-            </div>
-         </div>
-         <!-- Modal -->
-         <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-               <!-- Modal content-->
-               <div class="modal-content center" role="document">
-                  <div class="modal-body">
-                     <img
-                        src="{{  imagePreview }}"
-                        alt="">
-                  </div>
-               </div>
-            </div>
-         </div>
-            <!-- Modal -->
-         <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm"  autocomplete="off">
-            <div class="send-view">
-               <label class="send">
-                  <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
-                  <input #fileInput type="file" (change)="processFile(fileInput)">
-               </label>
-               <label class="send">
-                  <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
-                  <input #imageInput type="file" accept="image/*" (change)="processImageFile(imageInput)">
-               </label>
-               <label class="send">
-                  <span class="buzz">
-                     <p>Buzz!</p>
-                  </span>
-               </label>
-               <div class="send input-message">
-                  <input type="text" class="form-control" name="message" id="input-message" ngModel
-                     placeholder="Nhập nội dung tin nhắn">
-                  <img src="/assets/ICON/IconAppChat/7.svg" alt="icon">
-               </div>
-            </div>
-         </form>
+<!-----------======================= HEADER CONTENT ==========================    ----------->
+<div class="header-content">
+   <div class="head-left">
+      <div class="avatar">
+         <img src="{{ chat.avt }}" alt="avatar">
       </div>
-      <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
-   <script>
-      $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();   
-      });
-   </script>
+      <div class="info">
+         <h2 class="info-username">
+            <span>
+               {{ chat.name }}
+            </span>
+         </h2>
+         <p class="info-active" *ngIf="!chat.isActive">hoạt động 12 phút trước</p>
+         <p class="info-active" *ngIf="chat.isActive">Đang hoạt động</p>
+      </div>
+   </div>
+   <div class="head-right">
+      <ul>
+         <li>
+            <a>
+               <img src="/assets/ICON/IconboxChat/8.svg" alt="search-icon" style="width: 20px;
+               height: 20px;">
+            </a>
+         </li>
+         <li style="cursor: pointer;" (click)="toggleInfo()">
+            <a>
+               <img [src]="showAboutRight ? '/assets/ICON/IconAppChat/5.svg' : '/assets/ICON/IconAppChat/6.svg'"
+                  alt="about-icon">
+            </a>
+         </li>
+         <li>
+            <a>
+               <img src="/assets/ICON/IconAppChat/2.svg" alt="more-icon">
+            </a>
+         </li>
+      </ul>
+   </div>
+</div>
+<!-----------=======================  END HEADER CONTENT ==========================    ----------->
+
+
+
+<div class="messeage">
+   <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
+   <div class="info-messeage" *ngIf="showAboutRight">
+      <app-conversation-about [chat]="chat"></app-conversation-about>
+   </div>
+<!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
+<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
+   <div class="content-messeage">
+      <div class="content" #scrollframe>
+         <div class="messages">
+            <ul>
+               <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
+                  <img *ngIf="messeage.fromMe" src="{{ chat.avt }}" alt="" />
+                  <img *ngIf="!messeage.fromMe" src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                  <img class="img-preview" *ngIf="messeage.type === 'image'" [src]="messeage.content"
+                     (click)="watchImagePreview(messeage.content)" data-toggle="modal" data-target="#myModal" />
+
+                  <a *ngIf="messeage.type === 'file'" (click)="openFile(messeage.url)">{{ messeage.content }}</a>
+                  <p *ngIf="messeage.type === 'text' && messeage.fromMe" data-toggle="tooltip" data-placement="left"
+                     title="{{ messeage.time | date:'medium' }}">{{ messeage.content }}</p>
+                  <p *ngIf="messeage.type === 'text' && !messeage.fromMe" data-toggle="tooltip" data-placement="right"
+                     title="{{ messeage.time | date:'medium' }}">{{ messeage.content }}</p>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <!-- Modal content-->
+            <div class="modal-content center" role="document">
+               <div class="modal-body">
+                  <img src="{{  imagePreview }}" alt="">
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Modal -->
+      <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm" autocomplete="off">
+         <div class="send-view">
+            <label class="send">
+               <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
+               <input #fileInput type="file" (change)="processFile(fileInput)">
+            </label>
+            <label class="send">
+               <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
+               <input #imageInput type="file" accept="image/*" (change)="processImageFile(imageInput)">
+            </label>
+            <label class="send">
+               <span class="buzz">
+                  <p>Buzz!</p>
+               </span>
+            </label>
+            <div class="send input-message">
+               <input type="text" class="form-control" name="message" id="input-message" ngModel
+                  placeholder="Nhập nội dung tin nhắn">
+               <img src="/assets/ICON/IconAppChat/7.svg" alt="icon">
+            </div>
+         </div>
+      </form>
+   </div>
+</div>
+
+<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
+<script>
+   $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+   });
+</script>
