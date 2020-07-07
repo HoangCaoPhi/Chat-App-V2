@@ -18,7 +18,8 @@
 		<div id="contacts">
 			<ul>
 				<li class="contact" *ngFor="let chat of sortCoversation" routerLink="/chat/{{chat.id}}"
-					(click)="seenMesseage(chat)" [ngClass]="getActive(chat)">
+					(click)="seenMesseage(chat)" 
+					[ngClass]="getActive(chat)">
 
 
 					<div class="wrap">
@@ -29,7 +30,7 @@
 							
 						<div class="meta">
 							<p class="name">{{ chat.name }}</p>
-							<p class="preview" [ngClass]="getSeen(chat)">{{  chat.lastMesseage }}</p>
+							<p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p>
 						</div>
 
 						<div class="meta status">
@@ -37,11 +38,12 @@
 								{{  chat.lastTime |  date:'HH:MM'  }}</p>
 							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 1">
 								{{  chat.lastTime |  date: 'EEE'  }}</p>
-							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 2">{{  chat.lastTime |  date }}
-							</p>
+							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 2">
+								{{  chat.lastTime |  date }}</p>
 							<p>
-								<span class="badge badge-light newMesseage" [ngClass]="getAmoutNewMesseage(chat)">
-									{{ chat.amoutNewMesseage }}</span>
+							<span class="badge badge-light newMesseage" [ngClass]="{'not-amout': chat.amoutNewMesseage === 0}">
+									{{ chat.amoutNewMesseage }}
+							</span>
 							</p>
 						</div>
 					</div>

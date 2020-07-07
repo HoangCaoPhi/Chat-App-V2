@@ -15,7 +15,6 @@ import { ChatService } from '../../services/chat.service';
 export class ListComponent implements OnInit {
   chats: Chat[];
   filterChats: Chat[] = [];
-  checkActive: number = 0;
   idParam: number;
 
   constructor(private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService) {
@@ -70,46 +69,32 @@ export class ListComponent implements OnInit {
   /* 
         Them class vao DOM khi seen tin nhắn
   */
-  getSeen(chat) {
-    return {
-      'seen': !chat.seenStatus,
-      'not-seen': chat.seenStatus
-    }
-  }
-  getAmoutNewMesseage(chat) {
-    return {
-      'not-amout': chat.amoutNewMesseage === 0
-    }
-  }
 
+  // Thay doi trang thái khi xem tin nhắn
   seenMesseage(chat) {
     chat.seenStatus = 0;
     chat.amoutNewMesseage = 0;
-    this.checkActive = 1;
-
-    this.getSeen(chat);
-    this.getAmoutNewMesseage(chat);
   }
-
+ // Focus hộp thoại hiện tại
   getActive(chat) {
-    if (chat.id === this.count) {
+    if (chat.id === this.userId) {
       this.seenMesseage(chat);
     }
     return {
-      'selected': chat.id === this.count
+      'selected': chat.id === this.userId
     }
   }
   /*
         Lấy id và active thanh những cuộc trò chuyện
   */
-  count: number;
+  userId: number;
 
   valueFromChildSubscription: Subscription;
   getParam() {
     this.valueFromChildSubscription = this.componentShareService.ValueFromChild.subscribe(
       data => {
-        this.count = data;
-        console.log("This is a conversation id" + this.count);
+        this.userId = data;
+        console.log("This is a conversation id" + this.userId);
       }
     );
   }
@@ -119,30 +104,30 @@ export class ListComponent implements OnInit {
   /* Xử lý date 
   */
 
- calculateDiff(dateSent){
-  let currentDate = new Date();
-  dateSent = new Date(dateSent);
+  calculateDiff(dateSent) {
+    let currentDate = new Date();
+    dateSent = new Date(dateSent);
 
-  return Math.floor(
-    (Date.UTC(currentDate.getFullYear(), 
-     currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), 
-     dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
- }
- /*
-      return 0 tra ve giờ
-      return 1 trả về thứ
-      return 2 trả về ngày
-  */
- caculateLastTime(time) {
-   let timeSub = this.calculateDiff(time);
-   if(timeSub <= 1) {
+    return Math.floor(
+      (Date.UTC(currentDate.getFullYear(),
+        currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(),
+          dateSent.getMonth(), dateSent.getDate())) / (1000 * 60 * 60 * 24));
+  }
+  /*
+       return 0 tra ve giờ
+       return 1 trả về thứ
+       return 2 trả về ngày
+   */
+  caculateLastTime(time) {
+    let timeSub = this.calculateDiff(time);
+    if (timeSub <= 1) {
       return 0;
-   }
-   else if(timeSub > 1 && timeSub <= 8) {
+    }
+    else if (timeSub > 1 && timeSub <= 8) {
       return 1;
-   }
-   else if(timeSub > 8) {
+    }
+    else if (timeSub > 8) {
       return 2;
-   }
- }
+    }
+  }
 }
