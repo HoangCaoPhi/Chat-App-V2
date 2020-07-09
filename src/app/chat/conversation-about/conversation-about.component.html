@@ -1,4 +1,3 @@
-
 <div class="info-content">
    <div class="info-image">
       <div class="image">
@@ -17,17 +16,23 @@
       <div class="title" (click)="toggleFile()">
          <p class="name-share">TỆP ĐÃ CHIA SẺ</p>
          <span class="icon-dropdown">
-            <img *ngIf="showFile" src="/assets/ICON/IconAppChat/13.svg">
-            <img *ngIf="!showFile" src="/assets/ICON/IconAppChat/19.svg" style=" transform: rotate(180deg);">
+            <img *ngIf="showFile; then showFileIcon; else hiddenFileIcon">
+            <ng-template #showFileIcon>
+               <img src="/assets/ICON/IconAppChat/13.svg">
+            </ng-template>
+            <ng-template #hiddenFileIcon>
+               <img src="/assets/ICON/IconAppChat/19.svg" style=" transform: rotate(180deg);">
+            </ng-template>
          </span>
+
       </div>
-      <div *ngFor="let file of this.chat.listMesseage">
+      <ng-container *ngFor="let file of this.chat.listMesseage">
          <div class="file" *ngIf="file.type === 'file' &&  showFile">
             <span *ngIf="file.typeofFile === 'pdf'">
                <img src="../../../assets/ICON//IconboxChat/pdf-icon.svg" alt="PDF">
             </span>
             <span *ngIf="file.typeofFile === 'docx'">
-               <img src="../../../assets/ICON/IconboxChat/docx-icon.svg"alt="DOCX">
+               <img src="../../../assets/ICON/IconboxChat/docx-icon.svg" alt="DOCX">
             </span>
             <span *ngIf="file.typeofFile === 'pptx'">
                <img src="../../../assets/ICON/IconboxChat/pptx-icon.svg" alt="PowerPoint">
@@ -36,7 +41,7 @@
                <span>{{ file.content }}</span>
             </p>
          </div>
-      </div>
+      </ng-container>
       <p class="line"></p>
    </div>
 
@@ -44,22 +49,23 @@
       <div class="title" (click)="toggleImg()">
          <p class="name-share">ẢNH ĐÃ CHIA SẺ</p>
          <span class="icon-dropdown">
-            <img *ngIf="showImg" src="/assets/ICON/IconAppChat/13.svg">
-            <img *ngIf="!showImg" src="/assets/ICON/IconAppChat/19.svg" style=" transform: rotate(180deg);">
+            <img *ngIf="showImg; then showImgIcon; else hiddenImgIcon">
+            <ng-template #showImgIcon>
+               <img src="/assets/ICON/IconAppChat/13.svg">
+            </ng-template>
+            <ng-template #hiddenImgIcon>
+               <img src="/assets/ICON/IconAppChat/19.svg" style=" transform: rotate(180deg);">
+            </ng-template>
          </span>
       </div>
       <div class="img-share" *ngIf="showImg">
          <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 bottom-25"
-                *ngFor="let img of getImageMessegae(this.chat.listMesseage)">
-               <img
-                    class="image-share img-responsive" 
-                    *ngIf="img.type === 'image'" 
-                    [src]="img.content"
-                    data-toggle="modal" 
-                    data-target="#myModal1" 
-                    (click)="watchImagePreview(img.content)">
-            </div>
+            <ng-container *ngFor="let img of getImageMessegae(this.chat.listMesseage)">
+               <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 bottom-25">
+                  <img class="image-share img-responsive" *ngIf="img.type === 'image'" [src]="img.content"
+                     data-toggle="modal" data-target="#myModal1" (click)="watchImagePreview(img.content)">
+               </div>
+            </ng-container>
          </div>
       </div>
    </div>
