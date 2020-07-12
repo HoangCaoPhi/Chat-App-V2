@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
 
-
+    // Gọi service authen
     this.authenticationService.register(this.form.value)
       .pipe(first())
       .subscribe(

@@ -9,16 +9,17 @@ export class AuthGuard implements CanActivate {
         private router: Router,
         private authenticationService: AuthenticationService
     ) { }
-
+    // Kiểm tra route có thể được đi đến
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
         if (currentUser) {
-            // logged in so return true
+            // Nếu có thông tin user thì trả về true
             return true;
         }
 
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        // Nếu không có người dùng thì trả về trang login
+        // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        this.router.navigate(['/login']);
         return false;
     }
 }

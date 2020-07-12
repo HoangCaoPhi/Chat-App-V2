@@ -9,11 +9,8 @@ import { AppComponent } from './app.component';
 import { appRoutingModule } from './app-routing.module';
 
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
-
 import { LoginComponent } from './login/login.component';
-
 import { ChatService } from './services/chat.service';
-
 import { RegisterComponent } from './register/register.component';
 
 
@@ -27,8 +24,7 @@ import { RegisterComponent } from './register/register.component';
     ],
     declarations: [
         AppComponent,
-        LoginComponent
-,
+        LoginComponent,
         RegisterComponent
    ],
     providers: [

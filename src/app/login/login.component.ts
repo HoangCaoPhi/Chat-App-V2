@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    // convenience getter for easy access to form fields
+    // Trả về loginForm Control
     get f() { return this.loginForm.controls; }
 
     onSubmit() {
@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
+        // Gọi service login 
         this.authenticationService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe(
@@ -59,6 +60,6 @@ export class LoginComponent implements OnInit {
                 error => {
                     this.error = error;
                     this.loading = false;
-                });
+            });
     }
 }
