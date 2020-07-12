@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-import { Chat } from '../../_models/chat';
+import { Chat } from '../../models/chat';
 import { ChatService } from '../../services/chat.service';
 import { ComponentShareService } from '../../services/component-share.service';
 

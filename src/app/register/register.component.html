@@ -1,0 +1,75 @@
+<div class="wrap-form">
+    <div class="login-form">
+        <img src="../../assets/AuthenImg/chat-illustration-2.svg" />
+        <div class="login-content">
+            <h1>Create an Account</h1>
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" autocomplete="off">
+                <div class="row">
+                    <!--====================== TRUONG FIRST NAME AND LASTNAME==================-->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="firstname" placeholder="FirstName"
+                                formControlName="firstname">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="lastname" placeholder="LastName"
+                                formControlName="lastname">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="submitted && form.controls.lastname?.errors?.required || submitted && form.controls.firstname?.errors?.required">
+                    First và LastName không được để trống !
+                </div>
+                <!--====================== END RUONG FIRST NAME AND LASTNAME==================-->
+                <!--====================== TRUONG EMAIL  ==================-->
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" placeholder="Email Adress"
+                        formControlName="email">
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="submitted && form.controls.email?.errors?.required">
+                    Email không được trống
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="submitted && form.controls.email?.errors?.email">
+                    Bạn phải nhập đúng định dạng email
+                </div>
+                <!--====================== END TRUONG EMAIL  ==================-->
+                <!--====================== TRUONG PASSWORD  ==================-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="pwd" placeholder="Password"
+                                formControlName="password">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="form-control input-sm" placeholder="Confirm Password"
+                                formControlName="confirmPassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="col alert alert-danger" role="alert" *ngIf="submitted && form.hasError('passwordnotmatch')">
+                    Password và ConfirmPassword chưa đúng !
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="submitted && form.controls.password?.errors?.required">
+                    Password không được để trống
+                </div>
+                <!--====================== END TRUONG PASSWORD  ==================-->
+                <button class="btn btn-primary">
+                    Register
+                </button>
+                <div class="col alert alert-danger" role="alert" *ngIf="error">
+                    {{ error }}
+                </div>
+            </form>
+            <div>
+                <span>Do you have an account?</span>
+                <a routerLink="/login">Log in</a>
+            </div>
+        </div>
+    </div>
+</div>

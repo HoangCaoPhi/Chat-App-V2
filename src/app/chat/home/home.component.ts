@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Chat } from '@app/_models/chat';
+import { Chat } from '@app/models/chat';
 
 @Component({
   selector: 'app-home',

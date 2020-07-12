@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Chat } from '../_models/chat';
+import { Chat } from '../models/chat';
 import { Data } from './../data';
 
 import { Observable } from 'rxjs';

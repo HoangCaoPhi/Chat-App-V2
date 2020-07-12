@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ComponentShareService } from '@app/services/component-share.service';
-import { Chat } from '../../_models/chat';
+import { Chat } from '../../models/chat';
 import { ChatService } from '../../services/chat.service';
 
 @Component({

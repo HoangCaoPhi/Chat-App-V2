@@ -25,21 +25,24 @@
 	justify-content: space-around;
 	flex: 1;
 }
+
+.invalid-feedback {
+	color: red;
+}
+
 .form-control:focus {
 	border-color: blue;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
+
 // Override
 .alert {
-	margin-top: 15px;
+
 	margin-bottom: 12px;
-    height: 34px;
+    height: 40px;
     line-height: 30px;
     padding: 0px 15px;
-}
-.invalid-feedback {
-	color: red;
 }
 span,
 a {

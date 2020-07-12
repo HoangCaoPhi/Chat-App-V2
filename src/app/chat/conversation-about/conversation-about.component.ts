@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Chat } from '@app/_models/chat';
+import { Chat } from '@app/models/chat';
 
 @Component({
   selector: 'app-conversation-about',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './../../services';
-import { User } from './../../_models';
+import { User } from './../../models';
 
 @Component({
   selector: 'app-header',

@@ -1,4 +1,4 @@
-import { Chat } from './_models/chat';
+import { Chat } from './models/chat';
 
 export const Data: Chat[] = [
     {
