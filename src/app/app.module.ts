@@ -12,9 +12,8 @@ import { JwtInterceptor, ErrorInterceptor } from './helpers';
 
 import { LoginComponent } from './login/login.component';
 
- 
-import { ChatModule } from './chat/chat.module';
-import { ChatService } from './services/chat.service';;
+import { ChatService } from './services/chat.service';
+
 import { RegisterComponent } from './register/register.component';
 
 
@@ -24,7 +23,6 @@ import { RegisterComponent } from './register/register.component';
         ReactiveFormsModule,
         HttpClientModule,
         appRoutingModule,
-        ChatModule,
         FormsModule
     ],
     declarations: [
