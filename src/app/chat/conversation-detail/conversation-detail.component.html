@@ -2,16 +2,16 @@
 <div class="header-content">
    <div class="head-left">
       <div class="avatar">
-         <img src="{{ chat.avt }}" alt="avatar">
+         <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar>
       </div>
       <div class="info">
          <h2 class="info-username">
             <span>
-               {{ chat.name }}
+               {{ user.userName }}
             </span>
          </h2>
-         <p class="info-active" *ngIf="!chat.isActive">hoạt động 12 phút trước</p>
-         <p class="info-active" *ngIf="chat.isActive">Đang hoạt động</p>
+         <!-- <p class="info-active" *ngIf="!chat.isActive">hoạt động 12 phút trước</p>
+         <p class="info-active" *ngIf="chat.isActive">Đang hoạt động</p> -->
       </div>
    </div>
    <div class="head-right">
@@ -23,10 +23,10 @@
             </a>
          </li>
          <li style="cursor: pointer;" (click)="toggleInfo()">
-            <a>
+            <!-- <a>
                <img [src]="showAboutRight ? '/assets/ICON/IconAppChat/5.svg' : '/assets/ICON/IconAppChat/6.svg'"
                   alt="about-icon">
-            </a>
+            </a> -->
          </li>
          <li>
             <a>
@@ -43,13 +43,13 @@
 <div class="messeage">
    <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
    <div class="info-messeage" *ngIf="showAboutRight">
-      <app-conversation-about [chat]="chat"></app-conversation-about>
+      <app-conversation-about [user]="user"></app-conversation-about>
    </div>
 <!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
 <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
    <div class="content-messeage">
       <div class="content" #scrollframe>
-         <div class="messages">
+         <!-- <div class="messages">
             <ul>
                <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
                   <img *ngIf="messeage.fromMe" src="{{ chat.avt }}" alt="" />
@@ -64,7 +64,7 @@
                      title="{{ messeage.time | date:'medium' }}">{{ messeage.content }}</p>
                </li>
             </ul>
-         </div>
+         </div> -->
       </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -72,7 +72,7 @@
             <!-- Modal content-->
             <div class="modal-content center" role="document">
                <div class="modal-body">
-                  <img src="{{  imagePreview }}" alt="">
+                  <!-- <img src="{{  imagePreview }}" alt=""> -->
                </div>
             </div>
          </div>

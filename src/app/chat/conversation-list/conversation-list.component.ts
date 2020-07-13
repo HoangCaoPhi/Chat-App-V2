@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { ComponentShareService } from '@app/services/component-share.service';
 import { Chat } from '../../models/chat';
 import { ChatService } from '../../services/chat.service';
+import { User } from '@app/models';
+import { MessageService } from '@app/services/stringee/message.service';
 
 @Component({
   selector: 'app-conversation-list',
@@ -13,59 +15,40 @@ import { ChatService } from '../../services/chat.service';
 })
 
 export class ListComponent implements OnInit {
-  chats: Chat[];
-  filterChats: Chat[] = [];
+  user: User[];
+  filterUsers: User[] = [];
   idParam: number;
 
-  constructor(private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService) {
+  constructor(
+    private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService, private messageService: MessageService) {
     // Nhận id của contact-detail gửi đến
     this.getParam();
   }
 
   ngOnInit(): void {
-    this.getConvesation();
-  }
-  /*
-      Chức năng filter cuộc trò chuyện 
-  */
-  _keySearchFilter = '';
-
-  get keySearchFilter(): string {
-    return this._keySearchFilter;
-  }
-
-  set keySearchFilter(value: string) {
-    this._keySearchFilter = value;
-    this.filterChats = this.keySearchFilter ? this.performFilter(this.keySearchFilter) : this.chats;
-    console.log(`This is list chat = ${JSON.stringify(this.filterChats)}`);
-  }
-
-  performFilter(filterBy: string): any[] {
-    filterBy = filterBy.toLocaleLowerCase();
-
-    return this.chats.filter((chat: any) =>
-      chat.name.toLocaleLowerCase().indexOf(filterBy) > -1);
+     this.getConvesation();
   }
 
   /*
           Lấy các cuộc trò chuyện
    */
   getConvesation() {
-    this.chatService.getInfo().subscribe(
+    this.chatService.getUser().subscribe(
       (getChats) => {
-        this.chats = getChats;
-        this.filterChats = this.chats;
+        this.user = getChats;
+        console.log(getChats);
+        this.filterUsers = this.user;
       }
     )
   }
   /*
         Sắp xếp cuộc trò chuyện theo thời gian gửi sau cùng 
   */
-  get sortCoversation() {
-    return this.filterChats.sort((a, b) => {
-      return <any>new Date(b.lastTime) - <any>new Date(a.lastTime);
-    });
-  }
+  // get sortCoversation() {
+  //   return this.filterUsers.sort((a, b) => {
+  //     return <any>new Date(b.lastTime) - <any>new Date(a.lastTime);
+  //   });
+  // }
   /* 
         Them class vao DOM khi seen tin nhắn
   */
@@ -74,6 +57,7 @@ export class ListComponent implements OnInit {
   seenMesseage(chat) {
     chat.seenStatus = 0;
     chat.amoutNewMesseage = 0;
+     this.messageService.creaateConversation(chat);
   }
  // Focus hộp thoại hiện tại
   getActive(chat) {
@@ -94,7 +78,7 @@ export class ListComponent implements OnInit {
     this.valueFromChildSubscription = this.componentShareService.ValueFromChild.subscribe(
       data => {
         this.userId = data;
-        console.log("This is a conversation id" + this.userId);
+        // console.log("This is a conversation id" + this.userId);
       }
     );
   }

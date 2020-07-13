@@ -11,6 +11,8 @@ import { ViewComponent } from './conversation-detail/conversation-detail.compone
 import { FormsModule } from '@angular/forms';
 import { ConversationAboutComponent } from './conversation-about/conversation-about.component';
 
+// Import your AvatarModule
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [HomeComponent, ListComponent, ViewComponent, ConversationAboutComponent],
@@ -18,7 +20,9 @@ import { ConversationAboutComponent } from './conversation-about/conversation-ab
     CommonModule,
     ChatRoutingModule,
     FormsModule,
-    ShareModule
+    ShareModule,
+      // Specify AvatarModule as an import
+    AvatarModule
   ]
 })
 export class ChatModule { }

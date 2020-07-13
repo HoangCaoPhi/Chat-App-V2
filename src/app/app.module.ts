@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { ChatService } from './services/chat.service';
 import { RegisterComponent } from './register/register.component';
 
+// Import your AvatarModule
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
     imports: [
@@ -20,7 +22,9 @@ import { RegisterComponent } from './register/register.component';
         ReactiveFormsModule,
         HttpClientModule,
         appRoutingModule,
-        FormsModule
+        FormsModule,
+        // Specify AvatarModule as an import
+        AvatarModule
     ],
     declarations: [
         AppComponent,

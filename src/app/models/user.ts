@@ -4,5 +4,8 @@
     password: string;
     firstName: string;
     lastName: string;
+    userName: string;
+    phone: string;
+    avatarUrl: string;
     token?: string;
 }

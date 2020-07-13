@@ -1,18 +1,18 @@
 <div class="info-content">
    <div class="info-image">
       <div class="image">
-         <img src="{{ chat.avt }}" alt="">
+         <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar>
       </div>
    </div>
 
    <div class="info-status">
-      <p>{{ chat.name }}</p>
-      <p style="text-align: center;">{{ chat.phone }}</p>
-      <p style="text-align: center;">{{ chat.email }}</p>
+      <p>{{ user.userName }}</p>
+      <p style="text-align: center;">{{ user.phone }}</p>
+      <p style="text-align: center;">{{ user.email }}</p>
       <p class="line"></p>
    </div>
 
-   <div class="share-file">
+   <!-- <div class="share-file">
       <div class="title" (click)="toggleFile()">
          <p class="name-share">TỆP ĐÃ CHIA SẺ</p>
          <span class="icon-dropdown">
@@ -43,9 +43,9 @@
          </div>
       </ng-container>
       <p class="line"></p>
-   </div>
+   </div> -->
 
-   <div class="share-img">
+   <!-- <div class="share-img">
       <div class="title" (click)="toggleImg()">
          <p class="name-share">ẢNH ĐÃ CHIA SẺ</p>
          <span class="icon-dropdown">
@@ -68,7 +68,7 @@
             </ng-container>
          </div>
       </div>
-   </div>
+   </div> -->
 </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal1" role="dialog">

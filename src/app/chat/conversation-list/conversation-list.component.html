@@ -5,7 +5,7 @@
 			<div class="col-sm-10">
 				<div class="input-contact">
 					<input type="text" class="form-control" placeholder="Tìm kiếm cuộc trò chuyện"
-						   [(ngModel)]='keySearchFilter'>
+						  >
 				</div>
 			</div>
 			<div class="col-sm-2 btn-add">
@@ -17,22 +17,23 @@
 		<!-- ========================== CONTACT LIST =============================-->
 		<div id="contacts">
 			<ul>
-				<li class="contact" *ngFor="let chat of sortCoversation" routerLink="/chat/{{chat.id}}"
+				<li class="contact" *ngFor="let chat of user" routerLink="/chat/{{chat.id}}"
 					(click)="seenMesseage(chat)" 
 					[ngClass]="getActive(chat)">
 
 
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img [src]="chat.avt" alt="" />
-						<img class="green" src="/assets/images/green_sphere.svg" alt="avatar-conversation"
-							*ngIf="chat.isActive">
-							
+						<!-- <img [src]="chat.avatarUrl" alt="" /> -->
+						<!-- <img class="green" src="/assets/images/green_sphere.svg" alt="avatar-conversation"
+							*ngIf="chat.isActive"> -->
+						<ngx-avatar [name]="chat.firstName + ' ' + chat.lastName" size="34"></ngx-avatar>
 						<div class="meta">
-							<p class="name">{{ chat.name }}</p>
-							<p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p>
+							<p class="name">{{ chat.userName }}</p>
+							<p class="preview">{{  chat.firstName }}</p>
+							<!-- <p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p> -->
 						</div>
-
+<!-- 
 						<div class="meta status">
 							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 0">
 								{{  chat.lastTime |  date:'HH:MM'  }}</p>
@@ -45,7 +46,7 @@
 									{{ chat.amoutNewMesseage }}
 							</span>
 							</p>
-						</div>
+						</div> -->
 					</div>
 				</li>
 			</ul>

@@ -24,6 +24,24 @@
                     First và LastName không được để trống !
                 </div>
                 <!--====================== END RUONG FIRST NAME AND LASTNAME==================-->
+
+                <!--======================== TRUONG USER NAME ================================-->
+                <div class="form-group">
+                    <input type="text" class="form-control" id="lastname" placeholder="UserName"
+                        formControlName="username">
+                </div>
+                 <!--======================== TRUONG USER NAME ================================-->
+
+                     <!--======================== TRUONG Phone================================-->
+                <div class="form-group">
+                    <input type="text" class="form-control" id="lastname" placeholder="PhoneNumber"
+                        formControlName="phone">
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="submitted && form.controls.phone?.errors?.pattern">
+                    So dien thoai ban khong hop le
+                </div>
+                 <!--======================== TRUONG USER NAME ================================-->
+
                 <!--====================== TRUONG EMAIL  ==================-->
                 <div class="form-group">
                     <input type="email" class="form-control" id="email" placeholder="Email Adress"

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Chat } from '@app/models/chat';
+import { User } from '@app/models';
 
 @Component({
   selector: 'app-conversation-about',
@@ -25,7 +26,7 @@ export class ConversationAboutComponent implements OnInit {
     this.showImg = !this.showImg;
   }
 
-  @Input() chat:Chat;
+  @Input() user:User;
 
   // Lây danh sách tin nhắn hình ảnh chung 
   getImageMessegae(img) {
