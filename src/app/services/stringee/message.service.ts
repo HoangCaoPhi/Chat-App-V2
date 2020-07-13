@@ -19,7 +19,7 @@ export class MessageService {
   }
   // Hàm tạo cuộc trò truyện với một người khác
   creaateConversation(user: User) {
-    var userIds = user.id;
+    var userIds = [user.id];
     var options = {
       isDistinct: false,
       isGroup: false

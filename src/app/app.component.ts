@@ -1,18 +1,16 @@
-﻿import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { User } from './models';
+﻿import { Component, OnInit } from '@angular/core';
 import { MessageService } from './services/stringee/message.service';
 
 
 @Component({ selector: 'app-root', templateUrl: 'app.component.html' })
-export class AppComponent {
+export class AppComponent implements OnInit {
     currentUser: any;
     constructor(private messageService: MessageService) {
   
     }
-    ngOnint() {
+    ngOnInit() {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(this.currentUser.token);
         if (this.currentUser) {
             this.messageService.connectStringee(this.currentUser.token);
             this.messageService.connectListners();

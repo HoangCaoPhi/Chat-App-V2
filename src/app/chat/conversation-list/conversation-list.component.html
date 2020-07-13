@@ -18,7 +18,7 @@
 		<div id="contacts">
 			<ul>
 				<li class="contact" *ngFor="let chat of user" routerLink="/chat/{{chat.id}}"
-					(click)="seenMesseage(chat)" 
+					(click)="onCick(chat)" 
 					[ngClass]="getActive(chat)">
 
 

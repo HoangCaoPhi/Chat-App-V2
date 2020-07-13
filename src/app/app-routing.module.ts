@@ -4,25 +4,19 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './helpers';
+import { HomeComponent } from './chat/home/home.component';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: "chat",
-    loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule),
+    path: "chat/:id",
+    component: HomeComponent,
     canActivate: [AuthGuard]
   },
-  { 
-    path: '', 
-    redirectTo: '/chat/1' ,   
-    pathMatch: 'full', 
-    canActivate: [AuthGuard]
-   },
-
   // otherwise redirect to home
-  { path: '**', redirectTo: '/chat' }
+  // { path: '**', redirectTo: '/chat' }
 
 ];
 

@@ -54,10 +54,13 @@ export class ListComponent implements OnInit {
   */
 
   // Thay doi trang thái khi xem tin nhắn
-  seenMesseage(chat) {
-    chat.seenStatus = 0;
-    chat.amoutNewMesseage = 0;
-     this.messageService.creaateConversation(chat);
+  seenMesseage(chat: User) {
+    // chat.seenStatus = 0;
+    // chat.amoutNewMesseage = 0;
+    // this.messageService.creaateConversation(chat);
+  }
+  onCick(user: User) {
+    this.messageService.creaateConversation(user);
   }
  // Focus hộp thoại hiện tại
   getActive(chat) {
