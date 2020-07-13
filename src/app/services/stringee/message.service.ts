@@ -26,24 +26,54 @@ export class MessageService {
     };
     this.stringeeChat.createConversation(userIds, options, (status, code, message, conv) => {
       console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(conv));
+      let convId = conv.id;
+      localStorage.setItem("convId", convId);
     });
   }
+
   // Lắng nghe onconnect
   connectListners() {
     this.stringeeClient.on('connect', function () {
       console.log('++++++++++++++ connected to StringeeServer');
     });
   }
+
   // Lắng nghe authen
   authenListners() {
     this.stringeeClient.on('authen', function (res) {
       console.log('authen', res);
     });
   }
+
   // Lắng nghe disconnect
   disconnectListners() {
     this.stringeeClient.on('disconnect', function () {
       console.log('++++++++++++++ disconnected');
+    });
+  }
+
+  // Hàm gửi tin nhắn dạng text
+  sendTextMessage(YOUR_CONVERSATION_ID: string, content: string) {
+    var txtMsg = {
+      type: 1,
+      convId: YOUR_CONVERSATION_ID,
+      message: {
+        content: content
+      }
+    };
+
+    this.stringeeChat.sendMessage(txtMsg, function (status, code, message, msg) {
+      console.log(status + code + message + "msg result " + JSON.stringify(msg));
+    });
+  }
+
+  // Hàm lấy số lượng tin nhắn cuối cùng
+  getLastMessages(YOUR_CONVERSATION_ID: string) {
+    var convId = YOUR_CONVERSATION_ID;
+    var count = 50;
+    var isAscending = false;
+    this.stringeeChat.getLastMessages(convId, count, isAscending, function (status, code, message, msgs) {
+      console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(msgs));
     });
   }
   

@@ -7,6 +7,7 @@ import { Chat } from '../../models/chat';
 import { ChatService } from '../../services/chat.service';
 import { ComponentShareService } from '../../services/component-share.service';
 import { User } from '@app/models';
+import { MessageService } from '@app/services/stringee/message.service';
 
 
 class FileSpinnet {
@@ -31,6 +32,7 @@ export class ViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private chatService: ChatService,
+    private messageService: MessageService,
     private componentShareService: ComponentShareService
   ) {
     route.params.subscribe(val => {
@@ -60,17 +62,8 @@ export class ViewComponent implements OnInit {
 
   sendMesseage(sendForm: NgForm) {
     // console.log(sendForm.value);
-    if (sendForm.value) {
-      this.newMesseage =
-      {
-        id: this.chat.listMesseage.length + 1,
-        content: sendForm.value.message,
-        time: Date(),
-        fromMe: false,
-        type: 'text'
-      }
-      this.chat.listMesseage.push(this.newMesseage);
-    }
+    console.log(sendForm.value);
+    this.messageService.sendTextMessage(localStorage.getItem('convId'), sendForm.value.message);
     sendForm.reset();
 
   }
