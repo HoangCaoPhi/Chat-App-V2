@@ -4,12 +4,11 @@
 		<div class="row search">
 			<div class="col-sm-10">
 				<div class="input-contact">
-					<input type="text" class="form-control" placeholder="Tìm kiếm cuộc trò chuyện"
-						  >
+					<input type="text" class="form-control" placeholder="Tìm kiếm cuộc trò chuyện">
 				</div>
 			</div>
 			<div class="col-sm-2 btn-add">
-				<img src="/assets/ICON/IconboxChat/23.svg" alt="">
+				<img src="/assets/ICON/IconboxChat/23.svg" alt="" (click)="getConversationLast()">
 			</div>
 		</div>
 		<!-- ========================== END SEARCH ===============================-->
@@ -17,8 +16,7 @@
 		<!-- ========================== CONTACT LIST =============================-->
 		<div id="contacts">
 			<ul>
-				<li class="contact" *ngFor="let chat of user" routerLink="/chat/{{chat.id}}"
-					(click)="onCick(chat)" 
+				<li class="contact" *ngFor="let chat of user" routerLink="/chat/{{chat.id}}" (click)="onCick(chat)"
 					[ngClass]="getActive(chat)">
 
 
@@ -33,7 +31,7 @@
 							<p class="preview">{{  chat.firstName }}</p>
 							<!-- <p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p> -->
 						</div>
-<!-- 
+						<!-- 
 						<div class="meta status">
 							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 0">
 								{{  chat.lastTime |  date:'HH:MM'  }}</p>

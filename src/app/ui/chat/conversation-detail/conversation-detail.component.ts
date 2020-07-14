@@ -29,7 +29,7 @@ export class ViewComponent implements OnInit {
   imagePreview: any;
   responseLastMsg: any;
   messages: object;
-  
+  UserId: string = JSON.parse(localStorage.getItem("currentUser")).id;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,13 +40,14 @@ export class ViewComponent implements OnInit {
     route.params.subscribe(val => {
       this.getConversationById();
       this.getConvesationLast();
+      // this.userId = this.stringeeService.getCurrentUserIdFromAccessToken(localStorage.get("currentUser"));
     });
   }
 
   ngOnInit(): void {
 
   }
-  
+  /*=================================================         CÁC HÀM LẤY TỪ STRINGEE         ================================================================*/ 
   // Lấy cuộc trò chuyện của từng người dùng
   async getConvesationLast() {
     this.responseLastMsg =  await this.stringeeService.getLastMessages(localStorage.getItem('convId'));
@@ -59,6 +60,9 @@ export class ViewComponent implements OnInit {
     //   console.log(content);
     // }
   }
+
+
+
   getConversationById() {
     const id = this.route.snapshot.paramMap.get('id');
     // console.log("detail id " + id);

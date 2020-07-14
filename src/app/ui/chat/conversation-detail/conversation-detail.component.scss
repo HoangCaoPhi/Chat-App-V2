@@ -260,65 +260,76 @@
 .content-messeage .content::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.3);
 }
-.messages ul li {
-	display: inline-block;
-	clear: both;
-	margin: 15px 15px 5px 15px;
-	width: calc(100% - 25px);
-	font-size: 0.9em;
-}
-.messages ul li:nth-last-child(1) {
-	margin-bottom: 66px;
-}
-.messages ul li.sent img {
-	margin: 6px 8px 0 0;
-}
-.messages ul li.sent p {
+ // List message
+ .messages ul li {
+    display: inline-block;
+    clear: both;
+    margin: 15px 15px 5px 15px;
+    width: calc(100% - 25px);
+    font-size: 0.9em;
+  }
+  .messages ul li:nth-last-child(1) {
+    margin-bottom: 20px;
+  }
+  // Avatar
+  .messages ul li.sent img {
+    margin: 4px 8px 0 0;
+  }
+  .messages ul li.replies img {
+    float: right;
+    margin: 4px 0 0 8px;
+  }
+  .messages ul li img {
+    vertical-align: bottom;
+    width: 32px;
+    border-radius: 50%;
+    float: left;
+  }
+  .messages ul li.sent ngx-avatar {
+    margin: 4px 8px 0 0;
+  }
+  .messages ul li.replies ngx-avatar {
+    float: right;
+    margin: 4px 0 0 8px;
+  }
+  .messages ul li ngx-avatar {
+    vertical-align: bottom;
+    width: 32px;
+    border-radius: 50%;
+    float: left;
+  }
+  // Messages P
+  .messages ul li.sent p {
     background: #eeeeee;
-    max-width: 353px;
     word-wrap: break-word;
-    color: #212121;
-}
-.messages ul li.replies p {
-	background: #2688e6;
-    color: #f5f5f5;
-    // width: auto;
-    max-width: 353px;
-    // min-height: 50px;
-    word-wrap: break-word;
-	float: right;
-}
-.messages ul li.sent a {
-    cursor: pointer;
-    background: #eeeeee;
-    word-wrap: break-word;
-    color: #212121;
-    text-decoration: none;
-}
-.messages ul li.replies img {
-	float: right;
-	margin: 6px 0 0 8px;
-}
-.messages ul li.replies a {
-    cursor: pointer;
+    color: #212121;;
+  }
+  .messages ul li.replies p {
     background: #2688e6;
     color: #ffffff;
     word-wrap: break-word;
     float: right;
   }
-.messages ul li img {
-	width: 22px;
-	border-radius: 50%;
-	float: left;
-}
-.messages ul li p {
-	display: inline-block;
-	padding: 10px 15px;
-	border-radius: 20px;
-	max-width: 205px;
-	line-height: 130%;
-}
-.messages ul li a {
+  .messages ul li p {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 205px;
+    line-height: 130%;
+  }
+  // Messages A
+  .messages ul li.sent a {
+    background: #eeeeee;
+    word-wrap: break-word;
+    color: #212121;;
+  }
+  .messages ul li.replies a {
+    background: #2688e6;
+    color: #ffffff;
+    word-wrap: break-word;
+    float: right;
+  }
+  .messages ul li a {
     display: inline-block;
     text-decoration: underline;
     padding: 10px 15px;
@@ -326,24 +337,29 @@
     max-width: 205px;
     line-height: 130%;
   }
-.messages ul  li.sent .img-preview {
+  // Image messages
+  .messages ul  li.sent .img-preview {
     border-radius: 5px;
     float: left;
-    width: max-content;
-    // width: 350px;
-    // height: 350px;
+    width: auto;
+    max-height: 350px;
     cursor: pointer;
 }
-.messages ul li.replies .img-preview {
+  .messages ul  li.replies .img-preview {
     border-radius: 5px;
     float: right;
-    width: max-content;
-    // width: 350px;
-    // height: 350px;
+    width: auto;
+    max-height: 350px;
     cursor: pointer;
-    // width: auto;
-    // max-height: 400px;;
 }
+  // File messages
+  .messages ul  li.replies .file {
+    cursor: pointer;
+  }
+
+  .messages ul  li.sent .file {
+    cursor: pointer;
+  }
 /*=============================================== END CONTENT MESSEAGE ========================== */ 
 .content-messeage .send {
     border-top: none;

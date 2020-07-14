@@ -87,7 +87,7 @@ export class StringeeService {
       });
     })
   }
-  // Hàm lấy số lượng cuộc trò chuyện cuối cùng ở trong conten message
+  // Hàm lấy số lượng cuộc trò chuyện cuối cùng ở trong content message
   async getLastConversations() {
     var count = 10;
     var isAscending = true;
@@ -100,15 +100,34 @@ export class StringeeService {
   getLastConv(count, isAscending) {
     return new Promise((resolve) => {
       this.stringeeChat.getLastConversations(count, isAscending, function (status, code, message, convs) {
-         resolve(convs);
+        resolve(convs);
       });
     })
   }
-
+  /*============================================== THÔNG TIN USER ============================================================= */
+  async getUserInfo(userIds) {
+    var users: any;
+    users = await this.getUser(userIds);
+  }
+  getUser(userIds) {
+    var userId = [userIds];
+    console.log(userId);
+    return new Promise((resolve) => {
+      this.stringeeChat.getUsersInfo(userId, function (status, code, message, users) {
+        resolve(users);
+      });
+    })
+  }
+  // getUserInfo(userId) {
+  //   var userIds = [userId];
+  //   this.stringeeChat.getUsersInfo(userId, function (status, code, message, users) {
+  //       console.log('status:' + status + ' code:' + code + ' message:' + message + ' users:' + JSON.stringify(users));
+  //   });
+  // }
   /*================================================ HÀM PHỤ TRỢ =============================================================== */
   // Hàm lấy userId hiện tại của người dùng đăng nhập
-   getCurrentUserIdFromAccessToken(token) {
-      let decodedToken = jwt_decode (token);
-      return decodedToken.userId;
+  getCurrentUserIdFromAccessToken(token) {
+    let decodedToken = jwt_decode(token);
+    return decodedToken.userId;
   }
 }

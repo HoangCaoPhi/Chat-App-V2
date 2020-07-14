@@ -45,8 +45,8 @@
    <div class="info-messeage" *ngIf="showAboutRight">
       <app-conversation-about [user]="user"></app-conversation-about>
    </div>
-<!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
-<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
+   <!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
+   <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
    <div class="content-messeage">
       <div class="content" #scrollframe>
          <!-- <div class="messages">
@@ -65,12 +65,22 @@
                </li>
             </ul>
          </div> -->
-         <ul >
+         <div class="messages">
+            <ul *ngFor="let messeage of responseLastMsg">
+               <li class="replies" *ngIf="messeage.sender == UserId">
+                  <p class="left"> {{ messeage.content.content }} </p>
+               </li>
+               <li class="sent" *ngIf="messeage.sender != UserId">
+                  <p class="right"> {{ messeage.content.content }} </p>
+               </li>
+            </ul>
+         </div>
+         <!-- <ul >
             <li *ngFor="let messeage of responseLastMsg">
                      <p> {{ messeage.content.content }} </p>
 
             </li>
-         </ul>
+         </ul> -->
       </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">

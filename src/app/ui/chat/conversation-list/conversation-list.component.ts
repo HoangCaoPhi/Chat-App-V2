@@ -44,12 +44,33 @@ export class ListComponent implements OnInit {
       }
     )
   }
-
+// Lấy các cuộc trò chuyện sau cùng
   responseConvs: any;
   async getConversationLast() {
       this.responseConvs =  await this.stringeeService.getLastConversations();
+
       console.log("res conv" + this.responseConvs);
+
+      let userId =  JSON.parse(localStorage.getItem('currentUser')).id;
+
+      let convId = localStorage.getItem("convId");
+
+      for(let conv of this.responseConvs) {
+        let nameConv  = conv.participants.filter(p => p.userId != userId);
+        // Lấy thông tin user của cuộc trò chuyê
+        // let user = await this.stringeeService.getUserInfo(nameConv[0].userId);
+         console.log("Thong tin userId " + JSON.stringify(nameConv[0].userId));
+        // console.log("Thong tin user " + JSON.stringify(nameConv));
+         let user =  await this.stringeeService.getUserInfo(nameConv[0].userId);
+         
+         console.log("Thong tin user " + JSON.stringify(user));
+      }
+      console.log(userId);
   }
+
+
+
+
   /*
         Sắp xếp cuộc trò chuyện theo thời gian gửi sau cùng 
   */
