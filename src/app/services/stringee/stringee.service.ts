@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { StringeeClient, StringeeChat } from "stringee-chat-js-sdk";
 import { User } from '@app/models';
 
+import * as jwt_decode from "jwt-decode";
 @Injectable({
   providedIn: 'root'
 })
-export class MessageService {
+export class StringeeService {
 
   constructor() { }
 
@@ -67,23 +68,14 @@ export class MessageService {
     });
   }
 
-  // Hàm lấy số lượng tin nhắn cuối cùng
-  // getLastMessages(YOUR_CONVERSATION_ID: string) {
-  //   var convId = YOUR_CONVERSATION_ID;
-  //   var count = 50;
-  //   var isAscending = false;
-  //   this.stringeeChat.getLastMessages(convId, count, isAscending, function (status, code, message, msgs) {
-  //     console.log(JSON.stringify(msgs));
-  //   });
-  // }
-
+  // Hàm lấy số lượng tin nhắn cuối cùng ở trong conten message
   async getLastMessages(YOUR_CONVERSATION_ID: string) {
     var convId = YOUR_CONVERSATION_ID;
     var count = 50;
-    var isAscending = false;
+    var isAscending = true;
     var msgsRender: any;
     msgsRender = await this.getLastMsg(convId, count, isAscending);
-    console.log("ms" + typeof(msgsRender));
+    console.log("ms" + typeof (msgsRender));
     return msgsRender;
   }
 
@@ -95,5 +87,28 @@ export class MessageService {
       });
     })
   }
+  // Hàm lấy số lượng cuộc trò chuyện cuối cùng ở trong conten message
+  async getLastConversations() {
+    var count = 10;
+    var isAscending = true;
+    var convsRender: any;
+    convsRender = await this.getLastConv(count, isAscending);
+    console.log("cv" + convsRender);
+    return convsRender;
 
+  }
+  getLastConv(count, isAscending) {
+    return new Promise((resolve) => {
+      this.stringeeChat.getLastConversations(count, isAscending, function (status, code, message, convs) {
+         resolve(convs);
+      });
+    })
+  }
+
+  /*================================================ HÀM PHỤ TRỢ =============================================================== */
+  // Hàm lấy userId hiện tại của người dùng đăng nhập
+   getCurrentUserIdFromAccessToken(token) {
+      let decodedToken = jwt_decode (token);
+      return decodedToken.userId;
+  }
 }

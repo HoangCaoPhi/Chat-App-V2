@@ -9,19 +9,19 @@ import { AppComponent } from './app.component';
 import { appRoutingModule } from './app-routing.module';
 
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './ui/login/login.component';
 import { ChatService } from './services/chat.service';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './ui/register/register.component';
 
 // Import your AvatarModule
 import { AvatarModule } from 'ngx-avatar';
 
-import { MessageService } from './services/stringee/message.service';
-import { HomeComponent } from './chat/home/home.component';
-import { ViewComponent } from './chat/conversation-detail/conversation-detail.component';
-import { ConversationAboutComponent } from './chat/conversation-about/conversation-about.component';
+import { StringeeService } from './services/stringee/stringee.service';
+import { HomeComponent } from './ui/chat/home/home.component';
+import { ViewComponent } from './ui/chat/conversation-detail/conversation-detail.component';
+import { ConversationAboutComponent } from './ui/chat/conversation-about/conversation-about.component';
 import { HeaderComponent } from './share/header/header.component';
-import { ListComponent } from './chat/conversation-list/conversation-list.component';
+import { ListComponent } from './ui/chat/conversation-list/conversation-list.component';
 
 @NgModule({
     imports: [
@@ -47,7 +47,7 @@ import { ListComponent } from './chat/conversation-list/conversation-list.compon
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         ChatService,
-        MessageService
+        StringeeService
     ],
     bootstrap: [AppComponent]
 })

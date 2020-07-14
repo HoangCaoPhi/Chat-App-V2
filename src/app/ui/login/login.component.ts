@@ -6,7 +6,7 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from '@app/services';
 
 import { StringeeClient, StringeeChat } from "stringee-chat-js-sdk";
-import { MessageService } from '@app/services/stringee/message.service';
+import { StringeeService } from '@app/services/stringee/stringee.service';
 
 @Component({
     templateUrl: './login.component.html',
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private messageService: MessageService,
+        private stringeeService: StringeeService,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
     // Trả về loginForm Control
     get f() { return this.loginForm.controls; }
-
+    ACCESS_TOKEN: string;
     onSubmit() {
         this.submitted = true;
 
@@ -57,13 +57,14 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         // Gọi service login 
+     
         this.authenticationService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
-                    // this.ACCESS_TOKEN = data.token;
-                    // console.log(this.ACCESS_TOKEN);
-                    // this.messageService.connectStringee(this.ACCESS_TOKEN);
+                    this.ACCESS_TOKEN = data.token;
+                    console.log(this.ACCESS_TOKEN);
+                    this.stringeeService.connectStringee(this.ACCESS_TOKEN);
                     // this.messageService.connectListners();
                     this.router.navigate([this.returnUrl]);
                 },

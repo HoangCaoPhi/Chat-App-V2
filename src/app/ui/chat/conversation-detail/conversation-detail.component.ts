@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-import { Chat } from '../../models/chat';
-import { ChatService } from '../../services/chat.service';
-import { ComponentShareService } from '../../services/component-share.service';
+import { Chat } from '../../../models/chat';
+import { ChatService } from '../../../services/chat.service';
+import { ComponentShareService } from '../../../services/component-share.service';
 import { User } from '@app/models';
-import { MessageService } from '@app/services/stringee/message.service';
+import { StringeeService } from '@app/services/stringee/stringee.service';
 
 
 class FileSpinnet {
@@ -34,7 +34,7 @@ export class ViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private chatService: ChatService,
-    private messageService: MessageService,
+    private stringeeService: StringeeService,
     private componentShareService: ComponentShareService
   ) {
     route.params.subscribe(val => {
@@ -46,19 +46,18 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  /*
-       Lấy cuộc hội thoại với route id     
-  */
+  
+  // Lấy cuộc trò chuyện của từng người dùng
   async getConvesationLast() {
-    this.responseLastMsg =  await this.messageService.getLastMessages(localStorage.getItem('convId'));
-    console.log("MessageList" +   this.responseLastMsg);
-    let msgsLength =  this.responseLastMsg.length;
-    for (let i = 0; i < msgsLength; i++) { 
-      let message = this.responseLastMsg[i];
-      let content = this.responseLastMsg[i].content.content;
-      console.log(message);
-      console.log(content);
-    }
+    this.responseLastMsg =  await this.stringeeService.getLastMessages(localStorage.getItem('convId'));
+    // console.log("MessageList" +   this.responseLastMsg);
+    // let msgsLength =  this.responseLastMsg.length;
+    // for (let i = 0; i < msgsLength; i++) { 
+    //   let message = this.responseLastMsg[i];
+    //   let content = this.responseLastMsg[i].content.content;
+    //   console.log(message);
+    //   console.log(content);
+    // }
   }
   getConversationById() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -76,7 +75,7 @@ export class ViewComponent implements OnInit {
   sendMesseage(sendForm: NgForm) {
     // console.log(sendForm.value);
     console.log(sendForm.value);
-    this.messageService.sendTextMessage(localStorage.getItem('convId'), sendForm.value.message);
+    this.stringeeService.sendTextMessage(localStorage.getItem('convId'), sendForm.value.message);
     sendForm.reset();
 
   }

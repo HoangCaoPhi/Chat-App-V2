@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ComponentShareService } from '@app/services/component-share.service';
-import { Chat } from '../../models/chat';
-import { ChatService } from '../../services/chat.service';
+import { Chat } from '../../../models/chat';
+import { ChatService } from '../../../services/chat.service';
 import { User } from '@app/models';
-import { MessageService } from '@app/services/stringee/message.service';
+import { StringeeService } from '@app/services/stringee/stringee.service';
 
 @Component({
   selector: 'app-conversation-list',
@@ -20,13 +20,16 @@ export class ListComponent implements OnInit {
   idParam: number;
 
   constructor(
-    private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService, private messageService: MessageService) {
+    private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService, private stringeeService: StringeeService) {
     // Nhận id của contact-detail gửi đến
     this.getParam();
+    this.getConversationLast();
+    
   }
 
   ngOnInit(): void {
      this.getConvesation();
+     
   }
 
   /*
@@ -40,6 +43,12 @@ export class ListComponent implements OnInit {
         this.filterUsers = this.user;
       }
     )
+  }
+
+  responseConvs: any;
+  async getConversationLast() {
+      this.responseConvs =  await this.stringeeService.getLastConversations();
+      console.log("res conv" + this.responseConvs);
   }
   /*
         Sắp xếp cuộc trò chuyện theo thời gian gửi sau cùng 
@@ -60,7 +69,8 @@ export class ListComponent implements OnInit {
     // this.messageService.creaateConversation(chat);
   }
   onCick(user: User) {
-    this.messageService.creaateConversation(user);
+    this.stringeeService.creaateConversation(user);
+    this.stringeeService.getLastConversations();
   }
  // Focus hộp thoại hiện tại
   getActive(chat) {
