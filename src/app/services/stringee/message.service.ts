@@ -11,7 +11,7 @@ export class MessageService {
   constructor() { }
 
   stringeeClient = new StringeeClient();
-  stringeeChat   = new StringeeChat(this.stringeeClient);
+  stringeeChat = new StringeeChat(this.stringeeClient);
 
   // Hàm connect stringge
   connectStringee(ACCESS_TOKEN) {
@@ -25,7 +25,7 @@ export class MessageService {
       isGroup: false
     };
     this.stringeeChat.createConversation(userIds, options, (status, code, message, conv) => {
-      console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(conv));
+      //   console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(conv));
       let convId = conv.id;
       localStorage.setItem("convId", convId);
     });
@@ -63,18 +63,37 @@ export class MessageService {
     };
 
     this.stringeeChat.sendMessage(txtMsg, function (status, code, message, msg) {
-      console.log(status + code + message + "msg result " + JSON.stringify(msg));
+      //  console.log(status + code + message + "msg result " + JSON.stringify(msg));
     });
   }
 
   // Hàm lấy số lượng tin nhắn cuối cùng
-  getLastMessages(YOUR_CONVERSATION_ID: string) {
+  // getLastMessages(YOUR_CONVERSATION_ID: string) {
+  //   var convId = YOUR_CONVERSATION_ID;
+  //   var count = 50;
+  //   var isAscending = false;
+  //   this.stringeeChat.getLastMessages(convId, count, isAscending, function (status, code, message, msgs) {
+  //     console.log(JSON.stringify(msgs));
+  //   });
+  // }
+
+  async getLastMessages(YOUR_CONVERSATION_ID: string) {
     var convId = YOUR_CONVERSATION_ID;
     var count = 50;
     var isAscending = false;
-    this.stringeeChat.getLastMessages(convId, count, isAscending, function (status, code, message, msgs) {
-      console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(msgs));
-    });
+    var msgsRender: any;
+    msgsRender = await this.getLastMsg(convId, count, isAscending);
+    console.log("ms" + typeof(msgsRender));
+    return msgsRender;
   }
-  
+
+  getLastMsg(convId, count, isAscending) {
+    return new Promise((resolve, reject) => {
+      this.stringeeChat.getLastMessages(convId, count, isAscending, function (status, code, message, msgs) {
+        console.log("msgs " + msgs);
+        resolve(msgs);
+      });
+    })
+  }
+
 }

@@ -65,6 +65,12 @@
                </li>
             </ul>
          </div> -->
+         <ul >
+            <li *ngFor="let messeage of responseLastMsg">
+                     <p> {{ messeage.content.content }} </p>
+
+            </li>
+         </ul>
       </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">

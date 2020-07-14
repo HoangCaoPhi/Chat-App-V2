@@ -27,7 +27,9 @@ export class ViewComponent implements OnInit {
   avatarSender: string;
   newMesseage: any;
   imagePreview: any;
-
+  responseLastMsg: any;
+  messages: object;
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,7 @@ export class ViewComponent implements OnInit {
   ) {
     route.params.subscribe(val => {
       this.getConversationById();
+      this.getConvesationLast();
     });
   }
 
@@ -46,7 +49,17 @@ export class ViewComponent implements OnInit {
   /*
        Lấy cuộc hội thoại với route id     
   */
-
+  async getConvesationLast() {
+    this.responseLastMsg =  await this.messageService.getLastMessages(localStorage.getItem('convId'));
+    console.log("MessageList" +   this.responseLastMsg);
+    let msgsLength =  this.responseLastMsg.length;
+    for (let i = 0; i < msgsLength; i++) { 
+      let message = this.responseLastMsg[i];
+      let content = this.responseLastMsg[i].content.content;
+      console.log(message);
+      console.log(content);
+    }
+  }
   getConversationById() {
     const id = this.route.snapshot.paramMap.get('id');
     // console.log("detail id " + id);
