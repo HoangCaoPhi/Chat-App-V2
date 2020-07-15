@@ -10,12 +10,10 @@ import { appRoutingModule } from './app-routing.module';
 
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
 import { LoginComponent } from './ui/login/login.component';
-import { ChatService } from './services/chat.service';
 import { RegisterComponent } from './ui/register/register.component';
 
 // Import your AvatarModule
 import { AvatarModule } from 'ngx-avatar';
-
 import { StringeeService } from './services/stringee/stringee.service';
 import { HomeComponent } from './ui/chat/home/home.component';
 import { ViewComponent } from './ui/chat/conversation-detail/conversation-detail.component';
@@ -38,8 +36,8 @@ import { CommonModule } from '@angular/common';
         AppComponent,
         LoginComponent,
         RegisterComponent,
-        HomeComponent, 
-        LoginComponent, 
+        HomeComponent,
+        LoginComponent,
         ViewComponent,
         ConversationAboutComponent,
         HeaderComponent,
@@ -48,7 +46,6 @@ import { CommonModule } from '@angular/common';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        ChatService,
         StringeeService
     ],
     bootstrap: [AppComponent]

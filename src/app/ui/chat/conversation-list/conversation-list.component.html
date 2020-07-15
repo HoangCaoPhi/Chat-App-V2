@@ -48,10 +48,14 @@
 			</ul> -->
 		<div id="contacts">
 			<ul>
-				<li *ngFor="let conv of responseConvs" class="contact" routerLink="/chat/{{conv.id}}" (click)="onCickConversation(conv)">
+				<li *ngFor="let conv of responseConvs" class="contact" routerLink="/chat/{{conv.id}}" (click)="onCickConversation(conv)" [ngClass] = "getActive(conv)">
 					<div class="meta">
 						<div class="wrap">
 							<span class="contact-status online"></span>
+							<ng-container *ngFor="let participant of conv.participants">
+								<ngx-avatar *ngIf="participant.name != null" [name]="participant.name" size="34"></ngx-avatar>
+							</ng-container>
+						
 							<div class="meta">
 								<ng-container *ngFor="let participant of conv.participants">
 									<p class="name" *ngIf="participant.name != null">

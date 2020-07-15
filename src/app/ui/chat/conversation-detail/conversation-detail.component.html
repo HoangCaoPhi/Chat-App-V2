@@ -2,12 +2,12 @@
 <div class="header-content">
    <div class="head-left">
       <div class="avatar">
-         <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar>
+         <!-- <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar> -->
       </div>
       <div class="info">
          <h2 class="info-username">
             <span>
-               {{ user.userName }}
+               <!-- {{ user.userName }} -->
             </span>
          </h2>
          <!-- <p class="info-active" *ngIf="!chat.isActive">hoạt động 12 phút trước</p>
@@ -23,10 +23,10 @@
             </a>
          </li>
          <li style="cursor: pointer;" (click)="toggleInfo()">
-            <!-- <a>
+            <a>
                <img [src]="showAboutRight ? '/assets/ICON/IconAppChat/5.svg' : '/assets/ICON/IconAppChat/6.svg'"
                   alt="about-icon">
-            </a> -->
+            </a>
          </li>
          <li>
             <a>
@@ -98,11 +98,11 @@
          <div class="send-view">
             <label class="send">
                <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
-               <input #fileInput type="file" (change)="processFile(fileInput)">
+               <input #fileInput type="file">
             </label>
             <label class="send">
                <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
-               <input #imageInput type="file" accept="image/*" (change)="processImageFile(imageInput)">
+               <input #imageInput type="file" accept="image/*">
             </label>
             <label class="send">
                <span class="buzz">

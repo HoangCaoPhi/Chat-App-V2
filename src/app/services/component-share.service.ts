@@ -9,12 +9,12 @@ export class ComponentShareService {
   constructor() { }
 
   private getConversationId = new Subject<any>();
-  
-  // Trả về id nhận được
+
+  // Trả về conversationId nhận được
   public get ValueFromChild() {
     return this.getConversationId;
   }
-  // Nhận vào id được emit lên
+  // Nhận vào conversationId được emit lên
   public notifyCountValue(number) {
     this.getConversationId.next(number);
   }

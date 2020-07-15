@@ -4,6 +4,7 @@ import { StringeeClient, StringeeChat } from "stringee-chat-js-sdk";
 import { User } from '@app/models';
 
 import * as jwt_decode from "jwt-decode";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,22 +15,10 @@ export class StringeeService {
   stringeeClient = new StringeeClient();
   stringeeChat = new StringeeChat(this.stringeeClient);
 
+  /*================================================  KẾT NỐI VÀ LẮNG NGHE  ========================================================================== */
   // Hàm connect stringge
   connectStringee(ACCESS_TOKEN) {
     this.stringeeClient.connect(ACCESS_TOKEN);
-  }
-  // Hàm tạo cuộc trò truyện với một người khác
-  creaateConversation(user: User) {
-    var userIds = [user.id];
-    var options = {
-      isDistinct: false,
-      isGroup: false
-    };
-    this.stringeeChat.createConversation(userIds, options, (status, code, message, conv) => {
-      //   console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(conv));
-      let convId = conv.id;
-      localStorage.setItem("convId", convId);
-    });
   }
 
   // Lắng nghe onconnect
@@ -75,7 +64,25 @@ export class StringeeService {
     });
   }
 
-  // Hàm gửi tin nhắn dạng text
+
+  /*======================================================================  Tạo cuộc trò chuyện  ======================================================================= */
+
+  // Hàm tạo cuộc trò truyện với một người khác
+  creaateConversation(user: User) {
+    var userIds = [user.id];
+    var options = {
+      isDistinct: false,
+      isGroup: false
+    };
+    this.stringeeChat.createConversation(userIds, options, (status, code, message, conv) => {
+      //   console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(conv));
+      let convId = conv.id;
+      localStorage.setItem("convId", convId);
+    });
+  }
+
+
+  /*====================================================== GỬI TIN NHẮN ===================================================================================================== */
   sendTextMessage(YOUR_CONVERSATION_ID: string, content: string) {
     var txtMsg = {
       type: 1,
@@ -90,7 +97,10 @@ export class StringeeService {
     });
   }
 
-  // Hàm lấy số lượng tin nhắn cuối cùng ở trong conten message
+  /*====================================================== END GỬI TIN NHẮN ===================================================================================================== */
+
+  /*=======================================================  LẤY CUỘC TRÒ CHUYỆN VÀ TIN NHẤN ==================================================================================================================== */
+  // Hàm lấy số lượng tin nhắn cuối cùng ở trong content message
   async getLastMessages(YOUR_CONVERSATION_ID: string) {
     var convId = YOUR_CONVERSATION_ID;
     var count = 50;
@@ -126,7 +136,7 @@ export class StringeeService {
       });
     })
   }
-  /*============================================== THÔNG TIN USER ============================================================= */
+  /*=================================================================== THÔNG TIN USER =================================================================================== */
 
   // Update thong tin user
   updateUserInfo(data) {
@@ -141,16 +151,16 @@ export class StringeeService {
   }
   getUser(userIds) {
     var userId = [userIds];
-   // console.log(userId);
+    // console.log(userId);
     return new Promise((resolve) => {
       this.stringeeChat.getUsersInfo(userId, function (status, code, message, users) {
         resolve(users);
       });
     })
   }
- 
+
   /*================================================ HÀM PHỤ TRỢ =============================================================== */
   // Hàm lấy userId hiện tại của người dùng đăng nhập
- 
+
 
 }
