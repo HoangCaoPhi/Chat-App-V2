@@ -38,15 +38,13 @@ export class ViewComponent implements OnInit {
     private componentShareService: ComponentShareService
   ) {
     route.params.subscribe(val => {
-      this.getConversationById();
+      // this.getConversationById();
       this.getConvesationLast();
       // this.userId = this.stringeeService.getCurrentUserIdFromAccessToken(localStorage.get("currentUser"));
     });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
   /*=================================================         CÁC HÀM LẤY TỪ STRINGEE         ================================================================*/ 
   // Lấy cuộc trò chuyện của từng người dùng
   async getConvesationLast() {
@@ -63,14 +61,14 @@ export class ViewComponent implements OnInit {
 
 
 
-  getConversationById() {
-    const id = this.route.snapshot.paramMap.get('id');
-    // console.log("detail id " + id);
-    // Gửi dữ liệu lên service share-component để gửi đến contact list
-    this.componentShareService.notifyCountValue(id);
-    // Lấy các cuộc hôi thoại với id tương ứng
-    this.chatService.getUserId(id).subscribe(user => this.user = user);
-  }
+  // getConversationById() {
+  //   const id = this.route.snapshot.paramMap.get('id');
+  //   console.log("detail id " + id);
+  //   Gửi dữ liệu lên service share-component để gửi đến contact list
+  //   this.componentShareService.notifyCountValue(id);
+  //   Lấy các cuộc hôi thoại với id tương ứng
+  //   this.chatService.getUserId(id).subscribe(user => this.user = user);
+  // }
 
   /**   
          Gửi tin nhắn 
@@ -81,7 +79,6 @@ export class ViewComponent implements OnInit {
     console.log(sendForm.value);
     this.stringeeService.sendTextMessage(localStorage.getItem('convId'), sendForm.value.message);
     sendForm.reset();
-
   }
   /**   
          Upload file 

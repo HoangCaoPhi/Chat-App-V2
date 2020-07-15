@@ -22,10 +22,12 @@ import { ViewComponent } from './ui/chat/conversation-detail/conversation-detail
 import { ConversationAboutComponent } from './ui/chat/conversation-about/conversation-about.component';
 import { HeaderComponent } from './share/header/header.component';
 import { ListComponent } from './ui/chat/conversation-list/conversation-list.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
         BrowserModule,
+        CommonModule,
         ReactiveFormsModule,
         HttpClientModule,
         appRoutingModule,

@@ -7,6 +7,7 @@ import { Chat } from '../../../models/chat';
 import { ChatService } from '../../../services/chat.service';
 import { User } from '@app/models';
 import { StringeeService } from '@app/services/stringee/stringee.service';
+ 
 
 @Component({
   selector: 'app-conversation-list',
@@ -18,13 +19,13 @@ export class ListComponent implements OnInit {
   user: User[];
   filterUsers: User[] = [];
   idParam: number;
+  responseConvs: any; // cuộc trò chuyện được trả về 
 
   constructor(
     private chatService: ChatService, private route: ActivatedRoute, private componentShareService: ComponentShareService, private stringeeService: StringeeService) {
     // Nhận id của contact-detail gửi đến
     this.getParam();
     this.getConversationLast();
-    
   }
 
   ngOnInit(): void {
@@ -44,31 +45,33 @@ export class ListComponent implements OnInit {
       }
     )
   }
-// Lấy các cuộc trò chuyện sau cùng
-  responseConvs: any;
+// Lấy các cuộc trò chuyện sau cùng để hiện ở bên trái
+
+  /*======================================================= XỬ LÝ STRINGEE ===================================================================*/ 
   async getConversationLast() {
       this.responseConvs =  await this.stringeeService.getLastConversations();
-
-      console.log("res conv" + this.responseConvs);
-
       let userId =  JSON.parse(localStorage.getItem('currentUser')).id;
-
+      let token  =  JSON.parse(localStorage.getItem('currentUser')).token;
       let convId = localStorage.getItem("convId");
-
-      for(let conv of this.responseConvs) {
-        let nameConv  = conv.participants.filter(p => p.userId != userId);
-        // Lấy thông tin user của cuộc trò chuyê
-        // let user = await this.stringeeService.getUserInfo(nameConv[0].userId);
-         console.log("Thong tin userId " + JSON.stringify(nameConv[0].userId));
+      let length = this.responseConvs.length;
+    //  console.log(length);
+      for(let i = 0; i <  length; i++) {
+        let nameConv  = this.responseConvs[i].participants.filter(p => p.userId != userId);
         // console.log("Thong tin user " + JSON.stringify(nameConv));
-         let user =  await this.stringeeService.getUserInfo(nameConv[0].userId);
-         
-         console.log("Thong tin user " + JSON.stringify(user));
+        let user =  await this.stringeeService.getUserInfo(nameConv[0].userId);
+          // let user = this.stringeeService.getUserInfoTest();
+          //this.responseConvs[i].push({"user" : user});
+          //console.log("Thong tin user " + JSON.stringify(user));
+          // console.log(typeof(this.responseConvs[i]))
       }
-      console.log(userId);
+      console.log("res conv" + JSON.stringify(this.responseConvs));
   }
 
-
+  // Truyền conversation id sang cho list
+  onCickConversation(conv: any) {
+    
+  }
+/*======================================================= END XỬ LÝ STRINGEE ===================================================================*/ 
 
 
   /*

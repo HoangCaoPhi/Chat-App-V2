@@ -34,9 +34,31 @@ export class StringeeService {
 
   // Lắng nghe onconnect
   connectListners() {
-    this.stringeeClient.on('connect', function () {
+    this.stringeeClient.on('connect', () => {
+      let token = JSON.parse(localStorage.getItem('currentUser')).token;
+      let decodeToken = jwt_decode(token);
+
+      let userId = decodeToken["userId"];
+      let username = decodeToken["userName"];
+      let avatar = decodeToken["avt"];
+
       console.log('++++++++++++++ connected to StringeeServer');
+      console.log("User Id la" + userId + "UserName" + username + "avatar" + avatar);
+
+      this.stringeeChat.getUsersInfo([userId], (status, code, msg, users) => {
+        let user = users[0];
+        if (!user) {
+          let updateUserData = {
+            display_name: username,
+            avatar_url: avatar,
+            email: ""
+          }
+          this.updateUserInfo(updateUserData);
+        }
+      })
+
     });
+
   }
 
   // Lắng nghe authen
@@ -105,29 +127,30 @@ export class StringeeService {
     })
   }
   /*============================================== THÔNG TIN USER ============================================================= */
+
+  // Update thong tin user
+  updateUserInfo(data) {
+    this.stringeeChat.updateUserInfo(data, function (res) {
+      console.log(res)
+    });
+  }
   async getUserInfo(userIds) {
     var users: any;
     users = await this.getUser(userIds);
+    return users;
   }
   getUser(userIds) {
     var userId = [userIds];
-    console.log(userId);
+   // console.log(userId);
     return new Promise((resolve) => {
       this.stringeeChat.getUsersInfo(userId, function (status, code, message, users) {
         resolve(users);
       });
     })
   }
-  // getUserInfo(userId) {
-  //   var userIds = [userId];
-  //   this.stringeeChat.getUsersInfo(userId, function (status, code, message, users) {
-  //       console.log('status:' + status + ' code:' + code + ' message:' + message + ' users:' + JSON.stringify(users));
-  //   });
-  // }
+ 
   /*================================================ HÀM PHỤ TRỢ =============================================================== */
   // Hàm lấy userId hiện tại của người dùng đăng nhập
-  getCurrentUserIdFromAccessToken(token) {
-    let decodedToken = jwt_decode(token);
-    return decodedToken.userId;
-  }
+ 
+
 }
