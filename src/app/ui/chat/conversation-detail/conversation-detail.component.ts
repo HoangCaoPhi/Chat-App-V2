@@ -18,76 +18,61 @@ import { Subscription } from 'rxjs';
 export class ViewComponent implements OnInit {
 
   showAboutRight: boolean = true;
-  chat: Chat;
   user: User;
   avatarSender: string;
-  newMesseage: any;
-  imagePreview: any;
   responseLastMsg: any;
   messages: object;
   UserId: string = JSON.parse(localStorage.getItem("currentUser")).id;
+  convIdFromDataTranfer: any; // Nhận convId từ contact list
 
   constructor(
     private route: ActivatedRoute,
     private stringeeService: StringeeService,
     private componentShareService: ComponentShareService
   ) {
-    this.getParam();
     route.params.subscribe(val => {
+      this.getParam();
       this.getConvesationLast(this.convIdFromDataTranfer);
+      this.tranferConversationById();
     });
 
   }
-
   ngOnInit(): void { }
-  
-  /*
-        Nhận convId được đẩy từ conversation list 
-  */
-  convIdFromDataTranfer: any;
-  valueFromChildSubscription: Subscription;
+
+  /*=========================================================  TRANFER SERVICE ======================================================================== */
+  // Nhận convId được đẩy từ conversation list 
   getParam() {
-    this.valueFromChildSubscription = this.componentShareService.ValueFromChild.subscribe(
-      data => {
-        this.convIdFromDataTranfer = data;
-        console.log("This is a conversation id" + this.convIdFromDataTranfer);
-      }
-    );
+    this.componentShareService.getConversationId$.subscribe(convId => this.convIdFromDataTranfer = convId);
   }
-/*=================================================         CÁC HÀM LẤY TỪ STRINGEE         ================================================================*/
-  /*
-        Lấy cuộc trò chuyện cuối cùng để hiển thị ở phần content message 
-  */
-  async getConvesationLast(convId) {
-    this.responseLastMsg = await this.stringeeService.getLastMessages(convId);
+  // Tranfer id cho contact list
+  tranferConversationById() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.componentShareService.setConversationId(id);
   }
 
-
-  /**   
-         Gửi tin nhắn 
-  */
-
+  /*========================================================== CÁC HÀM LẤY TỪ STRINGEE ===================================================================*/
+  //    Lấy cuộc trò chuyện cuối cùng để hiển thị ở phần content message 
+  getConvesationLast(convId) {
+    if(!convId) {
+        convId = this.route.snapshot.paramMap.get('id');
+    }
+    this.stringeeService.stringeeServiceMessage(convId, (status, code, message, msgs) => {
+      this.responseLastMsg = msgs;
+    });
+  }
+  //    Gửi tin nhắn 
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
     this.stringeeService.sendTextMessage(this.convIdFromDataTranfer, sendForm.value.message);
     sendForm.reset();
   }
 
-
-  /* 
-        Ẩn hay Hiển thị phần thông tin tin nhắn
-  */
-
+  /*========================================================== XỬ LÝ Ở PHẦN GIAO DIỆN  ===========================================================================================*/
+  //   Ẩn hay Hiển thị phần thông tin tin nhắn
   toggleInfo() {
     this.showAboutRight = !this.showAboutRight;
   }
-  getImageMessegae(img) {
-    return img.filter(image => image.type === 'image');
-  }
-
-  /*
-      Tự động Scollbar khi gửi tin nhắn
-  */
+  // Tự động Scollbar khi gửi tin nhắn
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
 
@@ -114,17 +99,6 @@ export class ViewComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-  }
-
-  /*
-      Xem trước hình ảnh
-   */
-  watchImagePreview(src) {
-    this.imagePreview = src;
-  }
-
-  ngOnDestroy() {
-    this.valueFromChildSubscription.unsubscribe();
   }
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chat } from '@app/models/chat';
+import { StringeeService } from '@app/services/stringee/stringee.service';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +9,11 @@ import { Chat } from '@app/models/chat';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  chat: Chat;
-
-  constructor( private route: ActivatedRoute, private router: Router) { 
-    //   this.router.events.subscribe((event) => {
-    //     console.log(event);
-    // });
-    
+  currentUser: any;
+  constructor(private messageService: StringeeService) {
+    console.log("Day la Home")
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.messageService.connectStringee(this.currentUser.token);
   }
-
-  ngOnInit(): void {
- 
-  }
-
- 
+  ngOnInit(): void { }
 }

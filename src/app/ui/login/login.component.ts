@@ -18,9 +18,6 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
     error = '';
-    // ACCESS_TOKEN = '';
-    // stringeeClient = new StringeeClient();
-
     constructor(
         private formBuilder: FormBuilder,
         private stringeeService: StringeeService,
@@ -30,7 +27,7 @@ export class LoginComponent implements OnInit {
     ) {
         // Nếu người dùng đã đăng nhập
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/chat/1']);
+            this.router.navigate(['/chat/conv-vn-1-NO20OWUHMD-1594421748462']);
         }
     }
 
@@ -41,7 +38,7 @@ export class LoginComponent implements OnInit {
         });
 
         // điều hướng khi đăng nhập thành công
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/conv-vn-1-NO20OWUHMD-1594421748462';
     }
 
     // Trả về loginForm Control
@@ -62,9 +59,9 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.ACCESS_TOKEN = data.token;
-                    console.log(this.ACCESS_TOKEN);
-                    this.stringeeService.connectStringee(this.ACCESS_TOKEN);
+                    // this.ACCESS_TOKEN = data.token;
+                    // console.log(this.ACCESS_TOKEN);
+                    // this.stringeeService.connectStringee(this.ACCESS_TOKEN);
                     // this.messageService.connectListners();
                     this.router.navigate([this.returnUrl]);
                 },

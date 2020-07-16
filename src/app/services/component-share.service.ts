@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, EventEmitter, Output } from '@angular/core';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +8,15 @@ export class ComponentShareService {
 
   constructor() { }
 
-  private getConversationId = new Subject<any>();
+  private _getConversationId: BehaviorSubject<string>  = new BehaviorSubject<string>('');
+  getConversationId$: Observable<string> = this._getConversationId.asObservable();
 
-  // Trả về conversationId nhận được
-  public get ValueFromChild() {
-    return this.getConversationId;
-  }
-  // Nhận vào conversationId được emit lên
-  public notifyCountValue(number) {
-    this.getConversationId.next(number);
+   setConversationId(convId: string) {
+     this._getConversationId.next(convId);
+   }
+  // Nhận ID khi có sự kiện thay đổi user
+  @Output() userId = new EventEmitter<string>();
+  changeUser(id: string) {
+    this.userId.emit(id);
   }
 }
