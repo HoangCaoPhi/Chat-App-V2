@@ -57,7 +57,7 @@ export class ViewComponent implements OnInit {
         convId = this.route.snapshot.paramMap.get('id');
     }
     this.stringeeService.stringeeServiceMessage(convId, (status, code, message, msgs) => {
-      this.responseLastMsg = msgs;
+       this.responseLastMsg = msgs;
     });
   }
   //    Gửi tin nhắn 

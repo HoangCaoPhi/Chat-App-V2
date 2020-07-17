@@ -1,0 +1,59 @@
+{
+    "conversation" : [
+        {
+            "id":"conv-vn-1-NO20OWUHMD-1594421751134",
+            "name":"",
+            "isGroup":false,
+            "updatedAt":1594642657537,
+            "unreadCount":0,
+            "creator":"08d82725-4455-4a90-83cb-a8977bc9058d",
+            "created":1594642308878,
+            "participants":[
+               {
+                  "userId":"08d82725-c896-40bd-8502-0cf044127fc8",
+                  "name":"Dao Duc Khiem",
+                  "avatar":"",
+                  "lastMsgSeqReceived":0,
+                  "lastMsgSeqSeen":0
+               },
+               {
+                  "userId":"08d82725-4455-4a90-83cb-a8977bc9058d",
+                  "lastMsgSeqReceived":6,
+                  "lastMsgSeqSeen":6
+               }
+            ],
+            "lastMessage":{
+               "id":"msg-vn-1-NO20OWUHMD-1594422303062",
+               "localId":"",
+               "conversationId":"conv-vn-1-NO20OWUHMD-1594421751134",
+               "sender":"",
+               "createdAt":1594642657537,
+               "sequence":6,
+               "type":1,
+               "content":{
+                  "content":"lam bai tap di"
+               },
+               "state":4
+            }
+         }
+    ],
+    "message": {
+        "content": {
+            "creator": "08d82725-d94b-4ac7-8b02-aa157b2f0eb1",
+            "groupName": ""
+        },
+        "participants": {
+            "0": "08d82725-c896-40bd-8502-0cf044127fc8",
+            "1": "08d82725-4455-4a90-83cb-a8977bc9058d"
+        },
+        "length": 2,
+        "conversationId": "conv-vn-1-NO20OWUHMD-1594421751134",
+        "createdAt": 1594642308886,
+        "id": "msg-vn-1-NO20OWUHMD-1594422301727",
+        "localId": "",
+        "sender": "08d82725-4455-4a90-83cb-a8977bc9058d",
+        "sequence": 1,
+        "state": 4,
+        "type": 7
+    }
+}

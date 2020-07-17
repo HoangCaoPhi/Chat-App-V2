@@ -20,16 +20,16 @@
 					[ngClass]="getActive(chat)">
 					<div class="wrap">
 						<span class="contact-status online"></span> -->
-						<!-- <img [src]="chat.avatarUrl" alt="" /> -->
-						<!-- <img class="green" src="/assets/images/green_sphere.svg" alt="avatar-conversation"
+		<!-- <img [src]="chat.avatarUrl" alt="" /> -->
+		<!-- <img class="green" src="/assets/images/green_sphere.svg" alt="avatar-conversation"
 							*ngIf="chat.isActive"> -->
-						<!-- <ngx-avatar [name]="chat.firstName + ' ' + chat.lastName" size="34"></ngx-avatar>
+		<!-- <ngx-avatar [name]="chat.firstName + ' ' + chat.lastName" size="34"></ngx-avatar>
 						<div class="meta">
 							<p class="name">{{ chat.userName }}</p>
 							<p class="preview">{{  chat.firstName }}</p> -->
-							<!-- <p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p> -->
-						<!-- </div> -->
-						<!-- 
+		<!-- <p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p> -->
+		<!-- </div> -->
+		<!-- 
 						<div class="meta status">
 							<p class="time" *ngIf="caculateLastTime(chat.lastTime) == 0">
 								{{  chat.lastTime |  date:'HH:MM'  }}</p>
@@ -43,34 +43,62 @@
 							</span>
 							</p>
 						</div> -->
-					<!-- </div>
+		<!-- </div>
 				</li>
 			</ul> -->
 		<div id="contacts">
-			<ul>
-				<li *ngFor="let conv of responseConvs" class="contact" routerLink="/chat/{{conv.id}}" (click)="onCickConversation(conv)" [ngClass] = "getActive(conv)">
+			<ul *ngIf="tabTranfer == 0">
+				<li *ngFor="let conv of responseConvs" class="contact" routerLink="/chat/{{conv.id}}"
+					(click)="onCickConversation(conv)" [ngClass]="getActive(conv)">
 					<div class="meta">
 						<div class="wrap">
 							<span class="contact-status online"></span>
 							<ng-container *ngFor="let participant of conv.participants">
-								<ngx-avatar *ngIf="participant.name != null" [name]="participant.name" size="34"></ngx-avatar>
+								<ngx-avatar *ngIf="participant.name != null" [name]="participant.name" size="40">
+								</ngx-avatar>
 							</ng-container>
-						
+
 							<div class="meta">
 								<ng-container *ngFor="let participant of conv.participants">
 									<p class="name" *ngIf="participant.name != null">
 										{{ participant.name }}
 									</p>
 								</ng-container>
-
 								<p class="preview">{{  conv.lastMessage.content.content }}</p>
 								<!-- <p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p> -->
+							</div>
+							<div class="meta status">
+								<p class="time">
+									{{  conv.lastMessage.createdAt |  date:'HH:MM'  }}</p>
+								<p>
+									<span class="badge badge-light newMesseage">
+										{{ conv.unreadCount }}
+									</span>
+								</p>
 							</div>
 						</div>
 					</div>
 				</li>
 			</ul>
+
+			<ul class="nav nav-pills nav-stacked" *ngIf="tabTranfer == 1">
+				<li id="user-contact" class="active" *ngFor="let user of users" (click)="onCreateConversation(user)">
+					<ngx-avatar [name]="user.userName" size="34"></ngx-avatar>
+					<p class="name"> {{ user.userName }} </p>
+				</li>
+			</ul>
 		</div>
+
+
+
 		<!-- ========================== END CONTACT LIST =============================-->
+		<!-- tab menu -->
+		<div id="bottom-bar">
+			<button class="bg" (click)="getConversationsTab()"><span>Cuộc
+					trò chuyện</span></button>
+			<button class="bg" (click)="getContactListTab()"><span>Danh
+					bạ</span></button>
+		</div>
+		<!-- tab menu -->
 	</div>
 </div>

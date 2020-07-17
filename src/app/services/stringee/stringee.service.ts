@@ -24,12 +24,15 @@ export class StringeeService {
   // Lắng nghe onconnect
   connectListners() {
     this.stringeeClient.on('connect', () => {
+      
+      this.realTimeUpdate();
+
       let token = JSON.parse(localStorage.getItem('currentUser')).token;
       let decodeToken = jwt_decode(token);
 
-      let userId   = decodeToken["userId"];
+      let userId = decodeToken["userId"];
       let username = decodeToken["userName"];
-      let avatar   = decodeToken["avt"];
+      let avatar = decodeToken["avt"];
 
       console.log('++++++++++++++ connected to StringeeServer');
       console.log("User Id la" + userId + "UserName" + username + "avatar" + avatar);
@@ -68,17 +71,13 @@ export class StringeeService {
   /*======================================================================  TẠO CUỘC TRÒ CHUYỆN   ======================================================================= */
 
   // Hàm tạo cuộc trò truyện với một người khác
-  creaateConversation(user: User) {
+  creaateConversationService(user: User, callback: any) {
     var userIds = [user.id];
     var options = {
       isDistinct: false,
       isGroup: false
     };
-    this.stringeeChat.createConversation(userIds, options, (status, code, message, conv) => {
-      //   console.log('status:' + status + ' code:' + code + ' message:' + message + ' conv:' + JSON.stringify(conv));
-      let convId = conv.id;
-      localStorage.setItem("convId", convId);
-    });
+    this.stringeeChat.createConversation(userIds, options, callback);
   }
 
 
@@ -108,13 +107,23 @@ export class StringeeService {
   stringeeServiceConversation(callback: any) {
     this.stringeeChat.getLastConversations(10, true, callback);
   }
-  
+
   /*=================================================================== THÔNG TIN USER =================================================================================== */
 
   // Update thong tin user
   updateUserInfo(data) {
     this.stringeeChat.updateUserInfo(data, function (res) {
       console.log(res)
+    });
+  }
+  getUserInfo(userId: any, callback: any) {
+    this.stringeeChat.getUsersInfo([userId], callback);
+  }
+  
+  // Realtime update
+  realTimeUpdate() {
+    this.stringeeChat.on('onObjectChange', function (info) {
+      console.log(info);
     });
   }
   /*================================================ HÀM PHỤ TRỢ =============================================================== */
