@@ -70,11 +70,15 @@
             <ul *ngFor="let messeage of responseLastMsg">
                <li class="replies" *ngIf="messeage.sender == UserId">
                   <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                  <p class="left"> {{ messeage.content.content }} </p>
+                  <p class="left" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
+                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.photo.filePath"
+                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.photo.filePath)"/>
                </li>
                <li class="sent" *ngIf="messeage.sender != UserId">
                   <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                   <p class="right"> {{ messeage.content.content }} </p>
+                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.photo.filePath"
+                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.photo.filePath)" />
                </li>
             </ul>
          </div>
@@ -91,7 +95,7 @@
             <!-- Modal content-->
             <div class="modal-content center" role="document">
                <div class="modal-body">
-                  <!-- <img src="{{  imagePreview }}" alt=""> -->
+                  <img src="{{  imagePreview }}" alt="">
                </div>
             </div>
          </div>
@@ -105,7 +109,7 @@
             </label>
             <label class="send">
                <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
-               <input #imageInput type="file" accept="image/*">
+               <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
             </label>
             <label class="send">
                <span class="buzz">
