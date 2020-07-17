@@ -7,6 +7,7 @@ import { User } from '@app/models';
 import { StringeeService } from '@app/services/stringee/stringee.service';
 import { UserService } from '@app/services/user/user.service';
 import { filter, map } from 'rxjs/operators';
+import { UserIdTranferService } from '@app/services/user-tranfer.service';
 
 
 @Component({
@@ -22,50 +23,66 @@ export class ListComponent implements OnInit {
   tabTranfer: number = 0; // Chỉ định hiển thị cuộc trò chuyện hay danh bạ
   users: User[]; // danh sách người dùng lấy từ server
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
+  tabChange: boolean; // active tab
 
   constructor(
     private route: ActivatedRoute,
     private componentShareService: ComponentShareService,
+    private userIdTranferService: UserIdTranferService,
     private stringeeService: StringeeService,
     private _userservice: UserService
   ) {
-    route.params.subscribe(val => {
+  route.params.subscribe(val => {
       // Nhận param của contact-detail gửi đến
       this.getParam();
       this.stringeeService.stringeeClient.on('connect', () => {
-        this.stringeeService.realTimeUpdate();
-        this.getConversationLast();
+          this.stringeeService.realTimeUpdate();
+          this.getConversationLast();
       })
     });
   }
   ngOnInit(): void { }
-  /*======================================================== XỬ LÝ STRINGEE =====================================================================*/
+
+  /* #region  XỬ LÝ STRINGEE  */
   //  Lấy những cuộc trò chuyện trả về cho responseConvs để render 
   getConversationLast() {
-    this.stringeeService.stringeeServiceConversation((status, code, message, convs) => {
-      this.responseConvs = convs;
-    });
+      this.stringeeService.stringeeServiceConversation((status, code, message, convs) => {
+        this.responseConvs = convs;
+      });
   }
   // Tạo một cuộc trò chuyện mới
   onCreateConversation(user: User) {
     this.stringeeService.creaateConversationService(user, (status: string, code: string, message: string, conv: any) => {
-        localStorage.setItem("convId", conv.id);
-        this.componentShareService.setConversationId(conv.id);
+      localStorage.setItem("convId", conv.id);
     });
   }
-  /*=======================================================  TRANFER SERVICE ====================================================================== */
+
+  /* #region  TRANFER SERVICE  */
+
   //Truyền conversation id sang cho list 
   onCickConversation(conv: any) {
+    // Lay id cua user
+    for (let con of this.responseConvs) {
+      if (con.id == conv.id) {
+        let nameConv = con.participants.filter(p => p.userId != this.UserId);
+        // Lấy thông tin của user id và truyền sang cho conv detail
+        this.stringeeService.getUserInfo(nameConv[0].userId, (status, code, msg, users) => {
+            this._userservice.getUserFromId(users[0].userId).subscribe(user => this.userIdTranferService.setUser(user));
+        })
+      }
+    }
     this.componentShareService.setConversationId(conv.id);
   }
   // Conversation id được nhận từ conversation detail
   getParam() {
-    this.componentShareService.getConversationId$.subscribe(convId => this.convIdFromDataTranfer = convId);
+    this.componentShareService.getConversationId$.subscribe(convId => { this.convIdFromDataTranfer = convId });
   }
 
 
-  /*======================================================= XỬ LÝ GIAO DIỆN ===================================================================*/
+  /* #region  XỬ LÝ GIAO DIỆN  */
+  
   seenMesseage(chat: User) { }
+
   // Active cuộc trò chuyện khi click
   getActive(conv) {
     if (conv.id === this.convIdFromDataTranfer) {
@@ -76,25 +93,22 @@ export class ListComponent implements OnInit {
     }
   }
 
-  tabConv: number;
-  tabCont: number;
   // Chuyển về tab conversation
   getConversationsTab() {
-    this.tabConv = 1;
     this.tabTranfer = 0;
     this.getConversationLast();
+    this.tabChange = false;
   }
   // Chuyển về tab danh bạ
   getContactListTab() {
-    this.tabCont = 1;
     this.tabTranfer = 1;
-
+    this.tabChange = true;
+    // Lấy danh sách user từ backend
     this._userservice.getUser()
       .pipe(
-        map(data => data.filter(data => data.id !== this.UserId))
-      ).subscribe(
+        map(data => data.filter(data => data.id !== this.UserId)) // Loại bỏ người dùng hiện tại trong danh sách
+      ).subscribe( 
         data => { this.users = data }
       )
   }
-
 }

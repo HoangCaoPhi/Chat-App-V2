@@ -12,6 +12,7 @@ export class ConversationAboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("day la component about")
   }
 
   showFile: boolean = true;
@@ -26,7 +27,7 @@ export class ConversationAboutComponent implements OnInit {
     this.showImg = !this.showImg;
   }
 
-  @Input() user:User;
+  @Input() userShareService:any;
 
   // Lây danh sách tin nhắn hình ảnh chung 
   getImageMessegae(img) {

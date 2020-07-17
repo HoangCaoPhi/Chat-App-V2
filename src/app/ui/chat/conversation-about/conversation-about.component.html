@@ -1,15 +1,15 @@
 <div class="info-content">
    <div class="info-image">
       <div class="image">
-         <!-- <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar> -->
+         <ngx-avatar [name]="userShareService.userName" size="120"></ngx-avatar>
       </div>
    </div>
 
    <div class="info-status">
-      <!-- <p>{{ user.userName }}</p>
-      <p style="text-align: center;">{{ user.phone }}</p>
-      <p style="text-align: center;">{{ user.email }}</p>
-      <p class="line"></p> -->
+      <p>{{ userShareService.userName }}</p>
+      <p style="text-align: center;">{{ userShareService.email }}</p>
+      <p style="text-align: center;">{{ userShareService.contactMobile }}</p>
+      <p class="line"></p>
    </div>
 
    <!-- <div class="share-file">

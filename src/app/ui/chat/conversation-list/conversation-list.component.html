@@ -71,10 +71,9 @@
 								<p class="time">
 									{{  conv.lastMessage.createdAt |  date:'HH:MM'  }}</p>
 								<p>
-									<span class="badge badge-light newMesseage">
+								<span class="badge badge-light newMesseage">
 										{{ conv.unreadCount }}
-									</span>
-								</p>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -89,14 +88,12 @@
 			</ul>
 		</div>
 
-
-
 		<!-- ========================== END CONTACT LIST =============================-->
 		<!-- tab menu -->
 		<div id="bottom-bar">
-			<button class="bg" (click)="getConversationsTab()"><span>Cuộc
-					trò chuyện</span></button>
-			<button class="bg" (click)="getContactListTab()"><span>Danh
+			<button  (click)="getConversationsTab()" [ngClass] = "{ 'bg': 'tabtranfer', 'tab-active': !tabChange}" ><span>Cuộc
+					trò chuyện</span></button> 
+			<button  (click)="getContactListTab()" [ngClass] = "{'bg': 'tabtranfer', 'tab-active': tabChange }"><span>Danh
 					bạ</span></button>
 		</div>
 		<!-- tab menu -->

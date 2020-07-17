@@ -48,9 +48,7 @@ export class StringeeService {
           this.updateUserInfo(updateUserData);
         }
       })
-
     });
-
   }
 
   // Lắng nghe authen
@@ -81,7 +79,7 @@ export class StringeeService {
   }
 
 
-  /*====================================================================== GỬI TIN NHẮN ===================================================================================================== */
+  /*======================================================================== GỬI TIN NHẮN ===================================================================================================== */
   sendTextMessage(YOUR_CONVERSATION_ID: string, content: string) {
     var txtMsg = {
       type: 1,
@@ -98,14 +96,14 @@ export class StringeeService {
 
 
   /*=======================================================  LẤY CUỘC TRÒ CHUYỆN VÀ TIN NHẤN ==================================================================================================================== */
-  // Lấy ra các cuộc trò chuyện
+  // Lấy ra các tin nhan
   stringeeServiceMessage(convId: string, callback: any) {
     this.stringeeChat.getLastMessages(convId, 10, true, callback);
   }
 
   // Lấy ra các cuộc trò chuyện
   stringeeServiceConversation(callback: any) {
-    this.stringeeChat.getLastConversations(10, true, callback);
+    this.stringeeChat.getLastConversations(10, false, callback);
   }
 
   /*=================================================================== THÔNG TIN USER =================================================================================== */
