@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
   users: User[]; // danh sách người dùng lấy từ server
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
   tabChange: boolean; // active tab
+  responseLastMsg: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +48,7 @@ export class ListComponent implements OnInit {
   //  Lấy những cuộc trò chuyện trả về cho responseConvs để render 
   getConversationLast() {
       this.stringeeService.stringeeServiceConversation((status, code, message, convs) => {
-        this.responseConvs = convs;
+          this.responseConvs = convs;
       });
   }
   // Tạo một cuộc trò chuyện mới
@@ -73,11 +74,21 @@ export class ListComponent implements OnInit {
     }
     this.componentShareService.setConversationId(conv.id);
   }
+  getConvesationLast() {
+    console.log("Detail run")
+    this.stringeeService.stringeeServiceMessage(this.convIdFromDataTranfer, (status, code, message, msgs) => {
+      this.responseLastMsg = msgs;
+      console.log(msgs)
+    });
+  }
   // Conversation id được nhận từ conversation detail
   getParam() {
     this.componentShareService.getConversationId$.subscribe(convId => { this.convIdFromDataTranfer = convId });
-  }
 
+  }
+  test() {
+
+  }
 
   /* #region  XỬ LÝ GIAO DIỆN  */
   

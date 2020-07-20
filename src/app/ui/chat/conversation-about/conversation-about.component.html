@@ -12,7 +12,7 @@
       <p class="line"></p>
    </div>
 
-   <!-- <div class="share-file">
+ <div class="share-file">
       <div class="title" (click)="toggleFile()">
          <p class="name-share">TỆP ĐÃ CHIA SẺ</p>
          <span class="icon-dropdown">
@@ -26,8 +26,8 @@
          </span>
 
       </div>
-      <ng-container *ngFor="let file of this.chat.listMesseage">
-         <div class="file" *ngIf="file.type === 'file' &&  showFile">
+      <ng-container *ngFor="let file of getFiles()">
+         <div class="file" *ngIf="showFile">
             <span *ngIf="file.typeofFile === 'pdf'">
                <img src="../../../assets/ICON//IconboxChat/pdf-icon.svg" alt="PDF">
             </span>
@@ -38,14 +38,14 @@
                <img src="../../../assets/ICON/IconboxChat/pptx-icon.svg" alt="PowerPoint">
             </span>
             <p>
-               <span>{{ file.content }}</span>
+               <span>{{ file.content.content }}</span>
             </p>
          </div>
       </ng-container>
       <p class="line"></p>
-   </div> -->
+   </div> 
 
-   <!-- <div class="share-img">
+   <div class="share-img">
       <div class="title" (click)="toggleImg()">
          <p class="name-share">ẢNH ĐÃ CHIA SẺ</p>
          <span class="icon-dropdown">
@@ -60,15 +60,16 @@
       </div>
       <div class="img-share" *ngIf="showImg">
          <div class="row">
-            <ng-container *ngFor="let img of getImageMessegae(this.chat.listMesseage)">
+            <ng-container *ngFor="let img of getImages()">
                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 bottom-25">
-                  <img class="image-share img-responsive" *ngIf="img.type === 'image'" [src]="img.content"
-                     data-toggle="modal" data-target="#myModal1" (click)="watchImagePreview(img.content)">
+
+                  <img class="image-share img-responsive" [src]="img.content.file.filePath" data-toggle="modal"
+                     data-target="#myModal1" (click)="watchImagePreview(img.content)">
                </div>
             </ng-container>
          </div>
       </div>
-   </div> -->
+   </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal1" role="dialog">

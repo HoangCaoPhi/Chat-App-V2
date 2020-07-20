@@ -44,7 +44,11 @@
 <div class="messeage">
    <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
    <div class="info-messeage" *ngIf="showAboutRight">
-      <app-conversation-about [userShareService]="userShareService"></app-conversation-about>
+      <app-conversation-about 
+               [userShareService]="userShareService"
+               [responseLastMsg] = "responseLastMsg"
+      >
+      </app-conversation-about>
    </div>
    <!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
    <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
@@ -71,14 +75,16 @@
                <li class="replies" *ngIf="messeage.sender == UserId">
                   <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                   <p class="left" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
-                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.photo.filePath"
-                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.photo.filePath)"/>
+                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
+                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.file.filePath)"/>
+                     <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
                </li>
                <li class="sent" *ngIf="messeage.sender != UserId">
                   <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
                   <p class="right"> {{ messeage.content.content }} </p>
-                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.photo.filePath"
-                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.photo.filePath)" />
+                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
+                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.file.filePath)" />
+                     <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
                </li>
             </ul>
          </div>
@@ -105,11 +111,11 @@
          <div class="send-view">
             <label class="send">
                <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
-               <input #fileInput type="file">
+               <input #fileInput type="file" (change)="processFile(fileInput)">
             </label>
             <label class="send">
                <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
-               <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)">
+               <input #imageInput type="file" accept="image/*" (change)="processImage(imageInput)" name="file">
             </label>
             <label class="send">
                <span class="buzz">

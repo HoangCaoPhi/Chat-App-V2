@@ -13,7 +13,7 @@ export class ComponentShareService {
 
 
 
-  setConversationId(convId: string) {
+  setConversationId(convId: any) {
     this._getConversationId.next(convId);
   }
 

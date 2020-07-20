@@ -20,6 +20,7 @@ export class StringeeService {
   connectStringee(ACCESS_TOKEN) {
     this.stringeeClient.connect(ACCESS_TOKEN);
   }
+ 
 
   // Lắng nghe onconnect
   connectListners() {
@@ -93,7 +94,26 @@ export class StringeeService {
       //  console.log(status + code + message + "msg result " + JSON.stringify(msg));
     });
   }
-
+  sendFile(type: number, message: string, convId: string, fName: string, fPath: string, fLenght: number){
+    var fileMsg = {
+      type: type,
+      convId: convId,
+      message: {
+        content: message,
+        file: {
+          filePath: fPath,
+          filename: name,
+          length: fLenght
+        },
+        metadata: {
+          key: 'value'
+        }
+      }
+    };
+    this.stringeeChat.sendMessage(fileMsg, function (status, code, message, msg) {
+      //console.log(status + code + message + "msg result " + JSON.stringify(msg));
+    });
+  }
 
   /*=======================================================  LẤY CUỘC TRÒ CHUYỆN VÀ TIN NHẤN ==================================================================================================================== */
   // Lấy ra các tin nhan
