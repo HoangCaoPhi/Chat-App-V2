@@ -25,11 +25,13 @@ class FileSpinnet {
 export class ViewComponent implements OnInit {
   imagePreview: any;
   showAboutRight: boolean = true;
-  responseLastMsg: any; // Nhận về tin nhắn từ stringee
+  @Input() responseLastMsg: any; // Nhận về tin nhắn từ stringee
   UserId: string = JSON.parse(localStorage.getItem("currentUser")).id;
   convIdFromDataTranfer: any; // Nhận convId từ contact list
   userShareService: any; // Nhan userId tu contact list
   userInfo: any; // Thông tin user lấy theo id
+  convId: string;
+  // @Output() getMessageLast = new EventEmitter<any>();
 
   constructor(
     private route: ActivatedRoute,
@@ -40,45 +42,29 @@ export class ViewComponent implements OnInit {
     private _chatservice: FileService,
   ) {
     route.params.subscribe(val => {
-      this.getParam();
-      this.getUserIdTranfer();
-      this.tranferConversationById();
+      this.convId = this.route.snapshot.paramMap.get('id');
     });
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
 
   /* #region  TRANFER SERVICE  */
-  // Nhận convId được đẩy từ conversation list 
-  getParam() {
-    this.componentShareService.getConversationId$.subscribe(convId => { this.convIdFromDataTranfer = convId });
-    console.log(this.convIdFromDataTranfer);
-  }
-  // Tranfer id cho contact list để active conversation
-  tranferConversationById() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.componentShareService.setConversationId(id);
-  }
-  // Nhận user từ conversation list chuyển sang
-  getUserIdTranfer() {
-    this.userIdTranfer.getUser$.subscribe(user => { this.userShareService = user });
-
-  }
-
+ 
   /* #region  XỬ LÝ STRINGEE  */
   //    Lấy cuộc trò chuyện cuối cùng để hiển thị ở phần content message 
-  getConvesationLast() {
-    console.log("Detail run")
-    this.stringeeService.stringeeServiceMessage(this.convIdFromDataTranfer, (status, code, message, msgs) => {
+  getConvesationLast(id: string) {
+    this.stringeeService.stringeeServiceMessage(id, (status, code, message, msgs) => {
       this.responseLastMsg = msgs;
-      console.log(msgs)
     });
   }
   //    Gửi tin nhắn 
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
-    this.stringeeService.sendTextMessage(this.convIdFromDataTranfer, sendForm.value.message);
+    this.stringeeService.sendTextMessage(this.convId, sendForm.value.message);
     sendForm.reset();
-    this.getConvesationLast();
+    this.getConvesationLast(this.convId);
+    this.componentShareService.setConversationId(this.convId);
   }
   //  Gửi file
   imgPath: any
@@ -96,11 +82,11 @@ export class ViewComponent implements OnInit {
       this._chatservice.postFile(formData, JSON.parse(localStorage.getItem('currentUser')).token).subscribe(
         (res) => {
           this.imgPath = res; console.log(this.imgPath.filename)
-          this.stringeeService.sendFile(2, this.selectedFile.file.name, this.convIdFromDataTranfer, this.selectedFile.file.name, this.imgPath.filename, file.size)
+          this.stringeeService.sendFile(2, this.selectedFile.file.name, this.convId, this.selectedFile.file.name, this.imgPath.filename, file.size)
         }
       )
-
-      this.getConvesationLast();
+      this.getConvesationLast(this.convId);
+      this.componentShareService.setConversationId(this.convId);
     });
     reader.readAsDataURL(file);
   }
@@ -117,10 +103,11 @@ export class ViewComponent implements OnInit {
       this._chatservice.postFile(formData, JSON.parse(localStorage.getItem('currentUser')).token).subscribe(
         (res) => {
           this.imgPath = res; console.log(this.imgPath.filename)
-          this.stringeeService.sendFile(5, this.selectedFile.file.name, this.convIdFromDataTranfer, this.selectedFile.file.name, this.imgPath.filename, file.size)
+          this.stringeeService.sendFile(5, this.selectedFile.file.name, this.convId, this.selectedFile.file.name, this.imgPath.filename, file.size)
         }
       )
-      this.getConvesationLast();
+      this.getConvesationLast(this.convId);
+      this.componentShareService.setConversationId(this.convId);
     });
     reader.readAsDataURL(file);
   }

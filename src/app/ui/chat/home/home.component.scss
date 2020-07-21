@@ -76,10 +76,60 @@
 	width: 32px;
 }
 /*=============================================== END HEADER MESSEAGE========================== */
-
+.messeage {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: row-reverse;
+}
+.messeage .info-messeage {
+    border-left: 1px solid rgba(0, 0, 0, .10);
+    flex: 0 2 33.33%;
+    max-width: 420px;
+    min-width: 200px;
+    overflow-y: auto;
+    background-color: #f8f8f8;
+}
+.messeage .info-messeage .i {
+    direction: ltr;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.messeage .info-messeage .info-content {
+    margin-right: -12px;
+    direction: ltr;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding-top: 14px;
+}
+.messeage .info-messeage .info-content .info-image {
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    padding: 0 14px 16px 14px;
+    word-break: break-word;
+}
+.messeage .info-messeage .info-content .info-image .image{
+    position: relative;
+ }
+ .messeage .info-messeage .info-content .info-image .image img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+ }
 .content-app {
     display: flex;
 }
+.content-messeage {
+    flex: 2 0 0%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px);
+	width: 100%;
+ }
 .view {
     display: flex;
     flex: 3;

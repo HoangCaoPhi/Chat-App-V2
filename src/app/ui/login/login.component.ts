@@ -11,7 +11,7 @@ import { StringeeService } from '@app/services/stringee/stringee.service';
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
-  })
+})
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     ) {
         // Nếu người dùng đã đăng nhập
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/chat/conv-vn-1-NO20OWUHMD-1594421748462']);
+            this.router.navigate(['/chat/conv-vn-1-NO20OWUHMD-1594421751134']);
         }
     }
 
@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
             email: ['', Validators.required],
             password: ['', Validators.required]
         });
-
+  
         // điều hướng khi đăng nhập thành công
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/conv-vn-1-NO20OWUHMD-1594421748462';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/conv-vn-1-NO20OWUHMD-1594421751134';
     }
 
     // Trả về loginForm Control
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         // Gọi service login 
-     
+
         this.authenticationService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe(
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
                 error => {
                     this.error = error;
                     this.loading = false;
-            });
-        }
-    
+                });
+    }
+
 }

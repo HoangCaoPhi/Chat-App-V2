@@ -14,7 +14,7 @@ export class ConversationAboutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("day la component about")
+     
   }
 
   showFile: boolean = true;
@@ -30,16 +30,15 @@ export class ConversationAboutComponent implements OnInit {
   }
 
   @Input() userShareService: any;
-  @Input() responseLastMsg: any;
+  @Input() response: any;
 
   // Lây danh sách tin nhắn hình ảnh chung 
   getImages() {
-    // console.log( this.responseLastMsg.filter(mess => ((mess.type == 2))))
-    return this.responseLastMsg.filter(mess => ((mess.type == 2)));
+    return this.response.filter(mess => ((mess.type == 2)));
   }
   // Lây danh sách file chung 
   getFiles() {
-    return this.responseLastMsg.filter(mess => ((mess.type == 5)));
+    return this.response.filter(mess => ((mess.type == 5)));
   }
   watchImagePreview(src) {
     this.imagePreview = src;

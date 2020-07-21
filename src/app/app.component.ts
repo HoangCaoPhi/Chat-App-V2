@@ -5,8 +5,8 @@ import { StringeeService } from './services/stringee/stringee.service';
 @Component({ selector: 'app-root', templateUrl: 'app.component.html' })
 export class AppComponent implements OnInit {
   currentUser: any;
-  constructor(private messageService: StringeeService) {
-    console.log("App Chay");
+  constructor(private stringeeService: StringeeService) {
+  
  
   }
   ngOnInit() {

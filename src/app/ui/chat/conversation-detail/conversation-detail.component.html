@@ -1,136 +1,66 @@
-<!-----------======================= HEADER CONTENT ==========================    ----------->
-<div class="header-content">
-   <div class="head-left">
-      <div class="avatar">
-         <!-- <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar> -->
-         <ngx-avatar [name]="userShareService.userName" size="34"></ngx-avatar>
-      </div>
-      <div class="info">
-         <h2 class="info-username">
-            <span>
-               {{ userShareService.userName }}
-            </span>
-         </h2>
-         <p class="info-active">hoạt động 12 phút trước</p>
-         <!-- <p class="info-active" *ngIf="chat.isActive">Đang hoạt động</p> -->
-      </div>
-   </div>
-   <div class="head-right">
-      <ul>
-         <li>
-            <a>
-               <img src="/assets/ICON/IconboxChat/8.svg" alt="search-icon" style="width: 20px;
-               height: 20px;">
-            </a>
-         </li>
-         <li style="cursor: pointer;" (click)="toggleInfo()">
-            <a>
-               <img [src]="showAboutRight ? '/assets/ICON/IconAppChat/5.svg' : '/assets/ICON/IconAppChat/6.svg'"
-                  alt="about-icon">
-            </a>
-         </li>
-         <li>
-            <a>
-               <img src="/assets/ICON/IconAppChat/2.svg" alt="more-icon">
-            </a>
-         </li>
-      </ul>
-   </div>
-</div>
-<!-----------=======================  END HEADER CONTENT ==========================    ----------->
-
-
-
-<div class="messeage">
-   <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
-   <div class="info-messeage" *ngIf="showAboutRight">
-      <app-conversation-about 
-               [userShareService]="userShareService"
-               [responseLastMsg] = "responseLastMsg"
-      >
-      </app-conversation-about>
-   </div>
-   <!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
-   <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
-   <div class="content-messeage">
-      <div class="content" #scrollframe>
-         <!-- <div class="messages">
-            <ul>
-               <li *ngFor="let messeage of chat.listMesseage" [class]="messeage.fromMe ? 'sent' : 'replies'" #item>
-                  <img *ngIf="messeage.fromMe" src="{{ chat.avt }}" alt="" />
-                  <img  src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                  <img class="img-preview" *ngIf="messeage.type === 'image'" [src]="messeage.content"
-                     (click)="watchImagePreview(messeage.content)" data-toggle="modal" data-target="#myModal" />
-
-                  <a *ngIf="messeage.type === 'file'" (click)="openFile(messeage.url)">{{ messeage.content }}</a>
-                  <p *ngIf="messeage.type === 'text' && messeage.fromMe" data-toggle="tooltip" data-placement="left"
-                     title="{{ messeage.time | date:'medium' }}">{{ messeage.content }}</p>
-                  <p *ngIf="messeage.type === 'text' && !messeage.fromMe" data-toggle="tooltip" data-placement="right"
-                     title="{{ messeage.time | date:'medium' }}">{{ messeage.content }}</p>
-               </li>
-            </ul>
-         </div> -->
-         <div class="messages">
-            <ul *ngFor="let messeage of responseLastMsg">
-               <li class="replies" *ngIf="messeage.sender == UserId">
-                  <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                  <p class="left" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
-                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
-                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.file.filePath)"/>
-                     <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
-               </li>
-               <li class="sent" *ngIf="messeage.sender != UserId">
-                  <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                  <p class="right"> {{ messeage.content.content }} </p>
-                  <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
-                     data-toggle="modal" data-target="#myModal" (click)="watchImagePreview(messeage.content.file.filePath)" />
-                     <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
-               </li>
-            </ul>
-         </div>
-         <!-- <ul >
-            <li *ngFor="let messeage of responseLastMsg">
-                     <p> {{ messeage.content.content }} </p>
-
+<!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
+<!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
+<div class="content-messeage">
+   <div class="content" #scrollframe>
+      <div class="messages">
+         <ul *ngFor="let messeage of responseLastMsg">
+            <li class="replies" *ngIf="messeage.sender == UserId">
+               <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+               <p class="left" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
+               <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
+                  data-toggle="modal" data-target="#myModal"
+                  (click)="watchImagePreview(messeage.content.file.filePath)" />
+               <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5"
+                  class="file">{{ messeage.content.content }}</a>
             </li>
-         </ul> -->
+            <li class="sent" *ngIf="messeage.sender != UserId">
+               <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+               <p class="right"> {{ messeage.content.content }} </p>
+               <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
+                  data-toggle="modal" data-target="#myModal"
+                  (click)="watchImagePreview(messeage.content.file.filePath)" />
+               <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5"
+                  class="file">{{ messeage.content.content }}</a>
+            </li>
+         </ul>
       </div>
-      <!-- Modal -->
-      <div class="modal fade" id="myModal" role="dialog">
-         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <!-- Modal content-->
-            <div class="modal-content center" role="document">
-               <div class="modal-body">
-                  <img src="{{  imagePreview }}" alt="">
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Modal -->
-      <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm" autocomplete="off">
-         <div class="send-view">
-            <label class="send">
-               <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
-               <input #fileInput type="file" (change)="processFile(fileInput)">
-            </label>
-            <label class="send">
-               <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
-               <input #imageInput type="file" accept="image/*" (change)="processImage(imageInput)" name="file">
-            </label>
-            <label class="send">
-               <span class="buzz">
-                  <p>Buzz!</p>
-               </span>
-            </label>
-            <div class="send input-message">
-               <input type="text" class="form-control" name="message" id="input-message" ngModel
-                  placeholder="Nhập nội dung tin nhắn">
-               <img src="/assets/ICON/IconAppChat/7.svg" alt="icon">
-            </div>
-         </div>
-      </form>
    </div>
+   <!-- Modal -->
+   <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+         <!-- Modal content-->
+         <div class="modal-content center" role="document">
+            <div class="modal-body">
+               <img src="{{  imagePreview }}" alt="">
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Modal -->
+   <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm" autocomplete="off">
+      <div class="send-view">
+         <label class="send">
+            <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
+            <input #fileInput type="file" (change)="processFile(fileInput)">
+         </label>
+         <label class="send">
+            <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
+            <input #imageInput type="file" accept="image/*" (change)="processImage(imageInput)" name="file">
+         </label>
+         <label class="send">
+            <span class="buzz">
+               <p>Buzz!</p>
+            </span>
+         </label>
+         <div class="send input-message">
+            <input type="text" class="form-control" name="message" id="input-message" ngModel
+               placeholder="Nhập nội dung tin nhắn">
+            <img src="/assets/ICON/IconAppChat/7.svg" alt="icon">
+         </div>
+      </div>
+   </form>
 </div>
+
 
 <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
 <script>

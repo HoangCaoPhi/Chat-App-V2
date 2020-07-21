@@ -5,16 +5,18 @@ import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
 import { AuthGuard } from './helpers';
 import { HomeComponent } from './ui/chat/home/home.component';
+import { ViewComponent } from './ui/chat/conversation-detail/conversation-detail.component';
 
 const routes: Routes = [
 
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   {
     path: "chat/:id",
     component: HomeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
   // otherwise redirect to home
   { path: '**', redirectTo: 'chat' }
 
