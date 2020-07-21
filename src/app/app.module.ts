@@ -22,6 +22,7 @@ import { HeaderComponent } from './share/header/header.component';
 import { ListComponent } from './ui/chat/conversation-list/conversation-list.component';
 import { CommonModule } from '@angular/common';;
  
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { CommonModule } from '@angular/common';;
         HttpClientModule,
         appRoutingModule,
         FormsModule,
-        AvatarModule
+        AvatarModule,
+        InfiniteScrollModule
     ],
     declarations: [
         AppComponent,

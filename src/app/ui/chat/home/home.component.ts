@@ -67,6 +67,7 @@ export class HomeComponent implements OnInit {
   getMessageLast(convId) {
     this.stringeeService.stringeeServiceMessage(convId, (status, code, message, msgs) => {
       this.responseLastMsg = msgs; 
+      console.log(msgs);
     });
   }
  // Nhận user từ conversation list chuyển sang

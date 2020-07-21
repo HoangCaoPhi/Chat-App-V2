@@ -46,9 +46,8 @@
       <!-----------=======================  END HEADER CONTENT ==========================    ----------->
       <div class="messeage">
          <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
-         <div class="info-messeage" *ngIf="showAboutRight" >
-            <app-conversation-about [response]="responseLastMsg"
-               [userShareService]="userShareService">
+         <div class="info-messeage" *ngIf="showAboutRight">
+            <app-conversation-about [response]="responseLastMsg" [userShareService]="userShareService">
             </app-conversation-about>
          </div>
          <app-conversation-detail [responseLastMsg]="responseLastMsg" class="content-messeage">

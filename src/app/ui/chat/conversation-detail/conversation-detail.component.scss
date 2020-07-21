@@ -201,14 +201,14 @@
     display: flex;
     flex-direction: column;
     height: calc(100vh - 120px);
-	width: 100%;
+	  width: 100%;
  }
  .content-messeage .content {
     height: 815px;
     position: relative;
     padding: 0 0 0 12px;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y:  scroll;
  }
  .content-messeage .content::-webkit-scrollbar {
     border-radius: 5px;
@@ -355,9 +355,10 @@ label input:focus {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-top: 5px;
 }
 .buzz p {
-    margin-top: 7px;
+    margin-top: 16px;
     font-size: 13px;
     font-weight: 500;
     color: #ffffff;

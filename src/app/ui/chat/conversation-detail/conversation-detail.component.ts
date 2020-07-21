@@ -31,6 +31,7 @@ export class ViewComponent implements OnInit {
   userShareService: any; // Nhan userId tu contact list
   userInfo: any; // Thông tin user lấy theo id
   convId: string;
+  loading: boolean = false;
   // @Output() getMessageLast = new EventEmitter<any>();
 
   constructor(
@@ -50,7 +51,7 @@ export class ViewComponent implements OnInit {
   }
 
   /* #region  TRANFER SERVICE  */
- 
+
   /* #region  XỬ LÝ STRINGEE  */
   //    Lấy cuộc trò chuyện cuối cùng để hiển thị ở phần content message 
   getConvesationLast(id: string) {
@@ -61,8 +62,10 @@ export class ViewComponent implements OnInit {
   //    Gửi tin nhắn 
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
-    this.stringeeService.sendTextMessage(this.convId, sendForm.value.message);
-    sendForm.reset();
+    if (sendForm.value.message) {
+      this.stringeeService.sendTextMessage(this.convId, sendForm.value.message);
+      sendForm.reset();
+    }
     this.getConvesationLast(this.convId);
     this.componentShareService.setConversationId(this.convId);
   }
@@ -156,6 +159,28 @@ export class ViewComponent implements OnInit {
   // Xử lý sự kiện click tin nhắn dạng file
   openFile(url: string) {
     window.open(url, "");
+  }
+
+
+
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
+  direction = '';
+
+  // Sự kiện di chuột lên xem tin nhắn trước
+  onUp() {
+    console.log('scrolled up!');
+    this.loading = true;
+    this.stringeeService.stringeeServiceGetBeforeMessage(this.responseLastMsg[0].sequence, this.convId, (status, code, message, msgs) => {
+          this.responseLastMsg = msgs.concat(this.responseLastMsg);
+          setTimeout(() => {
+            /** spinner ends after 5 seconds */
+            this.loading = false;
+          }, 5000);
+       
+    });
+    this.direction = 'up';
   }
 }
 

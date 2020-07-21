@@ -120,10 +120,15 @@ export class StringeeService {
   stringeeServiceMessage(convId: string, callback: any) {
     this.stringeeChat.getLastMessages(convId, 10, true, callback);
   }
-
+  // Lấy tin nhắn trước
+   stringeeServiceGetBeforeMessage(sequence: number, convId: string, callback: any) {
+    var count = 10;
+    var isAscending = true;
+    this.stringeeChat.getMessagesBefore(convId, sequence, count, isAscending, callback);
+   }
   // Lấy ra các cuộc trò chuyện
   stringeeServiceConversation(callback: any) {
-    this.stringeeChat.getLastConversations(10, false, callback);
+    this.stringeeChat.getLastConversations(25, false, callback);
   }
 
   /*=================================================================== THÔNG TIN USER =================================================================================== */

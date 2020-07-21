@@ -34,11 +34,11 @@ export class ConversationAboutComponent implements OnInit {
 
   // Lây danh sách tin nhắn hình ảnh chung 
   getImages() {
-    return this.response.filter(mess => ((mess.type == 2)));
+    // return this.response.filter(mess => ((mess.type == 2)));
   }
   // Lây danh sách file chung 
   getFiles() {
-    return this.response.filter(mess => ((mess.type == 5)));
+    // return this.response.filter(mess => ((mess.type == 5)));
   }
   watchImagePreview(src) {
     this.imagePreview = src;

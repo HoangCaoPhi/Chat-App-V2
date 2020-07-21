@@ -1,8 +1,17 @@
 <!-----------=======================  END THONG TIN MESSEAGE ==========================    ----------->
 <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
 <div class="content-messeage">
-   <div class="content" #scrollframe>
+   <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary" role="status" *ngIf="loading">
+          <span class="sr-only">Loading...</span>
+      </div>
+  </div>
+   <div style="height: 90%" #scrollframe infinite-scroll [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolledUp)="onUp()"
+      [scrollWindow]="false" class="content">
+
       <div class="messages">
+
          <ul *ngFor="let messeage of responseLastMsg">
             <li class="replies" *ngIf="messeage.sender == UserId">
                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />

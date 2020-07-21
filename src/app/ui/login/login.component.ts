@@ -59,10 +59,6 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    // this.ACCESS_TOKEN = data.token;
-                    // console.log(this.ACCESS_TOKEN);
-                    // this.stringeeService.connectStringee(this.ACCESS_TOKEN);
-                    // this.messageService.connectListners();
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
