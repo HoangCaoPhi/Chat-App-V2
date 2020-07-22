@@ -63,15 +63,22 @@
 										{{ participant.name }}
 									</p>
 								</ng-container>
-								<p class="preview">{{  conv.lastMessage.content.content }}</p>
+
+								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}">
+									{{  conv.lastMessage.content.content }}</p>
 								<!-- <p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p> -->
 							</div>
 							<div class="meta status">
-								<p class="time">
-									{{  conv.lastMessage.createdAt |  date:'HH:MM'  }}</p>
-								<p>
-								<span class="badge badge-light newMesseage">
-										{{ conv.unreadCount }}
+								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 0" class="time">
+									{{conv.lastMessage.createdAt | date: 'HH:MM'}}</p>
+								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 1" class="time">
+									{{conv.lastMessage.createdAt | date: 'EEE'}}</p>
+								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 2" class="time">
+									{{conv.lastMessage.createdAt | date: 'd MMM' }}
+								</p>
+								<span class="badge badge-light newMesseage"
+									[ngClass]="{'not-amout': conv.unreadCount === 0}">
+									{{ conv.unreadCount }}
 								</span>
 							</div>
 						</div>
@@ -79,8 +86,8 @@
 				</li>
 			</ul>
 
-			<ul class="nav nav-pills nav-stacked" *ngIf="tabTranfer == 1">
-				<li id="user-contact" class="active" *ngFor="let user of users" (click)="onCreateConversation(user)">
+			<ul class="nav-pills nav-stacked" *ngIf="tabTranfer == 1">
+				<li id="user-contact"   *ngFor="let user of users" (click)="onCreateConversation(user)">
 					<ngx-avatar [name]="user.userName" size="34"></ngx-avatar>
 					<p class="name"> {{ user.userName }} </p>
 				</li>
@@ -90,9 +97,10 @@
 		<!-- ========================== END CONTACT LIST =============================-->
 		<!-- tab menu -->
 		<div id="bottom-bar">
-			<button  (click)="getConversationsTab()" [ngClass] = "{ 'bg': 'tabtranfer', 'tab-active': !tabChange}" ><span>Cuộc
-					trò chuyện</span></button> 
-			<button  (click)="getContactListTab()" [ngClass] = "{'bg': 'tabtranfer', 'tab-active': tabChange }"><span>Danh
+			<button (click)="getConversationsTab()"
+				[ngClass]="{ 'bg': 'tabtranfer', 'tab-active': !tabChange}"><span>Cuộc
+					trò chuyện</span></button>
+			<button (click)="getContactListTab()" [ngClass]="{'bg': 'tabtranfer', 'tab-active': tabChange }"><span>Danh
 					bạ</span></button>
 		</div>
 		<!-- tab menu -->

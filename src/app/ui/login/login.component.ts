@@ -25,10 +25,7 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
-        // Nếu người dùng đã đăng nhập
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/chat/conv-vn-1-NO20OWUHMD-1594421751134']);
-        }
+        
     }
 
     ngOnInit() {
@@ -38,7 +35,7 @@ export class LoginComponent implements OnInit {
         });
   
         // điều hướng khi đăng nhập thành công
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/conv-vn-1-NO20OWUHMD-1594421751134';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/1';
     }
 
     // Trả về loginForm Control

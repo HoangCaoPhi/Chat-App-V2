@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ComponentShareService } from '@app/services/component-share.service';
@@ -24,6 +24,7 @@ export class ListComponent implements OnInit {
   users: User[]; // danh sách người dùng lấy từ server
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
   tabChange: boolean; // active tab
+  selectContact: string;
     
 
   constructor(
@@ -31,7 +32,8 @@ export class ListComponent implements OnInit {
     private componentShareService: ComponentShareService,
     private userIdTranferService: UserIdTranferService,
     private stringeeService: StringeeService,
-    private _userservice: UserService
+    private _userservice: UserService,
+    private router: Router,
   ) {
   route.params.subscribe(val => {
         this.convId = this.route.snapshot.paramMap.get('id');
@@ -55,6 +57,7 @@ export class ListComponent implements OnInit {
   onCreateConversation(user: User) {
     this.stringeeService.creaateConversationService(user, (status: string, code: string, message: string, conv: any) => {
       localStorage.setItem("convId", conv.id);
+      this.router.navigate(['/chat/' + conv.id])
     });
   }
 
@@ -107,5 +110,25 @@ export class ListComponent implements OnInit {
       ).subscribe( 
         data => { this.users = data }
       )
+  }
+ 
+  forMatTime(data: number) {
+    let diff = this.calculateDiff(data);
+    if (diff < 1) {
+      return 0;
+    }
+    else if (diff >= 1 && diff < 8) {
+      return 1;
+    }
+    else {
+      return 2;
+    }
+  }
+
+ 
+  calculateDiff(data: number) {
+    let currentDate = new Date();
+    let timeSent = new Date(data);
+    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(timeSent.getFullYear(), timeSent.getMonth(), timeSent.getDate())) / (1000 * 60 * 60 * 24));
   }
 }
