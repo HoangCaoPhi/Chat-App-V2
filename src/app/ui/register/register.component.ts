@@ -4,6 +4,7 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { User } from '@app/models';
+import { NotifierService } from 'angular-notifier';
 
 // Tái kiến trúc lại Formgrou để so sánh password
 export function comparePassword(c: FormGroup ) {
@@ -30,7 +31,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private notifier: NotifierService 
   ) {
     // Nếu người dùng đã đăng nhập
     if (this.authenticationService.currentUserValue) {
@@ -72,10 +74,21 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
+          this.showNotification('success', 'Bạn đã tạo tài khoản thành công !')
         },
         error => {
           this.error = error;
+          this.showNotification('error', error)
           this.loading = false;
         });
   }
+      /**
+	 * Show a notification
+	 *
+	 * @param {string} type    Notification type
+	 * @param {string} message Notification message
+	 */
+	public showNotification( type: string, message: string ): void {
+		this.notifier.notify(type, message );
+	}
 }

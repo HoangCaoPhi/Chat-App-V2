@@ -7,6 +7,7 @@ import { AuthenticationService } from '@app/services/authentication.service';
 
 import { StringeeClient, StringeeChat } from "stringee-chat-js-sdk";
 import { StringeeService } from '@app/services/stringee/stringee.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
     templateUrl: './login.component.html',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     error = '';
     ACCESS_TOKEN: string;
+    private notifier: NotifierService; // Notifier service
     //#endregion
 
     //#region Contructor
@@ -29,8 +31,11 @@ export class LoginComponent implements OnInit {
         private stringeeService: StringeeService,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
-    ) { }
+        private authenticationService: AuthenticationService,
+        notifier: NotifierService
+    ) {
+        this.notifier = notifier;
+    }
     //#endregion   
 
     ngOnInit() {
@@ -57,10 +62,23 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
+                    this.showNotification('success', 'Bạn đã đăng nhập thành công !')
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
+                    this.showNotification('error', error)
                 });
     }
+
+    /**
+	 * Show a notification
+	 *
+	 * @param {string} type    Notification type
+	 * @param {string} message Notification message
+	 */
+    public showNotification(type: string, message: string): void {
+        this.notifier.notify(type, message);
+    }
+
 }
