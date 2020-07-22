@@ -11,10 +11,18 @@ import { ComponentShareService } from '@app/services/component-share.service';
   styleUrls: ['./conversation-about.component.scss']
 })
 export class ConversationAboutComponent implements OnInit {
+  //#region Field
   convId: any;
   files: any;
   imgs: any;
+  showFile: boolean = true;
+  showImg: boolean = true;
+  imagePreview: any;
+  @Input() userShareService: any;
+  @Input() response: any;
+  //#endregion
 
+  //#region Contructor
   constructor(private router: Router,
     private route: ActivatedRoute,
     private componentShareService: ComponentShareService,
@@ -26,15 +34,10 @@ export class ConversationAboutComponent implements OnInit {
       this.getParam();
     });
   }
+  ngOnInit(): void { }
+  //#endregion
 
-  ngOnInit(): void {
-
-  }
-
-  showFile: boolean = true;
-  showImg: boolean = true;
-  imagePreview: any;
-
+  //#region Handle Frontend
   // Ẩn hiện file và hình ảnh chung
   toggleFile() {
     this.showFile = !this.showFile;
@@ -42,18 +45,17 @@ export class ConversationAboutComponent implements OnInit {
   toggleImg() {
     this.showImg = !this.showImg;
   }
-
-  @Input() userShareService: any;
-  @Input() response: any;
-
-  // Lây danh sách tin nhắn hình ảnh chung 
+  /**
+   *  Lấy ra các hình ảnh được lấy từ Db
+   */
   getImages() {
-    // return this.response.filter(mess => ((mess.type == 2)));
     this._chatservice.getAllFile(this.convId).subscribe(
       (res) => { this.imgs = res }
     )
   }
-  // Lây danh sách file chung 
+/**
+ *    Lấy các file chung
+ */
   getFiles() {
     // return this.response.filter(mess => ((mess.type == 5)));
     this._chatservice.getAllFile(this.convId).subscribe(
@@ -61,15 +63,18 @@ export class ConversationAboutComponent implements OnInit {
     )
   }
 
-    // Conversation id được nhận từ conversation detail
-    getParam() {
-      this.componentShareService.getConversationId$.subscribe( () => {
-        this.getFiles();
-        this.getImages();
-      });
-  
-    }
   watchImagePreview(src) {
     this.imagePreview = src;
   }
+  //#endregion
+
+  //#region Tranfer Data
+      // Nhận sự thay đổi Id cuộc trò chuyện
+      getParam() {
+        this.componentShareService.getConversationId$.subscribe(() => {
+          this.getFiles();
+          this.getImages();
+        });
+      }
+  //#endregion
 }

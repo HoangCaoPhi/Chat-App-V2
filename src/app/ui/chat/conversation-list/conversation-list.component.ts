@@ -17,6 +17,7 @@ import { UserIdTranferService } from '@app/services/user-tranfer.service';
 })
 
 export class ListComponent implements OnInit {
+  //#region  Field
   @Input() responseConvs: any; // cuộc trò chuyện được trả về 
   convId: string; // Id của cuộc trò chuyện
   convIdFromDataTranfer: string; // Id conversation lấy từ route
@@ -25,8 +26,9 @@ export class ListComponent implements OnInit {
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
   tabChange: boolean; // active tab
   selectContact: string;
+  //#endregion
 
-
+  //#region  Contructor
   constructor(
     private route: ActivatedRoute,
     private componentShareService: ComponentShareService,
@@ -41,33 +43,35 @@ export class ListComponent implements OnInit {
     });
   }
   ngOnInit(): void { }
-  // Conversation id được nhận từ conversation detail
-  getParam() {
-    this.componentShareService.getConversationId$.subscribe(convId => { this.getConversationLast() });
+  //#endregion
 
-  }
-  /* #region  XỬ LÝ STRINGEE  */
-  //  Lấy những cuộc trò chuyện trả về cho responseConvs để render 
+  //#region  Stringee Handle
+  /**
+   * Lấy ra tất cả các cuộc trò chuyện
+   */
   getConversationLast() {
     this.stringeeService.stringeeServiceConversation((status, code, message, convs) => {
       this.responseConvs = convs;
     });
   }
-  // Tạo một cuộc trò chuyện mới
+  /**
+   * Tạo một cuộc trò chuyện mới
+   * @param user Thông tin của user để tạo cuộc trò chuyện
+   */
   onCreateConversation(user: User) {
- 
     this.stringeeService.creaateConversationService(user, (status: string, code: string, message: string, conv: any) => {
       localStorage.setItem("convId", conv.id);
       this.router.navigate(['/chat/' + conv.id])
     });
   }
+  //#endregion
 
-  /* #region  TRANFER SERVICE  */
-
-  //Truyền conversation id sang cho list 
+  //#region  Tranfer Data
+  /**
+   * Truyền thông tin user từ cuộc trò chuyện sang tin nhắn chi tiết của từng cuộc trò chuyện
+   * @param conv Cuộc trò chuyện mà người dùng click vào
+   */
   onCickConversation(conv: any) {
-    // Lay id cua user
-    // Lấy thông tin của user id và truyền sang cho home
     for (let con of this.responseConvs) {
       if (con.id == conv.id) {
         let nameConv = con.participants.filter(p => p.userId != this.UserId);
@@ -79,12 +83,21 @@ export class ListComponent implements OnInit {
     this.stringeeService.stringeeChat.markConversationAsRead(this.convId)
   }
 
+    /**
+     * Conversation id được nhận được từ route để active cuộc trò chuyện
+     */
+    getParam() {
+      this.componentShareService.getConversationId$.subscribe(convId => { this.getConversationLast() });
+    }
+  //#endregion
 
-  /* #region  XỬ LÝ GIAO DIỆN  */
-
+  //#region  Handle Front
   seenMesseage(chat: User) { }
 
-  // Active cuộc trò chuyện khi click
+  /**
+   * Active cuộc trò chuyện khi người dùng click
+   * @param conv 
+   */
   getActive(conv) {
     if (conv.id === this.convId) {
       this.seenMesseage(conv);
@@ -93,14 +106,17 @@ export class ListComponent implements OnInit {
       'selected': conv.id === this.convId
     }
   }
-
-  // Chuyển về tab conversation
+  /**
+   *  Chuyện sang xem cuộc trò chuyện
+   */
   getConversationsTab() {
     this.tabTranfer = 0;
     this.getConversationLast();
     this.tabChange = false;
   }
-  // Chuyển về tab danh bạ
+  /**
+   * Chuyện sang xem danh sách các người dùng
+   */
   getContactListTab() {
     this.tabTranfer = 1;
     this.tabChange = true;
@@ -112,7 +128,10 @@ export class ListComponent implements OnInit {
         data => { this.users = data }
       )
   }
-
+  /**
+   * Định dạng các loại sẽ hiển thị giờ theo ngày, tuần hay giờ
+   * @param data Thời gian được truyền vào
+   */
   forMatTime(data: number) {
     let diff = this.calculateDiff(data);
     if (diff < 1) {
@@ -125,11 +144,14 @@ export class ListComponent implements OnInit {
       return 2;
     }
   }
-
-
+  /**
+   * Tính toán khoảng cách của thời gian hiện tại và thời gian gửi tin nhắn cuối cùng
+   * @param data 
+   */
   calculateDiff(data: number) {
     let currentDate = new Date();
     let timeSent = new Date(data);
     return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(timeSent.getFullYear(), timeSent.getMonth(), timeSent.getDate())) / (1000 * 60 * 60 * 24));
   }
+  //#endregion
 }

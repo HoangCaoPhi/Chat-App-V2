@@ -16,13 +16,13 @@ import { FileService } from '@app/services/message/file.service';
 class FileSpinnet {
   constructor(public src: string, public file: File) { }
 }
-
 @Component({
   selector: 'app-conversation-detail',
   templateUrl: './conversation-detail.component.html',
   styleUrls: ['./conversation-detail.component.scss']
 })
 export class ViewComponent implements OnInit {
+  //#region Field
   imagePreview: any;
   showAboutRight: boolean = true;
   @Input() responseLastMsg: any; // Nhận về tin nhắn từ stringee
@@ -32,8 +32,12 @@ export class ViewComponent implements OnInit {
   userInfo: any; // Thông tin user lấy theo id
   convId: string;
   loading: boolean = false;
-  // @Output() getMessageLast = new EventEmitter<any>();
+  //  Gửi file
+  imgPath: any
+  selectedFile: FileSpinnet;
+  //#endregion
 
+  //#region Contructor
   constructor(
     private route: ActivatedRoute,
     private stringeeService: StringeeService,
@@ -50,20 +54,24 @@ export class ViewComponent implements OnInit {
     this.stringeeService.stringeeChat.on('onObjectChange', () => {
       this.getConvesationLast(this.convId);
       this.componentShareService.setConversationId(this.convId);
-      
     })
   }
+  //#endregion
 
-  /* #region  TRANFER SERVICE  */
-
-  /* #region  XỬ LÝ STRINGEE  */
-  //    Lấy cuộc trò chuyện cuối cùng để hiển thị ở phần content message 
+  //#region Stringee Handle
+  /**
+   * Lấy ra tin nhắn chi tiết của từng cuộc trò chuyện
+   * @param id Id của cuộc trò chuyện lấy từ router
+   */
   getConvesationLast(id: string) {
     this.stringeeService.stringeeServiceMessage(id, (status, code, message, msgs) => {
       this.responseLastMsg = msgs;
     });
   }
-  //    Gửi tin nhắn 
+  /**
+   * Gửi tin nhắn dạng text
+   * @param sendForm Form value được lấy khi người dùng nhập
+   */
   sendMesseage(sendForm: NgForm) {
     console.log(sendForm.value);
     if (sendForm.value.message) {
@@ -71,34 +79,41 @@ export class ViewComponent implements OnInit {
       sendForm.reset();
     }
     this.getConvesationLast(this.convId);
-    this.componentShareService.setConversationId(this.convId);
+    this.componentShareService.setConversationId(this.convId); // Truyền sự kiện để update lại last message ở conversation list
   }
-  //  Gửi file
-  imgPath: any
-  selectedFile: FileSpinnet;
+  /**
+   * Gửi tin nhắn dạng file
+   * @param fileInput FileInput lấy từ người dùng khi kích hoạt sự kiện gửi file
+   */
   processImage(fileInput: any) {
     const file: File = fileInput.files[0];
     let fileType: string;
     fileType = fileInput.files[0].name.split(".").pop() // Lấy đuôi file
     const reader = new FileReader();
+
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new FileSpinnet(event.target.result, file);
       var formData = new FormData();
       formData.set('file', file)
-
+      // Post file lên server Stringee
       this._chatservice.postFile(formData, JSON.parse(localStorage.getItem('currentUser')).token).subscribe(
         (res) => {
-          this.imgPath = res;  
+          this.imgPath = res;
           this.stringeeService.sendFile(2, this.selectedFile.file.name, this.convId, this.selectedFile.file.name, this.imgPath.filename, file.size)
+          // Post file lên db
           this._chatservice.postFileDatabase(this.convId, this.selectedFile.file.name, this.imgPath.filename, 2, fileType).subscribe()
         }
       )
+      // Gọi lại cuộc trò chuyện và truyền sự kiện cập nhật lại cvlist
       this.getConvesationLast(this.convId);
       this.componentShareService.setConversationId(this.convId);
     });
     reader.readAsDataURL(file);
   }
-  // Xử lý sự kiện upload file
+  /**
+    * Gửi tin nhắn dạng file
+    * @param fileInput FileInput lấy từ người dùng khi kích hoạt sự kiện gửi file
+    */
   processFile(fileInput: any) {
     const file: File = fileInput.files[0];
     let fileType: string;
@@ -107,11 +122,13 @@ export class ViewComponent implements OnInit {
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new FileSpinnet(event.target.result, file);
       var formData = new FormData();
-      formData.set('file', file)
+      formData.set('file', file);
+      // Gửi file lên server Stringee
       this._chatservice.postFile(formData, JSON.parse(localStorage.getItem('currentUser')).token).subscribe(
         (res) => {
-          this.imgPath = res;  
+          this.imgPath = res;
           this.stringeeService.sendFile(5, this.selectedFile.file.name, this.convId, this.selectedFile.file.name, this.imgPath.filename, file.size);
+          // Gửi thông tin file và đường dẫn lên server net core
           this._chatservice.postFileDatabase(this.convId, this.selectedFile.file.name, this.imgPath.filename, 5, fileType).subscribe();
         }
       )
@@ -120,15 +137,13 @@ export class ViewComponent implements OnInit {
     });
     reader.readAsDataURL(file);
   }
+  //#endregion
 
-
-  /* #region  XỬ LÝ PHẦN GIAO DIỆN  */
-
+  //#region Handle Front
   //   Ẩn hay Hiển thị phần thông tin tin nhắn
   toggleInfo() {
     this.showAboutRight = !this.showAboutRight;
   }
-
   // Tự động Scollbar khi gửi tin nhắn
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
@@ -157,7 +172,6 @@ export class ViewComponent implements OnInit {
       behavior: 'smooth'
     });
   }
-
   // Xem trước hình ảnh
   watchImagePreview(src) {
     this.imagePreview = src;
@@ -167,11 +181,10 @@ export class ViewComponent implements OnInit {
     window.open(url, "");
   }
 
-
-
+  // Xử lý load more message
   throttle = 300;
   scrollDistance = 1;
-  scrollUpDistance = 2;
+  scrollUpDistance = 2; // Khoảng cách cần thiết để nhận sự kiện scoll
   direction = '';
 
   // Sự kiện di chuột lên xem tin nhắn trước
@@ -184,9 +197,10 @@ export class ViewComponent implements OnInit {
         /** spinner ends after 5 seconds */
         this.loading = false;
       }, 3000);
-
     });
     this.direction = 'up';
   }
+  //#endregion
+
 }
 

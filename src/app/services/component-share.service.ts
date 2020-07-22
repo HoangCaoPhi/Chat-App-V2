@@ -11,8 +11,6 @@ export class ComponentShareService {
   private _getConversationId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   getConversationId$: Observable<string> = this._getConversationId.asObservable();
 
-
-
   setConversationId(convId: any) {
     this._getConversationId.next(convId);
   }

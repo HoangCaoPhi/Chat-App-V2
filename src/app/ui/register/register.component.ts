@@ -5,16 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { User } from '@app/models';
 
-
-
-// Hàm kiểm tra password
+// Tái kiến trúc lại Formgrou để so sánh password
 export function comparePassword(c: FormGroup ) {
   const v = c.value;
   return (v.password === v.confirmPassword) ? null : {
     passwordnotmatch: true
   };
 }
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -23,7 +20,7 @@ export function comparePassword(c: FormGroup ) {
 
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  loading = false;
+  loading   = false;
   submitted = false;
   returnUrl: string;
   error = '';
@@ -37,7 +34,7 @@ export class RegisterComponent implements OnInit {
   ) {
     // Nếu người dùng đã đăng nhập
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/chat/1']);
+         this.router.navigate(['/chat/1']);
     }
   }
 
@@ -55,13 +52,9 @@ export class RegisterComponent implements OnInit {
     {
         validator: comparePassword
     });
-
     // điều hướng khi đăng nhập thành công
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-
-
-
 
   onSubmit() {
     this.submitted = true;
