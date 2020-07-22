@@ -3,9 +3,9 @@
 <div class="content-messeage">
    <div class="d-flex justify-content-center">
       <div class="spinner-border text-primary" role="status" *ngIf="loading">
-          <span class="sr-only">Loading...</span>
+         <span class="sr-only">Loading...</span>
       </div>
-  </div>
+   </div>
    <div style="height: 90%" #scrollframe infinite-scroll [infiniteScrollDistance]="scrollDistance"
       [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolledUp)="onUp()"
       [scrollWindow]="false" class="content">

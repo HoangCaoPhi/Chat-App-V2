@@ -31,22 +31,24 @@ export class HomeComponent implements OnInit {
   ) {
 
     route.params.subscribe(val => {
-      this.convId = val.id;
-      this.getMessageLast(val.id);
-      this.getUserIdTranfer();
-
       this.stringeeService.stringeeClient.on('connect', () => {
         console.log("connect")
         this.stringeeService.authenListners();
         this.stringeeService.realTimeUpdate();
+        this.stringeeService.getAndUpdateInfo();
         this.getConversationLast();
         this.getMessageLast(val.id);
+    
       })
+      this.getMessageLast(val.id);
+      this.convId = val.id;
+      this.getUserIdTranfer();
     });
   }
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.stringeeService.connectStringee(this.currentUser.token); // connect Stringee
+   
   }
   // Lấy thông tin cuộc trò chuyện và các tin nhắn tương ứng
   getConversationLast() {
@@ -60,6 +62,12 @@ export class HomeComponent implements OnInit {
 
           if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/chat/' + convs[0].id]);
+            this.stringeeService.getUserInfo(parti.userId, (status, code, msg, users) => {
+              this._userservice.getUserFromId(users[0].userId).subscribe(user => {
+                this.userShareService = user
+              });
+              // this._userservice.getUserFromId(users[0].userId).subscribe(user => this.userIdTranferService.setUser(user));
+            })
           }
           break;
         }
@@ -72,6 +80,7 @@ export class HomeComponent implements OnInit {
             this._userservice.getUserFromId(users[0].userId).subscribe(user => {
               this.userShareService = user
             });
+            // this._userservice.getUserFromId(users[0].userId).subscribe(user => this.userIdTranferService.setUser(user));
           })
         }
         break;

@@ -47,7 +47,11 @@ export class ViewComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-
+    this.stringeeService.stringeeChat.on('onObjectChange', () => {
+      this.getConvesationLast(this.convId);
+      this.componentShareService.setConversationId(this.convId);
+      
+    })
   }
 
   /* #region  TRANFER SERVICE  */
@@ -84,8 +88,9 @@ export class ViewComponent implements OnInit {
 
       this._chatservice.postFile(formData, JSON.parse(localStorage.getItem('currentUser')).token).subscribe(
         (res) => {
-          this.imgPath = res; console.log(this.imgPath.filename)
+          this.imgPath = res;  
           this.stringeeService.sendFile(2, this.selectedFile.file.name, this.convId, this.selectedFile.file.name, this.imgPath.filename, file.size)
+          this._chatservice.postFileDatabase(this.convId, this.selectedFile.file.name, this.imgPath.filename, 2, fileType).subscribe()
         }
       )
       this.getConvesationLast(this.convId);
@@ -105,8 +110,9 @@ export class ViewComponent implements OnInit {
       formData.set('file', file)
       this._chatservice.postFile(formData, JSON.parse(localStorage.getItem('currentUser')).token).subscribe(
         (res) => {
-          this.imgPath = res; console.log(this.imgPath.filename)
-          this.stringeeService.sendFile(5, this.selectedFile.file.name, this.convId, this.selectedFile.file.name, this.imgPath.filename, file.size)
+          this.imgPath = res;  
+          this.stringeeService.sendFile(5, this.selectedFile.file.name, this.convId, this.selectedFile.file.name, this.imgPath.filename, file.size);
+          this._chatservice.postFileDatabase(this.convId, this.selectedFile.file.name, this.imgPath.filename, 5, fileType).subscribe();
         }
       )
       this.getConvesationLast(this.convId);
@@ -173,12 +179,12 @@ export class ViewComponent implements OnInit {
     console.log('scrolled up!');
     this.loading = true;
     this.stringeeService.stringeeServiceGetBeforeMessage(this.responseLastMsg[0].sequence, this.convId, (status, code, message, msgs) => {
-          this.responseLastMsg = msgs.concat(this.responseLastMsg);
-          setTimeout(() => {
-            /** spinner ends after 5 seconds */
-            this.loading = false;
-          }, 5000);
-       
+      this.responseLastMsg = msgs.concat(this.responseLastMsg);
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.loading = false;
+      }, 3000);
+
     });
     this.direction = 'up';
   }

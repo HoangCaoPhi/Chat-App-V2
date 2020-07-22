@@ -23,35 +23,30 @@ export class StringeeService {
  
 
   // Lắng nghe onconnect
-  connectListners() {
-    this.stringeeClient.on('connect', () => {
-      
-      this.realTimeUpdate();
+ 
+  getAndUpdateInfo() {
+    let token = JSON.parse(localStorage.getItem('currentUser')).token;
+    let decodeToken = jwt_decode(token);
 
-      let token = JSON.parse(localStorage.getItem('currentUser')).token;
-      let decodeToken = jwt_decode(token);
+    let userId = decodeToken["userId"];
+    let username = decodeToken["userName"];
+    let avatar = decodeToken["avt"];
 
-      let userId = decodeToken["userId"];
-      let username = decodeToken["userName"];
-      let avatar = decodeToken["avt"];
+    console.log('++++++++++++++ connected to StringeeServer');
+    console.log("User Id la" + userId + "UserName" + username + "avatar" + avatar);
 
-      console.log('++++++++++++++ connected to StringeeServer');
-      console.log("User Id la" + userId + "UserName" + username + "avatar" + avatar);
-
-      this.stringeeChat.getUsersInfo([userId], (status, code, msg, users) => {
-        let user = users[0];
-        if (!user) {
-          let updateUserData = {
-            display_name: username,
-            avatar_url: avatar,
-            email: ""
-          }
-          this.updateUserInfo(updateUserData);
+    this.stringeeChat.getUsersInfo([userId], (status, code, msg, users) => {
+      let user = users[0];
+      if (1) {
+        let updateUserData = {
+          display_name: username,
+          avatar_url: avatar,
+          email: ""
         }
-      })
-    });
+        this.updateUserInfo(updateUserData);
+      }
+    })
   }
-
   // Lắng nghe authen
   authenListners() {
     this.stringeeClient.on('authen', function (res) {
