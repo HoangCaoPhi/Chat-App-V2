@@ -53,7 +53,7 @@ export class StringeeService {
    */
   authenListners() {
     this.stringeeClient.on('authen', function (res) {
-      console.log('authen', res);
+    //  console.log('authen', res);
     });
   }
 
@@ -182,7 +182,7 @@ export class StringeeService {
   // Realtime update
   realTimeUpdate() {
     this.stringeeChat.on('onObjectChange', function (info) {
-      console.log(info);
+    //  console.log(info);
     });
   }
   //#endregion

@@ -9,7 +9,7 @@
 
    <div class="ml-auto nav-right">
       <div class="dropdown">
-         <img src="http://emilcarlsson.se/assets/mikeross.png" alt="message-icon" data-toggle="dropdown">
+         <ngx-avatar [name]="userShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"></ngx-avatar>
          <ul class="dropdown-menu">
             <li><a (click)="logout()">Logout</a></li>
          </ul>

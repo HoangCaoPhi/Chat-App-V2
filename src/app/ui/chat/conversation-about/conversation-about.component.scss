@@ -1,127 +1,132 @@
-/*=============================================== ABOUT MESSEAGE ========================== */ 
-
- .i {
-    direction: ltr;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
+/*=============================================== ABOUT MESSEAGE ========================== */
+.i {
+   direction: ltr;
+   height: 100%;
+   overflow: hidden;
+   position: relative;
 }
- .info-content {
-    margin-right: -12px;
-    direction: ltr;
-    position: relative;
-    box-sizing: border-box;
-    margin: 0 auto;
-    padding-top: 14px;
+.info-content {
+   margin-right: -12px;
+   direction: ltr;
+   position: relative;
+   box-sizing: border-box;
+   margin: 0 auto;
+   padding-top: 14px;
 }
- .info-content .info-image {
-    align-items: center;
-    flex-direction: column;
-    display: flex;
-    padding: 0 14px 16px 14px;
-    word-break: break-word;
+.info-content .info-image {
+   align-items: center;
+   flex-direction: column;
+   display: flex;
+   padding: 0 14px 16px 14px;
+   word-break: break-word;
 }
- .info-content .info-image .image{
-    position: relative;
- }
-  .info-content .info-image .image img{
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
- }
- .info-status {
-    align-items: center;
-    flex: 1 1 auto;
-    margin-left: 0;
-    margin-top: 12px;
- }
- .info-status span{
-    color: #000;
-    display: flex;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    white-space: initial;
- }
- .info-status p:nth-child(1) {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 700;
-    color: #212121;
- }
- .info-status p:nth-child(2) {
-    font-size: 13px;
-    letter-spacing: -.13px;
-    color: #666666;
- }
- .info-status p:nth-child(3) {
-    font-size: 13px;
-    letter-spacing: -.13px;
-    color: #666666;
- }
-                /*======== FILE  SHARE ===== */
-.share-file,
-.share-img {
-	margin: 0 auto;
-	width: 80%;
+.info-content .info-image .image{
+   position: relative;
+}
+.info-content .info-image .image img{
+   height: 100px;
+   width: 100px;
+   border-radius: 50%;
+}
+.info-status {
+   align-items: center;
+   flex: 1 1 auto;
+   margin-left: 0;
+   margin-top: 12px;
+}
+.info-status span{
+   color: #000;
+   display: flex;
+   font-size: 20px;
+   font-weight: bold;
+   text-align: center;
+   white-space: initial;
+}
+.info-status p:nth-child(1) {
+   text-align: center;
+   font-size: 16px;
+   font-weight: 700;
+   color: #212121;
+}
+.info-status p:nth-child(2) {
+   font-size: 13px;
+   letter-spacing: -.13px;
+   color: #666666;
+}
+.info-status p:nth-child(3) {
+   font-size: 13px;
+   letter-spacing: -.13px;
+   color: #666666;
+}
+/*======== FILE SHARE ===== */
+.share-file, .share-img {
+   margin: 0 auto;
+   width: 80%;
 }
 .title {
-	display: flex;
-	align-items: center;
+   display: flex;
+   align-items: center;
 }
 .title .name-share {
-    font-size: 13px;
-    letter-spacing: -.13px;
-    color: #666666;
+   font-size: 13px;
+   letter-spacing: -.13px;
+   color: #666666;
 }
 .title img {
-	width: 16px;
-	height: 16px;
+   width: 16px;
+   height: 16px;
 }
 .icon-dropdown {
-	margin-left: auto;
-    order: 2;
-    // transform: rotate(180deg);
+   margin-left: auto;
+   order: 2;
+   // transform: rotate(180deg);
 }
 .file {
-	font-size: 13px;
-	letter-spacing: -.13px;
-    color: #666666;
-    display: flex;
-    cursor: pointer;
+   font-size: 13px;
+   letter-spacing: -.13px;
+   color: #666666;
+   display: flex;
+   cursor: pointer;
 }
 .file p {
-	padding: 6px 5px;
+   padding: 6px 5px;
 }
-
 .file p span {
-    color: rgb(53, 127, 210);
+   color: rgb(53, 127, 210);
 }
-
 .file img {
-	width: 16px;
-	height: 16px;
+   width: 16px;
+   height: 16px;
 }
-
-                    /*======== IMAGE SHARE ===== */
- 
- 
-.image-share  {
+/*======== IMAGE SHARE ===== */
+.image-share {
    margin-top: 10px;
-
    object-fit: cover;
    width: 100px;
    height: 100px;
 }
 .bottom-25 {
-    margin-bottom: 25px;
-    cursor: pointer;
+   margin-bottom: 25px;
+   cursor: pointer;
 }
-
 .share-file .title:hover {
-    cursor: pointer;
+   cursor: pointer;
 }
 .share-img .title:hover {
-    cursor: pointer;
+   cursor: pointer;
 }
-/*=============================================== END ABOUT MESSEAGE ========================== */ 
+.modal-image {
+   max-width: 100%;
+   max-height: 90vh;
+}
+.modal-dialog {
+   width: max-content;
+   display:-webkit-box;
+   display:-ms-flexbox;
+   display:flex;
+   -webkit-box-align:center;
+   -ms-flex-align:center;
+   align-items:center;
+   min-height:calc(100% - (.5rem * 2));
+}
+/*=============================================== END ABOUT MESSEAGE ========================== */

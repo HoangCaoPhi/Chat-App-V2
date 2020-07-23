@@ -26,9 +26,11 @@ export class ViewComponent implements OnInit {
   imagePreview: any;
   showAboutRight: boolean = true;
   @Input() responseLastMsg: any; // Nhận về tin nhắn từ stringee
+  @Input() userCurrentShareService;
+  @Input() userShareService: any;  
   UserId: string = JSON.parse(localStorage.getItem("currentUser")).id;
   convIdFromDataTranfer: any; // Nhận convId từ contact list
-  userShareService: any; // Nhan userId tu contact list
+ 
   userInfo: any; // Thông tin user lấy theo id
   convId: string;
   loading: boolean = false;
@@ -48,13 +50,17 @@ export class ViewComponent implements OnInit {
   ) {
     route.params.subscribe(val => {
       this.convId = this.route.snapshot.paramMap.get('id');
+
+      this.getConvesationLast(this.convId);
+
+      this.stringeeService.stringeeChat.on('onObjectChange', () => {
+        this.getConvesationLast(this.convId);
+        this.componentShareService.setConversationId(this.convId);
+      })
     });
   }
   ngOnInit(): void {
-    this.stringeeService.stringeeChat.on('onObjectChange', () => {
-      this.getConvesationLast(this.convId);
-      this.componentShareService.setConversationId(this.convId);
-    })
+  
   }
   //#endregion
 

@@ -8,6 +8,7 @@ import { StringeeService } from '@app/services/stringee/stringee.service';
 import { UserService } from '@app/services/user/user.service';
 import { filter, map } from 'rxjs/operators';
 import { UserIdTranferService } from '@app/services/user-tranfer.service';
+import { AuthenticationService } from '@app/services/authentication.service';
 
 
 @Component({
@@ -36,9 +37,11 @@ export class ListComponent implements OnInit {
     private stringeeService: StringeeService,
     private _userservice: UserService,
     private router: Router,
+    private authenticationService: AuthenticationService
   ) {
     route.params.subscribe(val => {
       this.convId = this.route.snapshot.paramMap.get('id');
+      // this.onCickConversation(this.convId);
       this.getParam();
     });
   }
@@ -52,6 +55,29 @@ export class ListComponent implements OnInit {
   getConversationLast() {
     this.stringeeService.stringeeServiceConversation((status, code, message, convs) => {
       this.responseConvs = convs;
+      //lấy thông tin conversation đầu tiên
+      if (convs) {
+        for (let con of this.responseConvs) {
+          if (con.id == this.convId) {
+            for (let parti of con.participants) {
+              if (parti.userId != this.UserId) {
+                // Nếu người dùng đã đăng nhập
+                if (this.authenticationService.currentUserValue) {
+                  //this.router.navigate(['/chat/' + convs[0].id]);
+                  // Lấy thông tin của user
+                  this.stringeeService.getUserInfo(parti.userId, (status, code, msg, users) => {
+                    // Truyền thông tin user cho detail
+                    this._userservice.getUserFromId(users[0].userId).subscribe(user => {
+                      this.userIdTranferService.setUser(user)
+                    });
+                  })
+                }
+                break;
+              }
+            }
+          }
+        }
+      }
     });
   }
   /**
@@ -61,7 +87,8 @@ export class ListComponent implements OnInit {
   onCreateConversation(user: User) {
     this.stringeeService.creaateConversationService(user, (status: string, code: string, message: string, conv: any) => {
       localStorage.setItem("convId", conv.id);
-      this.router.navigate(['/chat/' + conv.id])
+      this.router.navigate(['/chat/' + conv.id]);
+      this.getConversationsTab();
     });
   }
   //#endregion
@@ -83,12 +110,12 @@ export class ListComponent implements OnInit {
     this.stringeeService.stringeeChat.markConversationAsRead(this.convId)
   }
 
-    /**
-     * Conversation id được nhận được từ route để active cuộc trò chuyện
-     */
-    getParam() {
-      this.componentShareService.getConversationId$.subscribe(convId => { this.getConversationLast() });
-    }
+  /**
+   * Conversation id được nhận được từ route để active cuộc trò chuyện
+   */
+  getParam() {
+    this.componentShareService.getConversationId$.subscribe(convId => { this.getConversationLast() });
+  }
   //#endregion
 
   //#region  Handle Front

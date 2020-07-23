@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header  [userShareService]="userCurrentShareService"></app-header>
 <div class="content-app">
    <div class="contact-list">
       <app-conversation-list [responseConvs]="responseConvs"></app-conversation-list>
@@ -47,10 +47,15 @@
       <div class="messeage">
          <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
          <div class="info-messeage" *ngIf="showAboutRight">
-            <app-conversation-about [response]="responseLastMsg" [userShareService]="userShareService">
+            <app-conversation-about 
+                     [response]="responseLastMsg" 
+                     [userShareService]="userShareService">
             </app-conversation-about>
          </div>
-         <app-conversation-detail [responseLastMsg]="responseLastMsg" class="content-messeage">
+         <app-conversation-detail 
+               [responseLastMsg]="responseLastMsg" 
+               [userCurrentShareService]="userCurrentShareService"  
+               [userShareService]="userShareService" class="content-messeage">
          </app-conversation-detail>
       </div>
    </div>

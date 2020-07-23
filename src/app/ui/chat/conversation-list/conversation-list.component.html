@@ -7,7 +7,7 @@
 				<input type="text" placeholder="Tìm kiếm cuộc trò chuyện" />
 			</div>
 			<div class="btn-add">
-				<img src="../../../../assets/ICON/IconboxChat/23.svg" alt="add conversation">
+				<img src="../../../../assets/ICON/IconAppChat/3.svg" alt="add conversation">
 			</div>
 		</div>
 		<!-- ========================== END SEARCH ===============================-->
@@ -21,7 +21,7 @@
 						<div class="wrap">
 							<span class="contact-status online"></span>
 							<ng-container *ngFor="let participant of conv.participants">
-								<ngx-avatar *ngIf="participant.userId != UserId" [name]="participant.name" size="40">
+								<ngx-avatar *ngIf="participant.userId != UserId" [name]="participant.name" size="34">
 								</ngx-avatar>
 							</ng-container>
 
@@ -31,14 +31,18 @@
 										{{ participant.name }}
 									</p>
 								</ng-container>
-
-								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
-									*ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 1">
-									Bạn: {{  conv.lastMessage.content.content }}
+								<!-- Last message  -->
+								<p class="preview" *ngIf="conv.lastMessage.content.content == null"
+									[ngClass]="{'seen': conv.unreadCount == 0}">
+									#Các bạn hiện đã được kết nối.
 								</p>
 								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
 									*ngIf="conv.lastMessage.sender && conv.lastMessage.type == 1">
 									{{  conv.lastMessage.content.content }}
+								</p>
+								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
+									*ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 1">
+									Bạn: {{  conv.lastMessage.content.content }}
 								</p>
 								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
 									*ngIf="conv.lastMessage.sender && conv.lastMessage.type == 2">
@@ -46,13 +50,13 @@
 								</p>
 								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
 									*ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 2">
-									Bạn đã gửi một ảnh
+									Bạn: Bạn đã gửi một ảnh
 								</p>
-								<!-- <p class="preview" [ngClass]="{'seen' : !chat.seenStatus, 'not-seen' : chat.seenStatus}">{{  chat.lastMesseage }}</p> -->
+								<!-- End message  -->
 							</div>
 							<div class="meta status">
 								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 0" class="time">
-									{{conv.lastMessage.createdAt | date: 'HH:MM'}}</p>
+									{{conv.lastMessage.createdAt | date: 'HH:mm'}}</p>
 								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 1" class="time">
 									{{conv.lastMessage.createdAt | date: 'EEE'}}</p>
 								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 2" class="time">
@@ -67,7 +71,6 @@
 					</div>
 				</li>
 			</ul>
-
 			<ul class="nav-pills nav-stacked" *ngIf="tabTranfer == 1">
 				<li id="user-contact" *ngFor="let user of users" (click)="onCreateConversation(user)">
 					<ngx-avatar [name]="user.userName" size="34"></ngx-avatar>
@@ -75,15 +78,15 @@
 				</li>
 			</ul>
 		</div>
-
 		<!-- ========================== END CONTACT LIST =============================-->
 		<!-- tab menu -->
 		<div id="bottom-bar">
-			<button (click)="getConversationsTab()"
-				[ngClass]="{ 'bg': 'tabtranfer', 'tab-active': !tabChange}"><span>Cuộc
-					trò chuyện</span></button>
-			<button (click)="getContactListTab()" [ngClass]="{'bg': 'tabtranfer', 'tab-active': tabChange }"><span>Danh
-					bạ</span></button>
+			<button (click)="getConversationsTab()" [ngClass]="{ 'bg': 'tabtranfer', 'tab-active': !tabChange}">
+				<span>Cuộc trò chuyện</span>
+			</button>
+			<button (click)="getContactListTab()" [ngClass]="{'bg': 'tabtranfer', 'tab-active': tabChange }">
+				<span>Danh bạ</span>
+			</button>
 		</div>
 		<!-- tab menu -->
 	</div>

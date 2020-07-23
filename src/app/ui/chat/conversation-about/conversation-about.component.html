@@ -63,7 +63,7 @@
              <ng-container *ngFor="let img of imgs">
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 bottom-25" *ngIf="img.type==2">
                    <img class="image-share img-responsive" [src]="img.filePath" data-toggle="modal"
-                      data-target="#myModal1" (click)="watchImagePreview(img.content)">
+                      data-target="#myModal1" (click)="watchImagePreview(img.filePath)">
                 </div>
              </ng-container>
           </div>
@@ -76,7 +76,7 @@
        <!-- Modal content-->
        <div class="modal-content center" role="document">
           <div class="modal-body">
-             <!-- <img src="{{  imagePreview }}" alt=""> -->
+             <img src="{{  imagePreview }}" alt="" class="modal-image">
           </div>
        </div>
     </div>

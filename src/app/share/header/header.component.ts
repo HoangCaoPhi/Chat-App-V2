@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './../../services/authentication.service';
@@ -12,6 +12,8 @@ import { User } from './../../models';
 export class HeaderComponent implements OnInit {
   currentUser: User;
 
+  @Input() userShareService: any;
+  
   constructor(
       private router: Router,
       private authenticationService: AuthenticationService

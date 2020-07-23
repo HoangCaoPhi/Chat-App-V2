@@ -2,35 +2,43 @@
 <!-----------=======================   NOI DUNG TIN NHAN  ==========================    ----------->
 <div class="content-messeage">
    <div class="d-flex justify-content-center">
-      <div class="spinner-border text-primary" role="status" *ngIf="loading">
+      <div class="spinner-border text-primary spinner-border-sm" role="status" *ngIf="loading">
          <span class="sr-only">Loading...</span>
       </div>
    </div>
-   <div style="height: 90%" #scrollframe infinite-scroll [infiniteScrollDistance]="scrollDistance"
-      [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolledUp)="onUp()"
-      [scrollWindow]="false" class="content">
+   <div 
+         style="height: 90%" 
+         #scrollframe infinite-scroll 
+         [infiniteScrollDistance]="scrollDistance"
+         [infiniteScrollUpDistance]="scrollUpDistance" 
+         [infiniteScrollThrottle]="throttle" 
+         (scrolledUp)="onUp()"
+         [scrollWindow]="false" class="content">
 
       <div class="messages">
-
          <ul *ngFor="let messeage of responseLastMsg">
+             <!--   Người gửi  -->
             <li class="replies" *ngIf="messeage.sender == UserId">
-               <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+               <ngx-avatar [name]="userCurrentShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"></ngx-avatar>
                <p class="left" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
-               <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
-                  data-toggle="modal" data-target="#myModal"
-                  (click)="watchImagePreview(messeage.content.file.filePath)" />
-               <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5"
-                  class="file">{{ messeage.content.content }}</a>
+               <!--  Ảnh -->
+               <img (click)="watchImagePreview(messeage.content.file?.filePath)"  *ngIf="messeage.type == 2" [src]="messeage.content.file?.filePath"
+                    class="img-preview" data-toggle="modal" data-target="#myModal" />
+               <!-- File -->
+               <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
             </li>
+
+            <!--   Người nhận -->
             <li class="sent" *ngIf="messeage.sender != UserId">
-               <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-               <p class="right"> {{ messeage.content.content }} </p>
-               <img class="img-preview" *ngIf="messeage.type == 2" [src]="messeage.content.file.filePath"
-                  data-toggle="modal" data-target="#myModal"
-                  (click)="watchImagePreview(messeage.content.file.filePath)" />
-               <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5"
-                  class="file">{{ messeage.content.content }}</a>
+               <ngx-avatar [name]="userShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"></ngx-avatar>
+               <p class="right"  *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
+               <!-- Ảnh  -->
+               <img (click)="watchImagePreview(messeage.content.file?.filePath)" *ngIf="messeage.type == 2" [src]="messeage.content.file?.filePath"
+                   class="img-preview" data-toggle="modal" data-target="#myModal" />
+               <!--  File -->
+               <a (click)="openFile(messeage.content.file?.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
             </li>
+
          </ul>
       </div>
    </div>
@@ -40,7 +48,7 @@
          <!-- Modal content-->
          <div class="modal-content center" role="document">
             <div class="modal-body">
-               <img src="{{  imagePreview }}" alt="">
+               <img src="{{  imagePreview }}" alt="" class="modal-image">
             </div>
          </div>
       </div>
