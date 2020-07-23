@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         // Nếu người dùng đã đăng nhập
         if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/chat/conv-vn-1-NO20OWUHMD-1594421764436']);
+          //  window.location.reload();
         }
     }
     //#endregion   

@@ -412,3 +412,19 @@ label input:focus {
   max-width: 100%;
     max-height: 90vh;
 }
+
+.conv-signup {
+   position: absolute;
+   left: 31%;
+   top: 35px;
+}
+.conv-signup ngx-avatar {
+  top: 11px;
+  left: 20%;
+  position: relative;
+}
+.conv-signup .alert {
+  top: 29px;
+  left: -7%;
+  position: relative;
+}

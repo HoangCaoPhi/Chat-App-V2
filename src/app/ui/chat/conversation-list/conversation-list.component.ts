@@ -27,6 +27,7 @@ export class ListComponent implements OnInit {
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
   tabChange: boolean; // active tab
   selectContact: string;
+  searchTerm: string;
   //#endregion
 
   //#region  Contructor
@@ -43,6 +44,7 @@ export class ListComponent implements OnInit {
       this.convId = this.route.snapshot.paramMap.get('id');
       // this.onCickConversation(this.convId);
       this.getParam();
+ 
     });
   }
   ngOnInit(): void { }
@@ -59,10 +61,11 @@ export class ListComponent implements OnInit {
       if (convs) {
         for (let con of this.responseConvs) {
           if (con.id == this.convId) {
+            con.unreadCount = 0;
             for (let parti of con.participants) {
               if (parti.userId != this.UserId) {
                 // Nếu người dùng đã đăng nhập
-                if (this.authenticationService.currentUserValue) {
+               // if (this.authenticationService.currentUserValue) {
                   //this.router.navigate(['/chat/' + convs[0].id]);
                   // Lấy thông tin của user
                   this.stringeeService.getUserInfo(parti.userId, (status, code, msg, users) => {
@@ -71,7 +74,7 @@ export class ListComponent implements OnInit {
                       this.userIdTranferService.setUser(user)
                     });
                   })
-                }
+                // }
                 break;
               }
             }
@@ -99,6 +102,7 @@ export class ListComponent implements OnInit {
    * @param conv Cuộc trò chuyện mà người dùng click vào
    */
   onCickConversation(conv: any) {
+    conv.unreadCount = 0;
     for (let con of this.responseConvs) {
       if (con.id == conv.id) {
         let nameConv = con.participants.filter(p => p.userId != this.UserId);
@@ -152,7 +156,10 @@ export class ListComponent implements OnInit {
       .pipe(
         map(data => data.filter(data => data.id !== this.UserId)) // Loại bỏ người dùng hiện tại trong danh sách
       ).subscribe(
-        data => { this.users = data }
+        data => { 
+          this.users = data;
+          this.userResource = data 
+        }
       )
   }
   /**
@@ -179,6 +186,14 @@ export class ListComponent implements OnInit {
     let currentDate = new Date();
     let timeSent = new Date(data);
     return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(timeSent.getFullYear(), timeSent.getMonth(), timeSent.getDate())) / (1000 * 60 * 60 * 24));
+  }
+
+  public userResource = []; // Dữ liệu lưu để so sánh
+  search(): void {
+    let term   = this.searchTerm.toLowerCase();
+    this.users = this.userResource.filter(function(tag) {
+      return tag.userName.toLowerCase().indexOf(term) >= 0;
+  }); 
   }
   //#endregion
 }

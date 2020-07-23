@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       firstname: ["", [Validators.required]],
       lastname: ["", [Validators.required]],
       username: ["", [Validators.required]],
-      phone: ["", [Validators.required, Validators.pattern('(09|01[2|6|8|9])+([0-9]{8})\b')]],
+      phone: ["", [Validators.required, Validators.pattern(("(09|03|08)[0-9 ]{8}"))]],
       email: ["", [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]]
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
         validator: comparePassword
     });
     // điều hướng khi đăng nhập thành công
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/login';
   }
 
   onSubmit() {

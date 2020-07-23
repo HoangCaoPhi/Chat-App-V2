@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   convId: any; // Id cuộc trò chuyện
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
   showAboutRight: boolean = true;
-  userCurrentShareService: import("c:/Users/HCPhi/Documents/Phi/Front/Chat-App-V2/src/app/models/user").User[];
+  userCurrentShareService: any;
   //#endregion
 
   //#region Contructor
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
     console.log("getConversationLast")
     this.stringeeService.stringeeServiceConversation((status, code, message, convs) => {
       this.responseConvs = convs; 
-
+      console.log(this.responseConvs);
       //lấy thông tin conversation đầu tiên
       for (let con of this.responseConvs) {
         if (con.id == this.convId) {

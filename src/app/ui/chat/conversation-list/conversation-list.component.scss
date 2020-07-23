@@ -57,8 +57,8 @@
     overflow: hidden;
     cursor: pointer;
     img {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
     }
 }
  // End Search
@@ -113,7 +113,8 @@
 	margin-right: 12px;
   }
   #contacts ul li.contact .wrap .status .time {
-	font-size: 11px;
+	font-size: 10px;
+	margin-top: 3px;
 	color: #8e97a5;
   }
   #contacts ul li.contact .wrap .status .seen {
@@ -202,11 +203,11 @@
 	border-left: 4px solid #2196f3;
   }
   .newMesseage {
-	font-size: 9px;
+	font-size: 8px;
 	text-align: left;
 	position: relative;
 	left: 0px;
-	top: -5px;
+	top: -15px;
   }
   #bottom-bar {
 	width: 318px;
@@ -252,3 +253,38 @@
 	top: 7px;
   }
   
+  // Khi không có conversation
+  #contacts .image-null {
+    height: 130px;
+    width: 130px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('../../../../assets/images/chats_emptystate_v3.png');
+    background-size: contain;
+	border-style: none;
+	text-align: center;
+	position: absolute;
+	top: 22%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+#contacts .text-null {
+    position: absolute;
+    top: 35%;
+    left: 21%;
+}
+#contacts .text-null p {
+	color: white;
+    font-size: 21px;
+}
+.search-null span {
+	font-size: 15px;
+	font-weight: 400;
+	color: rgb(138, 141, 145);
+	margin-left: 10px;
+}
+.search-null {
+	position: relative;
+	left: -15%;
+}

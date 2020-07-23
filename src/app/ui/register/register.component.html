@@ -31,7 +31,7 @@
                 <!--====================== END RUONG FIRST NAME AND LASTNAME==================-->
                 <!--======================== TRUONG USER NAME ================================-->
                 <div class="form-group">
-                    <input type="text" class="form-control" id="lastname" placeholder="Tên người dùng"
+                    <input type="text" class="form-control" id="username" placeholder="Tên người dùng"
                         formControlName="username"
                         [ngClass]="{ 'is-invalid': submitted &&  form.controls.username.errors }">
                     <div *ngIf="submitted && form.controls.username?.errors?.required ">
@@ -42,7 +42,7 @@
                 <!--======================== TRUONG USER NAME ================================-->
                 <!--======================== TRUONG Phone================================-->
                 <div class="form-group">
-                    <input type="text" class="form-control" id="lastname" placeholder="Số điện thoại"
+                    <input type="text" class="form-control" id="phone" placeholder="Số điện thoại"
                         formControlName="phone" [ngClass]="{ 'is-invalid': submitted &&  form.controls.phone.errors }">
                     <div *ngIf="submitted && form.controls.phone?.errors?.required">
                         <div class="invalid-feedback d-block">Phone không được để trống </div>

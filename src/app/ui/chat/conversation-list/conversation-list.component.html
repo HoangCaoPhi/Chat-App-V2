@@ -4,7 +4,7 @@
 		<div class="search">
 			<div class="inpt-search">
 				<img src="../../../../assets/ICON/IconAppChat/11.svg" alt="search-icon">
-				<input type="text" placeholder="Tìm kiếm cuộc trò chuyện" />
+				<input type="text"   (focus)="getContactListTab()" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Tìm kiếm cuộc trò chuyện" />
 			</div>
 			<div class="btn-add">
 				<img src="../../../../assets/ICON/IconAppChat/3.svg" alt="add conversation">
@@ -14,6 +14,18 @@
 
 		<!-- ========================== CONTACT LIST =============================-->
 		<div id="contacts">
+			<!-- Khi không có cuộc trò chuyện nào  -->
+		    <ng-container *ngIf="responseConvs?.length == 0 && tabTranfer == 0">
+				<div class="image-null"></div>
+				<div class="text-null">
+					<p>Bắt đầu trò chuyện</p>
+					<div class="search-null">
+						<img src="../../../../assets/ICON/IconAppChat/11.svg" alt="search-icon">
+						<span>Sử dụng tìm kiếm để tìm bất cứ ai</span>
+					</div>
+				</div>
+			</ng-container>
+			<!-- Khi không có cuộc trò chuyện nào  -->
 			<ul *ngIf="tabTranfer == 0">
 				<li *ngFor="let conv of responseConvs" class="contact" routerLink="/chat/{{conv.id}}"
 					(click)="onCickConversation(conv)" [ngClass]="getActive(conv)">

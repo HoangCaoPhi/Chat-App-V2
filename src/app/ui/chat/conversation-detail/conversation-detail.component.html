@@ -6,37 +6,53 @@
          <span class="sr-only">Loading...</span>
       </div>
    </div>
-   <div 
-         style="height: 90%" 
-         #scrollframe infinite-scroll 
-         [infiniteScrollDistance]="scrollDistance"
-         [infiniteScrollUpDistance]="scrollUpDistance" 
-         [infiniteScrollThrottle]="throttle" 
-         (scrolledUp)="onUp()"
-         [scrollWindow]="false" class="content">
+   <div style="height: 90%" #scrollframe infinite-scroll [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolledUp)="onUp()"
+      [scrollWindow]="false" class="content">
 
       <div class="messages">
+         <!-- Khi mới đăng ký tài khoản  -->
+         <ng-container *ngIf="responseLastMsg == null">
+            <div class="conv-signup">
+               <h1>Xin Chào, {{ userCurrentShareService?.userName }}</h1>
+               <ngx-avatar [name]="userCurrentShareService?.userName" size="125" alt="message-icon"
+                  data-toggle="dropdown"></ngx-avatar>
+               <div class="alert alert-info">
+                  Bạn chưa có bất kỳ tin nhắn nào !
+               </div>
+            </div>
+         </ng-container>
+         <!-- Khi không có cuộc trò chuyện nào  -->
          <ul *ngFor="let messeage of responseLastMsg">
-             <!--   Người gửi  -->
+            <!--   Người gửi  -->
             <li class="replies" *ngIf="messeage.sender == UserId">
-               <ngx-avatar [name]="userCurrentShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"></ngx-avatar>
-               <p class="left" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
+               <ngx-avatar [name]="userCurrentShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"
+                  *ngIf="messeage.content.content"></ngx-avatar>
+               <p class="left" *ngIf="messeage.type == 1 && messeage.content.content"> {{ messeage.content.content }}
+               </p>
                <!--  Ảnh -->
-               <img (click)="watchImagePreview(messeage.content.file?.filePath)"  *ngIf="messeage.type == 2" [src]="messeage.content.file?.filePath"
-                    class="img-preview" data-toggle="modal" data-target="#myModal" />
+               <img (click)="watchImagePreview(messeage.content.file?.filePath)" *ngIf="messeage.type == 2"
+                  [src]="messeage.content.file?.filePath" class="img-preview" data-toggle="modal"
+                  data-target="#myModal" />
                <!-- File -->
-               <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
+               <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5"
+                  class="file">{{ messeage.content.content }}</a>
             </li>
 
             <!--   Người nhận -->
             <li class="sent" *ngIf="messeage.sender != UserId">
-               <ngx-avatar [name]="userShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"></ngx-avatar>
-               <p class="right"  *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
+               <ng-container *ngIf="messeage.content.content">
+                  <ngx-avatar [name]="userShareService.userName" size="34" alt="message-icon" data-toggle="dropdown">
+                  </ngx-avatar>
+                  <p class="right" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
+               </ng-container>
                <!-- Ảnh  -->
-               <img (click)="watchImagePreview(messeage.content.file?.filePath)" *ngIf="messeage.type == 2" [src]="messeage.content.file?.filePath"
-                   class="img-preview" data-toggle="modal" data-target="#myModal" />
+               <img (click)="watchImagePreview(messeage.content.file?.filePath)" *ngIf="messeage.type == 2"
+                  [src]="messeage.content.file?.filePath" class="img-preview" data-toggle="modal"
+                  data-target="#myModal" />
                <!--  File -->
-               <a (click)="openFile(messeage.content.file?.filePath)" *ngIf="messeage.type == 5" class="file">{{ messeage.content.content }}</a>
+               <a (click)="openFile(messeage.content.file?.filePath)" *ngIf="messeage.type == 5"
+                  class="file">{{ messeage.content.content }}</a>
             </li>
 
          </ul>
