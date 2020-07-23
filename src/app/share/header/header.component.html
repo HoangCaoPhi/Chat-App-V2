@@ -7,11 +7,19 @@
       </div>
    </div>
 
-   <div class="ml-auto nav-right">
-      <div class="dropdown">
-         <ngx-avatar [name]="userShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"></ngx-avatar>
-         <ul class="dropdown-menu">
-            <li><a (click)="logout()">Logout</a></li>
+   <div class="ml-auto navbar navbar-expand-sm">
+      <div class="collapse navbar-collapse" id="navbar-list-4">
+         <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+               <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <ngx-avatar [name]="userShareService?.userName" size="34" width="40" height="40" class="rounded-circle"></ngx-avatar>
+               </a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="left: -49px;">
+                  <a class="dropdown-item"  href="#">Edit Profile</a>
+                  <a class="dropdown-item"  (click)="logout()">Log Out</a>
+               </div>
+            </li>
          </ul>
       </div>
    </div>

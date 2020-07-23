@@ -2,7 +2,7 @@
     <div class="login-form">
         <div class="login-content">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
-                <h2 class="text-center">Welcome Chat</h2>
+                <h2 class="text-center">Đăng Nhập</h2>
                 <!--============================= TRƯỜNG EMAIL ============================-->
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -16,7 +16,7 @@
 
                 <!--============================= TRƯỜNG PASSWORD ============================-->
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Mật khẩu</label>
                     <input type="password" formControlName="password" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -26,12 +26,12 @@
                 <!--============================= END TRƯỜNG PASSWORD ============================-->
                 <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
+                    Đăng nhập
                 </button>
             </form>
             <div>
-                <span>Don't have an account?</span>
-                <a routerLink="/register">Sign Up</a>
+                <span>Bạn chưa có tài khoản ?</span>
+                <a routerLink="/register">Đăng ký</a>
             </div>
         </div>
             <img src="../../assets/AuthenImg/chat-illustration-1.svg" />
