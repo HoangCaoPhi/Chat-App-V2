@@ -11,16 +11,96 @@
       <div class="collapse navbar-collapse" id="navbar-list-4">
          <ul class="navbar-nav">
             <li class="nav-item dropdown">
-               <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <ngx-avatar [name]="userShareService?.userName" size="34" width="40" height="40" class="rounded-circle"></ngx-avatar>
+               <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <ngx-avatar [name]="userShareService?.userName" size="34" width="40" height="40"
+                     class="rounded-circle"></ngx-avatar>
                </a>
                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="left: -49px;">
-                  <!-- <a class="dropdown-item"  href="#">Edit Profile</a> -->
-                  <a class="dropdown-item"  (click)="logout()">Log Out</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Thông tin</a>
+                  <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
                </div>
             </li>
          </ul>
+      </div>
+   </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form [formGroup]="form" autocomplete="off">
+               <div class="row">
+                  <!--====================== TRUONG FIRST NAME AND LASTNAME==================-->
+                  <div class="col-sm-6">
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="firstname" placeholder="Tên"
+                           formControlName="firstname"
+                           [ngClass]="{ 'is-invalid': submitted &&  form.controls.firstname.errors }">
+                        <div *ngIf="submitted && form.controls.firstname?.errors?.required">
+                           <div class="invalid-feedback d-block">Tên không được để trống </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-6">
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="lastname" placeholder="Họ"
+                           formControlName="lastname"
+                           [ngClass]="{ 'is-invalid': submitted &&  form.controls.lastname.errors }">
+                        <div *ngIf="submitted && form.controls.lastname?.errors?.required">
+                           <div class="invalid-feedback d-block">Họ không được để trống</div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!--====================== END RUONG FIRST NAME AND LASTNAME==================-->
+               <!--======================== TRUONG USER NAME ================================-->
+               <div class="form-group">
+                  <input type="text" class="form-control" id="username" placeholder="Tên người dùng"
+                     formControlName="username"
+                     [ngClass]="{ 'is-invalid': submitted &&  form.controls.username.errors }">
+                  <div *ngIf="submitted && form.controls.username?.errors?.required ">
+                     <div class="invalid-feedback d-block">Tên người dùng không được để trống </div>
+                  </div>
+               </div>
+
+               <!--======================== TRUONG USER NAME ================================-->
+               <!--======================== TRUONG Phone================================-->
+               <div class="form-group">
+                  <input type="text" class="form-control" id="phone" placeholder="Số điện thoại" formControlName="phone"
+                     [ngClass]="{ 'is-invalid': submitted &&  form.controls.phone.errors }">
+                  <div *ngIf="submitted && form.controls.phone?.errors?.required">
+                     <div class="invalid-feedback d-block">Phone không được để trống </div>
+                  </div>
+                  <div *ngIf="submitted && form.controls.phone?.errors?.pattern">
+                     <div class="invalid-feedback d-block">
+                        Số điện thoại không hợp lệ</div>
+                  </div>
+               </div>
+
+               <!--======================== TRUONG USER NAME ================================-->
+
+               <!--====================== TRUONG PASSWORD  ==================-->
+               <div class="form-group">
+                  <label for="imageUrl">
+                      <input #imageInput type="file" accept="image/*">
+                  </label>
+              </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+         </div>
       </div>
    </div>
 </div>
