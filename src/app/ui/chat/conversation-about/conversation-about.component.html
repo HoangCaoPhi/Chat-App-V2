@@ -1,7 +1,8 @@
 <div class="info-content">
     <div class="info-image">
        <div class="image">
-          <ngx-avatar [name]="userShareService.userName" size="120"></ngx-avatar>
+         <ngx-avatar [name]="userShareService.userName" size="120"  *ngIf="!userShareService.avatarUrl"></ngx-avatar>
+         <img [src]="userShareService.avatarUrl" alt="" *ngIf="userShareService.avatarUrl" style="object-fit: cover;">
        </div>
     </div>
  

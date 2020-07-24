@@ -1,4 +1,4 @@
-<app-header  [userShareService]="userCurrentShareService"></app-header>
+<app-header [userShareService]="userCurrentShareService"></app-header>
 <div class="content-app">
    <div class="contact-list">
       <app-conversation-list [responseConvs]="responseConvs"></app-conversation-list>
@@ -9,7 +9,9 @@
          <div class="head-left">
             <div class="avatar">
                <!-- <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar> -->
-               <ngx-avatar [name]="userShareService.userName" size="34"></ngx-avatar>
+               <ngx-avatar [name]="userShareService.userName" size="34" *ngIf="!userShareService.avatarUrl">
+               </ngx-avatar>
+               <img [src]="userShareService.avatarUrl" alt="" *ngIf="userShareService.avatarUrl" style="object-fit: cover;">
             </div>
             <div class="info">
                <h2 class="info-username">
@@ -47,15 +49,12 @@
       <div class="messeage">
          <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
          <div class="info-messeage" *ngIf="showAboutRight">
-            <app-conversation-about 
-                     [response]="responseLastMsg" 
-                     [userShareService]="userShareService">
+            <app-conversation-about [response]="responseLastMsg" [userShareService]="userShareService">
             </app-conversation-about>
          </div>
-         <app-conversation-detail 
-               [responseLastMsg]="responseLastMsg" 
-               [userCurrentShareService]="userCurrentShareService"  
-               [userShareService]="userShareService" class="content-messeage">
+         <app-conversation-detail [responseLastMsg]="responseLastMsg"
+            [userCurrentShareService]="userCurrentShareService" [userShareService]="userShareService"
+            class="content-messeage">
          </app-conversation-detail>
       </div>
    </div>

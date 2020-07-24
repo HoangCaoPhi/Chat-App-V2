@@ -5,7 +5,7 @@
     firstName: string;
     lastName: string;
     userName: string;
-    phone: string;
+    contactMobile: string;
     avatarUrl: string;
     token?: string;
 }

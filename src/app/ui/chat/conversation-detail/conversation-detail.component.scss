@@ -221,15 +221,18 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
  // List message
+ .messages ul {
+   //height: 35px;;
+   margin: 0px;
+ }
  .messages ul li {
     display: inline-block;
     clear: both;
-    margin: 15px 15px 5px 15px;
     width: calc(100% - 25px);
     font-size: 0.9em;
   }
   .messages ul li:nth-last-child(1) {
-    margin-bottom: 20px;
+
   }
   // Avatar
   .messages ul li.sent img {
@@ -409,22 +412,35 @@ label input:focus {
     color: #757575;
 }
 .modal-image {
-  max-width: 100%;
+    max-width: 100%;
     max-height: 90vh;
 }
 
 .conv-signup {
-   position: absolute;
-   left: 31%;
-   top: 35px;
+   display: flex;
+   margin-top: 30px;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   text-align: center;
 }
-.conv-signup ngx-avatar {
-  top: 11px;
-  left: 20%;
-  position: relative;
+.conv-signup button {
+  margin-top: 30px;
 }
-.conv-signup .alert {
-  top: 29px;
-  left: -7%;
-  position: relative;
+.conv-signup .hello {
+  font-size: 20px;
+  font-weight: 900;
 }
+.conv-signup .info {
+  color: #9e9e9e;
+}
+// .conv-signup ngx-avatar {
+//   top: 11px;
+//   left: 20%;
+//   position: relative;
+// }
+// .conv-signup .alert {
+//   top: 29px;
+//   left: -7%;
+//   position: relative;
+// }

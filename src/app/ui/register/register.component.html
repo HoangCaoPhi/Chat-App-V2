@@ -42,12 +42,12 @@
                 <!--======================== TRUONG USER NAME ================================-->
                 <!--======================== TRUONG Phone================================-->
                 <div class="form-group">
-                    <input type="text" class="form-control" id="phone" placeholder="Số điện thoại"
-                        formControlName="phone" [ngClass]="{ 'is-invalid': submitted &&  form.controls.phone.errors }">
-                    <div *ngIf="submitted && form.controls.phone?.errors?.required">
+                    <input type="text" class="form-control" id="contactMobile" placeholder="Số điện thoại"
+                        formControlName="contactMobile" [ngClass]="{ 'is-invalid': submitted &&  form.controls.contactMobile.errors }">
+                    <div *ngIf="submitted && form.controls.contactMobile?.errors?.required">
                         <div class="invalid-feedback d-block">Phone không được để trống </div>
                     </div>
-                    <div *ngIf="submitted && form.controls.phone?.errors?.pattern">
+                    <div *ngIf="submitted && form.controls.contactMobile?.errors?.pattern">
                         <div class="invalid-feedback d-block">
                             Số điện thoại không hợp lệ</div>
                     </div>

@@ -71,14 +71,14 @@ export class HomeComponent implements OnInit {
             if (parti.userId != this.UserId) {
               // Nếu người dùng đã đăng nhập
               if (this.authenticationService.currentUserValue) {
-                // this.router.navigate(['/chat/' + convs[0].id]);
+               //  this.router.navigate(['/chat/' + convs[0].id]);
                 // Lấy thông tin của user
-                this.stringeeService.getUserInfo(parti.userId, (status, code, msg, users) => {
-                  // Truyền thông tin user cho detail
-                  this._userservice.getUserFromId(users[0].userId).subscribe(user => {
-                    this.userShareService = user
-                  });
-                })
+                  this.stringeeService.getUserInfo(parti.userId, (status, code, msg, users) => {
+                    // Truyền thông tin user cho detail
+                    this._userservice.getUserFromId(users[0].userId).subscribe(user => {
+                      this.userShareService = user
+                    });
+                  })
               }
               break;
             }

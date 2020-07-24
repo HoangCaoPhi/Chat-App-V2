@@ -62,6 +62,7 @@ export class ListComponent implements OnInit {
         for (let con of this.responseConvs) {
           if (con.id == this.convId) {
             con.unreadCount = 0;
+            this.stringeeService.stringeeChat.markConversationAsRead(con);
             for (let parti of con.participants) {
               if (parti.userId != this.UserId) {
                 // Nếu người dùng đã đăng nhập

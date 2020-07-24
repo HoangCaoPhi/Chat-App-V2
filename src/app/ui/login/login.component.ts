@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
         this.notifier = notifier;
         // Nếu người dùng đã đăng nhập
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/chat/conv-vn-1-NO20OWUHMD-1594421764436']);
-          //  window.location.reload();
+            this.router.navigate(['/chat/conv-vn-1-WZPKQ4ZWWE-1595456721011']);
+            //  window.location.reload();
         }
     }
     //#endregion   
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
         // điều hướng khi đăng nhập thành công
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/conv-vn-1-NO20OWUHMD-1594421764436';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/conv-vn-1-WZPKQ4ZWWE-1595456721011';
     }
 
     // Trả về loginForm Control

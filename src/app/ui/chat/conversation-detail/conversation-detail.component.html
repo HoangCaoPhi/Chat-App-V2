@@ -14,12 +14,10 @@
          <!-- Khi mới đăng ký tài khoản  -->
          <ng-container *ngIf="responseLastMsg == null">
             <div class="conv-signup">
-               <h1>Xin Chào, {{ userCurrentShareService?.userName }}</h1>
-               <ngx-avatar [name]="userCurrentShareService?.userName" size="125" alt="message-icon"
-                  data-toggle="dropdown"></ngx-avatar>
-               <div class="alert alert-info">
-                  Bạn chưa có bất kỳ tin nhắn nào !
-               </div>
+                <p class="hello">Xin Chào, {{ userCurrentShareService?.firstName }}</p>
+                <img src="../../../../assets/images/watermark.svg" alt="">
+                <p class="info">Chưa có tin nhắn</p>
+                <p class="info">Bạn có thể vào danh bạ để tìm người nhắn tin</p>
             </div>
          </ng-container>
          <!-- Khi không có cuộc trò chuyện nào  -->
@@ -27,7 +25,9 @@
             <!--   Người gửi  -->
             <li class="replies" *ngIf="messeage.sender == UserId">
                <ngx-avatar [name]="userCurrentShareService.userName" size="34" alt="message-icon" data-toggle="dropdown"
-                  *ngIf="messeage.content.content"></ngx-avatar>
+                  *ngIf="messeage.content.content && !userCurrentShareService?.avatarUrl"></ngx-avatar>
+               <img [src]="userCurrentShareService?.avatarUrl" width="30" height="30" alt="logo" class="rounded-circle"
+                  *ngIf="userCurrentShareService?.avatarUrl" style="object-fit: cover;">
                <p class="left" *ngIf="messeage.type == 1 && messeage.content.content"> {{ messeage.content.content }}
                </p>
                <!--  Ảnh -->
@@ -42,8 +42,10 @@
             <!--   Người nhận -->
             <li class="sent" *ngIf="messeage.sender != UserId">
                <ng-container *ngIf="messeage.content.content">
-                  <ngx-avatar [name]="userShareService.userName" size="34" alt="message-icon" data-toggle="dropdown">
-                  </ngx-avatar>
+                  <ngx-avatar [name]="userShareService?.userName" size="34" width="40" height="40"
+                     class="rounded-circle" *ngIf="!userShareService?.avatarUrl"></ngx-avatar>
+                  <img [src]="userShareService?.avatarUrl" width="30" height="30" alt="logo" class="rounded-circle"
+                     *ngIf="userShareService?.avatarUrl" style="object-fit: cover;">
                   <p class="right" *ngIf="messeage.type == 1"> {{ messeage.content.content }} </p>
                </ng-container>
                <!-- Ảnh  -->
@@ -54,7 +56,6 @@
                <a (click)="openFile(messeage.content.file?.filePath)" *ngIf="messeage.type == 5"
                   class="file">{{ messeage.content.content }}</a>
             </li>
-
          </ul>
       </div>
    </div>
