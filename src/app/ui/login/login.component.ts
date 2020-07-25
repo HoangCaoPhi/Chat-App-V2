@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.notifier = notifier;
         // Nếu người dùng đã đăng nhập
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/chat/conv-vn-1-WZPKQ4ZWWE-1595456721011']);
+            this.router.navigate(['/chat/1']);
             //  window.location.reload();
         }
     }
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
         // điều hướng khi đăng nhập thành công
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/conv-vn-1-WZPKQ4ZWWE-1595456721011';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat/1';
     }
 
     // Trả về loginForm Control
@@ -66,13 +66,14 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
-                    this.showNotification('success', 'Bạn đã đăng nhập thành công !')
-                },
-                error => {
-                    this.error = error;
-                    this.loading = false;
-                    this.showNotification('error', error)
+                    if(data.code == 200) {
+                        this.router.navigate([this.returnUrl]);
+                        this.showNotification('success', data.message)
+                    }
+                    else if(data.code == 1001) {
+                        this.loading = false;
+                        this.showNotification('error', data.message)
+                    }
                 });
     }
 

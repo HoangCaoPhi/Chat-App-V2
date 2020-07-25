@@ -50,9 +50,7 @@ export class ViewComponent implements OnInit {
   ) {
     route.params.subscribe(val => {
       this.convId = this.route.snapshot.paramMap.get('id');
-
       this.getConvesationLast(this.convId);
-
       this.stringeeService.stringeeChat.on('onObjectChange', () => {
         this.getConvesationLast(this.convId);
         this.componentShareService.setConversationId(this.convId);
@@ -150,27 +148,32 @@ export class ViewComponent implements OnInit {
   toggleInfo() {
     this.showAboutRight = !this.showAboutRight;
   }
-  // Tự động Scollbar khi gửi tin nhắn
-  @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
+  
+  // Xử lý Scrollframe
+  @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
-
+  
+  private itemContainer: any;
   private scrollContainer: any;
   private items = [];
-
+  private isNearBottom = true;
+  // Lắng nghe sự thay đổi 
   ngAfterViewInit() {
     this.scrollContainer = this.scrollFrame.nativeElement;
-    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());
+    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());    
 
-    // Add a new item every 2 seconds
+    // Add a new item every 2 seconds for demo purposes
     setInterval(() => {
       this.items.push({});
     }, 2000);
   }
-
+  // Khi phần tử thay đổi
   private onItemElementsChanged(): void {
-    this.scrollToBottom();
+    if (this.isNearBottom) {
+      this.scrollToBottom();
+    }
   }
-
+  // Cài đặt cho scroll xuống dưới cùng
   private scrollToBottom(): void {
     this.scrollContainer.scroll({
       top: this.scrollContainer.scrollHeight,
@@ -178,6 +181,19 @@ export class ViewComponent implements OnInit {
       behavior: 'smooth'
     });
   }
+  // Chỉ cuộn tự động, nếu người dùng đã cuộn đến cuối
+  private isUserNearBottom(): boolean {
+    const threshold = 150;
+    const position = this.scrollContainer.scrollTop + this.scrollContainer.offsetHeight;
+    const height = this.scrollContainer.scrollHeight;
+    return position > height - threshold;
+  }
+
+  scrolled(event: any): void {
+    this.isNearBottom = this.isUserNearBottom();
+  }
+  
+
   // Xem trước hình ảnh
   watchImagePreview(src) {
     this.imagePreview = src;
@@ -202,7 +218,7 @@ export class ViewComponent implements OnInit {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.loading = false;
-      }, 3000);
+      }, 1000);
     });
     this.direction = 'up';
   }

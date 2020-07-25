@@ -1,61 +1,89 @@
 <app-header [userShareService]="userCurrentShareService"></app-header>
 <div class="content-app">
-   <div class="contact-list">
-      <app-conversation-list [responseConvs]="responseConvs"></app-conversation-list>
-   </div>
-   <div class="view">
-      <!-----------======================= HEADER CONTENT ==========================    ----------->
-      <div class="header-content">
-         <div class="head-left">
-            <div class="avatar">
-               <!-- <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar> -->
-               <ngx-avatar [name]="userShareService.userName" size="34" *ngIf="!userShareService.avatarUrl">
-               </ngx-avatar>
-               <img [src]="userShareService.avatarUrl" alt="" *ngIf="userShareService.avatarUrl" style="object-fit: cover;">
+    <div class="contact-list">
+        <app-conversation-list [responseConvs]="responseConvs"></app-conversation-list>
+    </div>
+    <div class="view">
+        <!-- ---------======================= HEADER CONTENT ==========================    --------- -->
+        <div class="header-content">
+            <div class="head-left">
+                <div class="avatar">
+                    <!-- <ngx-avatar [name]="user.firstName + ' ' + user.lastName" size="34"></ngx-avatar> -->
+                    <ngx-avatar
+                        [name]="userShareService.userName"
+                        size="34"
+                        *ngIf="!userShareService.avatarUrl"
+                    >
+                    </ngx-avatar>
+                    <img
+                        [src]="userShareService.avatarUrl"
+                        alt
+                        *ngIf="userShareService.avatarUrl"
+                        style="object-fit: cover;"
+                    >
+                </div>
+                <div class="info">
+                    <h2 class="info-username">
+                        <span>{{ userShareService.userName }}</span>
+                    </h2>
+                    <!-- <p class="info-active">hoạt động 12 phút trước</p> -->
+                    <!-- <p class="info-active" *ngIf="chat.isActive">Đang hoạt động</p> -->
+                </div>
             </div>
-            <div class="info">
-               <h2 class="info-username">
-                  <span>
-                     {{ userShareService.userName }}
-                  </span>
-               </h2>
-               <!-- <p class="info-active">hoạt động 12 phút trước</p> -->
-               <!-- <p class="info-active" *ngIf="chat.isActive">Đang hoạt động</p> -->
+            <div class="head-right">
+                <ul>
+                    <li>
+                        <a>
+                            <img
+                                src="/assets/ICON/IconboxChat/8.svg"
+                                alt="search-icon"
+                                style="width: 20px;
+               height: 20px;"
+                            >
+                        </a>
+                    </li>
+                    <li
+                        style="cursor: pointer;"
+                        (click)="toggleInfo()"
+                    >
+                        <a>
+                            <img
+                                [src]="showAboutRight ? '/assets/ICON/IconAppChat/5.svg' : '/assets/ICON/IconAppChat/6.svg'"
+                                alt="about-icon"
+                            >
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <img
+                                src="/assets/ICON/IconAppChat/2.svg"
+                                alt="more-icon"
+                            >
+                        </a>
+                    </li>
+                </ul>
             </div>
-         </div>
-         <div class="head-right">
-            <ul>
-               <li>
-                  <a>
-                     <img src="/assets/ICON/IconboxChat/8.svg" alt="search-icon" style="width: 20px;
-               height: 20px;">
-                  </a>
-               </li>
-               <li style="cursor: pointer;" (click)="toggleInfo()">
-                  <a>
-                     <img [src]="showAboutRight ? '/assets/ICON/IconAppChat/5.svg' : '/assets/ICON/IconAppChat/6.svg'"
-                        alt="about-icon">
-                  </a>
-               </li>
-               <li>
-                  <a>
-                     <img src="/assets/ICON/IconAppChat/2.svg" alt="more-icon">
-                  </a>
-               </li>
-            </ul>
-         </div>
-      </div>
-      <!-----------=======================  END HEADER CONTENT ==========================    ----------->
-      <div class="messeage">
-         <!-----------=======================   THONG TIN MESSEAGE ==========================    ----------->
-         <div class="info-messeage" *ngIf="showAboutRight">
-            <app-conversation-about [response]="responseLastMsg" [userShareService]="userShareService">
-            </app-conversation-about>
-         </div>
-         <app-conversation-detail [responseLastMsg]="responseLastMsg"
-            [userCurrentShareService]="userCurrentShareService" [userShareService]="userShareService"
-            class="content-messeage">
-         </app-conversation-detail>
-      </div>
-   </div>
+        </div>
+        <!-- ---------=======================  END HEADER CONTENT ==========================    --------- -->
+        <div class="messeage">
+            <!-- ---------=======================   THONG TIN MESSEAGE ==========================    --------- -->
+            <div
+                class="info-messeage"
+                *ngIf="showAboutRight"
+            >
+                <app-conversation-about
+                    [response]="responseLastMsg"
+                    [userShareService]="userShareService"
+                >
+                </app-conversation-about>
+            </div>
+            <app-conversation-detail
+                [responseLastMsg]="responseLastMsg"
+                [userCurrentShareService]="userCurrentShareService"
+                [userShareService]="userShareService"
+                class="content-messeage"
+            >
+            </app-conversation-detail>
+        </div>
+    </div>
 </div>

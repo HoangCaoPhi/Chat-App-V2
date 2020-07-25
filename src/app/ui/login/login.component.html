@@ -1,31 +1,56 @@
 <div class="wrap-form">
     <div class="login-form">
         <div class="login-content">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <form
+                [formGroup]="loginForm"
+                (ngSubmit)="onSubmit()"
+                autocomplete="off"
+            >
                 <h2 class="text-center">Đăng Nhập</h2>
-                <!--============================= TRƯỜNG EMAIL ============================-->
+                <!-- ============================= TRƯỜNG EMAIL ============================ -->
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" formControlName="email" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <input
+                        type="text"
+                        formControlName="email"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                    >
+                    <div
+                        *ngIf="submitted && f.email.errors"
+                        class="invalid-feedback"
+                    >
                         <div *ngIf="f.email.errors.required">Email không được để trống</div>
                     </div>
                 </div>
-                <!--============================= END TRƯỜNG EMAIL ============================-->
+                <!-- ============================= END TRƯỜNG EMAIL ============================ -->
 
-                <!--============================= TRƯỜNG PASSWORD ============================-->
+
+                <!-- ============================= TRƯỜNG PASSWORD ============================ -->
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" formControlName="password" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <input
+                        type="password"
+                        formControlName="password"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                    >
+                    <div
+                        *ngIf="submitted && f.password.errors"
+                        class="invalid-feedback"
+                    >
                         <div *ngIf="f.password.errors.required">Mật khẩu không được để trống</div>
                     </div>
                 </div>
-                <!--============================= END TRƯỜNG PASSWORD ============================-->
-                <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                <!-- ============================= END TRƯỜNG PASSWORD ============================ -->
+                <button
+                    [disabled]="loading"
+                    class="btn btn-primary"
+                >
+                    <span
+                        *ngIf="loading"
+                        class="spinner-border spinner-border-sm mr-1"
+                    ></span>
                     Đăng nhập
                 </button>
             </form>
@@ -34,6 +59,6 @@
                 <a routerLink="/register">Đăng ký</a>
             </div>
         </div>
-            <img src="../../assets/AuthenImg/chat-illustration-1.svg" />
+        <img src="../../assets/AuthenImg/chat-illustration-1.svg">
     </div>
 </div>

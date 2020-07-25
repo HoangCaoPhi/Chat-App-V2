@@ -1,105 +1,214 @@
 <div class="contact-líst">
-	<div class="contact-view">
-		<!-- ========================== SEARCH ===============================-->
-		<div class="search">
-			<div class="inpt-search">
-				<img src="../../../../assets/ICON/IconAppChat/11.svg" alt="search-icon">
-				<input type="text"   (focus)="getContactListTab()" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Tìm kiếm cuộc trò chuyện" />
-			</div>
-			<div class="btn-add">
-				<img src="../../../../assets/ICON/IconAppChat/3.svg" alt="add conversation">
-			</div>
-		</div>
-		<!-- ========================== END SEARCH ===============================-->
+    <div class="contact-view">
+        <!-- ========================== SEARCH =============================== -->
+        <div class="search">
+            <div class="inpt-search">
+                <img
+                    src="../../../../assets/ICON/IconAppChat/11.svg"
+                    alt="search-icon"
+                >
+                <input
+                    type="text"
+                    (focus)="getContactListTab()"
+                    [(ngModel)]="searchTerm"
+                    (ngModelChange)="search()"
+                    placeholder="Tìm kiếm cuộc trò chuyện"
+                >
+            </div>
+            <div class="btn-add">
+                <img
+                    src="../../../../assets/ICON/IconAppChat/3.svg"
+                    alt="add conversation"
+                >
+            </div>
+        </div>
+        <!-- ========================== END SEARCH =============================== -->
 
-		<!-- ========================== CONTACT LIST =============================-->
-		<div id="contacts">
-			<!-- Khi không có cuộc trò chuyện nào  -->
-		    <ng-container *ngIf="responseConvs?.length == 0 && tabTranfer == 0">
-				<div class="image-null"></div>
-				<div class="text-null">
-					<p>Bắt đầu trò chuyện</p>
-					<div class="search-null">
-						<img src="../../../../assets/ICON/IconAppChat/11.svg" alt="search-icon">
-						<span>Sử dụng tìm kiếm để tìm bất cứ ai</span>
-					</div>
-				</div>
-			</ng-container>
-			<!-- Khi không có cuộc trò chuyện nào  -->
-			<ul *ngIf="tabTranfer == 0">
-				<li *ngFor="let conv of responseConvs" class="contact" routerLink="/chat/{{conv.id}}"
-					(click)="onCickConversation(conv)" [ngClass]="getActive(conv)">
-					<div class="meta">
-						<div class="wrap">
-							<span class="contact-status online"></span>
-							<ng-container *ngFor="let participant of conv.participants">
-								<ngx-avatar *ngIf="participant.userId != UserId" [name]="participant.name" size="34">
-								</ngx-avatar>
-							</ng-container>
 
-							<div class="meta">
-								<ng-container *ngFor="let participant of conv.participants">
-									<p class="name" *ngIf="participant.userId != UserId">
-										{{ participant.name }}
-									</p>
-								</ng-container>
-								<!-- Last message  -->
-								<p class="preview" *ngIf="conv.lastMessage.content.content == null"
-									[ngClass]="{'seen': conv.unreadCount == 0}">
-									#Các bạn hiện đã được kết nối.
-								</p>
-								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
-									*ngIf="conv.lastMessage.sender && conv.lastMessage.type == 1">
-									{{  conv.lastMessage.content.content }}
-								</p>
-								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
-									*ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 1">
-									Bạn: {{  conv.lastMessage.content.content }}
-								</p>
-								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
-									*ngIf="conv.lastMessage.sender && conv.lastMessage.type == 2">
-									Bạn nhận được một ảnh
-								</p>
-								<p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
-									*ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 2">
-									Bạn: Bạn đã gửi một ảnh
-								</p>
-								<!-- End message  -->
-							</div>
-							<div class="meta status">
-								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 0" class="time">
-									{{conv.lastMessage.createdAt | date: 'HH:mm'}}</p>
-								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 1" class="time">
-									{{conv.lastMessage.createdAt | date: 'EEE'}}</p>
-								<p *ngIf="forMatTime(conv.lastMessage.createdAt) === 2" class="time">
-									{{conv.lastMessage.createdAt | date: 'd MMM' }}
-								</p>
-								<span class="badge badge-light newMesseage"
-									[ngClass]="{'not-amout': conv.unreadCount === 0}">
-									{{ conv.unreadCount }}
-								</span>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-			<ul class="nav-pills nav-stacked" *ngIf="tabTranfer == 1">
-				<li id="user-contact" *ngFor="let user of users" (click)="onCreateConversation(user)">
-					<ngx-avatar [name]="user.userName" size="34"></ngx-avatar>
-					<p class="name"> {{ user.userName }} </p>
-				</li>
-			</ul>
-		</div>
-		<!-- ========================== END CONTACT LIST =============================-->
-		<!-- tab menu -->
-		<div id="bottom-bar">
-			<button (click)="getConversationsTab()" [ngClass]="{ 'bg': 'tabtranfer', 'tab-active': !tabChange}">
-				<span>Cuộc trò chuyện</span>
-			</button>
-			<button (click)="getContactListTab()" [ngClass]="{'bg': 'tabtranfer', 'tab-active': tabChange }">
-				<span>Danh bạ</span>
-			</button>
-		</div>
-		<!-- tab menu -->
-	</div>
+        <!-- ========================== CONTACT LIST ============================= -->
+        <div id="contacts">
+            <!-- Khi không có cuộc trò chuyện nào -->
+            <ng-container *ngIf="responseConvs?.length == 0 && tabTranfer == 0">
+                <div class="image-null"></div>
+                <div class="text-null">
+                    <p>Bắt đầu trò chuyện</p>
+                    <div class="search-null">
+                        <img
+                            src="../../../../assets/ICON/IconAppChat/11.svg"
+                            alt="search-icon"
+                        >
+                        <span>Sử dụng tìm kiếm để tìm bất cứ ai</span>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- Khi không có cuộc trò chuyện nào -->
+            <ul *ngIf="tabTranfer == 0">
+                <li
+                    *ngFor="let conv of responseConvs"
+                    class="contact"
+                    routerLink="/chat/{{conv.id}}"
+                    (click)="onCickConversation(conv)"
+                    [ngClass]="getActive(conv)"
+                >
+                    <div class="meta">
+                        <div class="wrap">
+                            <span class="contact-status online"></span>
+                            <ng-container *ngFor="let participant of conv.participants">
+                                <ngx-avatar
+                                    *ngIf="participant.userId != UserId"
+                                    [name]="participant.name"
+                                    size="34"
+                                >
+                                </ngx-avatar>
+                            </ng-container>
+
+
+                            <div class="meta">
+                                <ng-container *ngFor="let participant of conv.participants">
+                                    <p
+                                        class="name"
+                                        *ngIf="participant.userId != UserId"
+                                    >
+                                        {{ participant.name }}
+                                    </p>
+                                </ng-container>
+                                <!-- Last message -->
+                                <p
+                                    class="preview"
+                                    *ngIf="conv.lastMessage.content.content == null"
+                                    [ngClass]="{'seen': conv.unreadCount == 0}"
+                                >
+                                    #Các bạn hiện đã được kết nối.
+                                </p>
+                                <p
+                                    class="preview"
+                                    [ngClass]="{'seen': conv.unreadCount == 0}"
+                                    *ngIf="conv.lastMessage.sender && conv.lastMessage.type == 1"
+                                >
+                                    Bạn: {{  conv.lastMessage.content.content }}
+                                </p>
+                                <p
+                                    class="preview"
+                                    [ngClass]="{'seen': conv.unreadCount == 0}"
+                                    *ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 1"
+                                >
+                                    {{  conv.lastMessage.content.content }}
+                                </p>
+                                <p
+                                    class="preview"
+                                    [ngClass]="{'seen': conv.unreadCount == 0}"
+                                    *ngIf="conv.lastMessage.sender && conv.lastMessage.type == 2"
+                                >
+                                    Bạn: Bạn đã gửi một ảnh
+                                </p>
+                                <p
+                                    class="preview"
+                                    [ngClass]="{'seen': conv.unreadCount == 0}"
+                                    *ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 2"
+                                >
+                                    Bạn nhận được một ảnh
+                                </p>
+                                <p
+                                    class="preview"
+                                    [ngClass]="{'seen': conv.unreadCount == 0}"
+                                    *ngIf="conv.lastMessage.sender && conv.lastMessage.type == 5"
+                                >
+                                    Bạn: Bạn đã gửi một file
+                                </p>
+                                <p
+                                    class="preview"
+                                    [ngClass]="{'seen': conv.unreadCount == 0}"
+                                    *ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 5"
+                                >
+                                    Bạn nhận được một file
+                                </p>
+                                <!-- End message -->
+                            </div>
+                            <div class="meta status">
+                                <p
+                                    *ngIf="forMatTime(conv.lastMessage.createdAt) === 0"
+                                    class="time"
+                                >
+                                    {{conv.lastMessage.createdAt | date: 'HH:mm'}}
+                                </p>
+                                <p
+                                    *ngIf="forMatTime(conv.lastMessage.createdAt) === 1"
+                                    class="time"
+                                >
+                                    {{conv.lastMessage.createdAt | date: 'EEE'}}
+                                </p>
+                                <p
+                                    *ngIf="forMatTime(conv.lastMessage.createdAt) === 2"
+                                    class="time"
+                                >
+                                    {{conv.lastMessage.createdAt | date: 'd MMM' }}
+                                </p>
+                                <span
+                                    class="badge badge-light newMesseage"
+                                    [ngClass]="{'not-amout': conv.unreadCount === 0}"
+                                >
+                                    {{ conv.unreadCount }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul
+                class="nav-pills nav-stacked"
+                *ngIf="tabTranfer == 1"
+            >
+                <li
+                    id="user-contact"
+                    *ngFor="let user of users"
+                    (click)="onCreateConversation(user)"
+                >
+                    <ngx-avatar
+                        [name]="user.userName"
+                        size="34"
+                    ></ngx-avatar>
+                    <p class="name">{{ user.userName }}</p>
+                </li>
+            </ul>
+        </div>
+        <!-- ========================== END CONTACT LIST ============================= -->
+        <!-- tab menu -->
+        <div id="arrow-previous">
+            <ng-container *ngIf="!tabChange">
+                <a
+                    class=" round next"
+                    (click)="getContactListTab()"
+                >
+                    &#8250;
+                </a>
+            </ng-container>
+            <ng-container *ngIf="tabChange">
+                <a
+                    class=" previous round"
+                    (click)="getConversationsTab()"
+                >
+                    &#8249;
+                </a>
+            </ng-container>
+        </div>
+
+
+        <div id="bottom-bar">
+            <button
+                (click)="getConversationsTab()"
+                [ngClass]="{ 'bg': 'tabtranfer', 'tab-active': !tabChange}"
+            >
+                <span>Cuộc trò chuyện</span>
+            </button>
+            <button
+                (click)="getContactListTab()"
+                [ngClass]="{'bg': 'tabtranfer', 'tab-active': tabChange }"
+            >
+                <span>Danh bạ</span>
+            </button>
+        </div>
+
+
+        <!-- tab menu -->
+    </div>
 </div>

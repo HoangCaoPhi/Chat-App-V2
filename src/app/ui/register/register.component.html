@@ -1,26 +1,40 @@
 <div class="wrap-form">
     <div class="login-form">
-        <img src="../../assets/AuthenImg/chat-illustration-2.svg" />
+        <img src="../../assets/AuthenImg/chat-illustration-2.svg">
         <div class="login-content">
             <h1>Tạo tài khoản</h1>
-            <form (ngSubmit)="onSubmit()" [formGroup]="form" autocomplete="off">
+            <form
+                (ngSubmit)="onSubmit()"
+                [formGroup]="form"
+                autocomplete="off"
+            >
                 <div class="row">
-                    <!--====================== TRUONG FIRST NAME AND LASTNAME==================-->
+                    <!-- ====================== TRUONG FIRST NAME AND LASTNAME================== -->
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="firstname" placeholder="Tên"
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="firstname"
+                                placeholder="Tên"
                                 formControlName="firstname"
-                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.firstname.errors }">
+                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.firstname.errors }"
+                            >
                             <div *ngIf="submitted && form.controls.firstname?.errors?.required">
-                                <div class="invalid-feedback d-block">Tên không được để trống </div>
+                                <div class="invalid-feedback d-block">Tên không được để trống</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="lastname" placeholder="Họ"
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="lastname"
+                                placeholder="Họ"
                                 formControlName="lastname"
-                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.lastname.errors }">
+                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.lastname.errors }"
+                            >
                             <div *ngIf="submitted && form.controls.lastname?.errors?.required">
                                 <div class="invalid-feedback d-block">Họ không được để trống</div>
                             </div>
@@ -28,36 +42,55 @@
                     </div>
                 </div>
 
-                <!--====================== END RUONG FIRST NAME AND LASTNAME==================-->
-                <!--======================== TRUONG USER NAME ================================-->
+
+                <!-- ====================== END RUONG FIRST NAME AND LASTNAME================== -->
+                <!-- ======================== TRUONG USER NAME ================================ -->
                 <div class="form-group">
-                    <input type="text" class="form-control" id="username" placeholder="Tên người dùng"
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        placeholder="Tên người dùng"
                         formControlName="username"
-                        [ngClass]="{ 'is-invalid': submitted &&  form.controls.username.errors }">
+                        [ngClass]="{ 'is-invalid': submitted &&  form.controls.username.errors }"
+                    >
                     <div *ngIf="submitted && form.controls.username?.errors?.required ">
-                        <div class="invalid-feedback d-block">Tên người dùng không được để trống </div>
+                        <div class="invalid-feedback d-block">Tên người dùng không được để trống</div>
                     </div>
                 </div>
 
-                <!--======================== TRUONG USER NAME ================================-->
-                <!--======================== TRUONG Phone================================-->
+
+                <!-- ======================== TRUONG USER NAME ================================ -->
+                <!-- ======================== TRUONG Phone================================ -->
                 <div class="form-group">
-                    <input type="text" class="form-control" id="contactMobile" placeholder="Số điện thoại"
-                        formControlName="contactMobile" [ngClass]="{ 'is-invalid': submitted &&  form.controls.contactMobile.errors }">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="contactMobile"
+                        placeholder="Số điện thoại"
+                        formControlName="contactMobile"
+                        [ngClass]="{ 'is-invalid': submitted &&  form.controls.contactMobile.errors }"
+                    >
                     <div *ngIf="submitted && form.controls.contactMobile?.errors?.required">
-                        <div class="invalid-feedback d-block">Phone không được để trống </div>
+                        <div class="invalid-feedback d-block">Phone không được để trống</div>
                     </div>
                     <div *ngIf="submitted && form.controls.contactMobile?.errors?.pattern">
-                        <div class="invalid-feedback d-block">
-                            Số điện thoại không hợp lệ</div>
+                        <div class="invalid-feedback d-block">Số điện thoại không hợp lệ</div>
                     </div>
                 </div>
 
-                <!--======================== TRUONG USER NAME ================================-->
-                <!--====================== TRUONG EMAIL  ==================-->
+
+                <!-- ======================== TRUONG USER NAME ================================ -->
+                <!-- ====================== TRUONG EMAIL  ================== -->
                 <div class="form-group">
-                    <input type="email" class="form-control" id="email" placeholder="Email"
-                        formControlName="email" [ngClass]="{ 'is-invalid': submitted &&  form.controls.email.errors }">
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        placeholder="Email"
+                        formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted &&  form.controls.email.errors }"
+                    >
                     <div *ngIf="submitted && form.controls.email?.errors?.required">
                         <div class="invalid-feedback d-block">Email không được để trống</div>
                     </div>
@@ -66,14 +99,20 @@
                     </div>
                 </div>
 
-                <!--====================== END TRUONG EMAIL  ==================-->
-                <!--====================== TRUONG PASSWORD  ==================-->
+
+                <!-- ====================== END TRUONG EMAIL  ================== -->
+                <!-- ====================== TRUONG PASSWORD  ================== -->
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu"
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="pwd"
+                                placeholder="Mật khẩu"
                                 formControlName="password"
-                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.password.errors }">
+                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.password.errors }"
+                            >
                             <div *ngIf="submitted && form.controls.password?.errors?.required">
                                 <div class="invalid-feedback d-block">Password không được để trống</div>
                             </div>
@@ -81,10 +120,15 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="password" name="password_confirmation" id="password_confirmation"
-                                class="form-control input-sm" placeholder="Nhập lại mật khẩu"
+                            <input
+                                type="password"
+                                name="password_confirmation"
+                                id="password_confirmation"
+                                class="form-control input-sm"
+                                placeholder="Nhập lại mật khẩu"
                                 formControlName="confirmPassword"
-                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.confirmPassword.errors }">
+                                [ngClass]="{ 'is-invalid': submitted &&  form.controls.confirmPassword.errors }"
+                            >
                             <div *ngIf="submitted && form.controls.password?.errors?.required">
                                 <div class="invalid-feedback d-block">Nhập lại mật khẩu</div>
                             </div>
@@ -94,12 +138,12 @@
                         </div>
                     </div>
 
+
                 </div>
 
-                <!--====================== END TRUONG PASSWORD  ==================-->
-                <button class="btn btn-primary">
-                    Đăng ký
-                </button>
+
+                <!-- ====================== END TRUONG PASSWORD  ================== -->
+                <button class="btn btn-primary">Đăng ký</button>
             </form>
             <div>
                 <span>Bạn đã có tài khoản ?</span>

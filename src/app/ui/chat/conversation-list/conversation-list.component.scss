@@ -5,78 +5,86 @@
 	padding-right: 0px;
 	width: 318px;
 	position: relative;
-  }
-  .contact-líst .contact-líst:hover {
+}
+
+.contact-líst:hover {
 	overflow-y: scroll;
 	overflow-x: hidden;
-  }
-  .contact-líst .contact-líst::-webkit-scrollbar {
+}
+
+.contact-líst::-webkit-scrollbar {
 	height: 3px;
 	width: 1px;
 	background: #2c3e50;
-  }
- // Search
-  .search {
-    padding-top: 24px;
-    margin-left: 24px;
-    margin-bottom: 15px;
-    height: 55px;
+}
+
+// Search
+.search {
+	padding-top: 24px;
+	margin-left: 24px;
+	margin-bottom: 15px;
+	height: 55px;
 }
 
 .inpt-search {
-    display: flex;
-    float: left;
-    align-items: center;
-    margin-right: 10px;
-    height: 100%;
-    border-bottom: 2px solid #36455e;
-    input {
-        background-color: #0a1d3b;
-        color: #ffffff;
-        border: 0;
-        &:focus {
-            outline: 0;
-        }
-    }
-    img {
-        margin-right: 5px;
-    }
+	display: flex;
+	float: left;
+	align-items: center;
+	margin-right: 10px;
+	height: 100%;
+	border-bottom: 2px solid #36455e;
+	input {
+		background-color: #0a1d3b;
+		color: #ffffff;
+		border: 0;
+		&:focus {
+			outline: 0;
+		}
+	}
+	img {
+		margin-right: 5px;
+	}
 }
 
 .btn-add {
-    display: flex;
-    float: right;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    background-color: #2196f3;
-    border-radius: 4px;
-    margin-right: 24px;
-    width: 32px;
-    height: 32px;
-    overflow: hidden;
-    cursor: pointer;
-    img {
-        width: 20px;
-        height: 20px;
-    }
+	display: flex;
+	float: right;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	background-color: #2196f3;
+	border-radius: 4px;
+	margin-right: 24px;
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	cursor: pointer;
+	img {
+		width: 20px;
+		height: 20px;
+	}
 }
- // End Search
-  #contacts {
+
+// End Search
+#contacts {
 	margin-top: 15px;
-  }
-  #contacts ul li.contact {
+}
+
+#contacts ul li.contact {
 	height: 60px;
-  }
-  #contacts ul li.contact .wrap {
+}
+
+#contacts ul li.contact .wrap {
 	margin-left: 14px;
 	display: flex;
 	position: relative;
 	height: 60px;
-  }
-  #contacts ul li.contact .wrap p {
+}
+
+#contacts ul li.contact .wrap p {
 	color: white;
-  }
+}
+
 //   #contacts ul li.contact .wrap img {
 // 	width: 40px;
 // 	border-radius: 50%;
@@ -89,7 +97,7 @@
 // 	left: -2px;
 // 	top: 6px;
 //   }
-  #contacts ul li.contact .wrap ngx-avatar {
+#contacts ul li.contact .wrap ngx-avatar {
 	border-radius: 50%;
 	float: left;
 	margin-right: 10px;
@@ -97,47 +105,56 @@
 	position: relative;
 	left: -2px;
 	top: 6px;
-  }
-  #contacts ul li.contact .wrap .green {
+}
+
+#contacts ul li.contact .wrap .green {
 	height: 12px;
 	width: 12px;
 	position: absolute;
 	left: 24px;
 	top: 33px;
-  }
-  #contacts ul li.contact .wrap .status {
+}
+
+#contacts ul li.contact .wrap .status {
 	margin-top: 12px;
 	float: right;
 	position: absolute;
 	right: 0;
 	margin-right: 12px;
-  }
-  #contacts ul li.contact .wrap .status .time {
+}
+
+#contacts ul li.contact .wrap .status .time {
 	font-size: 10px;
 	margin-top: 3px;
 	color: #8e97a5;
-  }
-  #contacts ul li.contact .wrap .status .seen {
+}
+
+#contacts ul li.contact .wrap .status .seen {
 	font-size: 11px;
-  }
-  #contacts ul li.contact .wrap .status p span {
+}
+
+#contacts ul li.contact .wrap .status p span {
 	float: right;
 	margin-top: 5px;
-  }
-  #contacts ul li.contact .wrap .meta .name {
+}
+
+#contacts ul li.contact .wrap .meta .name {
 	font-size: 13px;
 	padding-top: 10px;
 	position: relative;
 	left: 0px;
 	top: 3px;
-  }
-  #contacts ul li.contact .wrap .meta .not-seen {
+}
+
+#contacts ul li.contact .wrap .meta .not-seen {
 	color: #ffffff;
-  }
-  #contacts ul li.contact .wrap .meta .seen {
+}
+
+#contacts ul li.contact .wrap .meta .seen {
 	color: #8c95a3;
-  }
-  #contacts ul li.contact .wrap .meta .preview {
+}
+
+#contacts ul li.contact .wrap .meta .preview {
 	font-size: 12px;
 	width: 100%;
 	padding-bottom: 10px;
@@ -152,8 +169,9 @@
 	-o-transition: 1s all ease;
 	-webkit-transition: 1s all ease;
 	transition: 1s all ease;
-  }
-  #contacts ul li.contact .wrap .meta .preview span {
+}
+
+#contacts ul li.contact .wrap .meta .preview span {
 	position: initial;
 	border-radius: initial;
 	background: none;
@@ -161,60 +179,78 @@
 	padding: 0 2px 0 0;
 	margin: 0 0 0 1px;
 	opacity: 0.5;
-  }
-  #contacts ul li:hover {
+}
+
+#contacts ul li:hover {
 	background: #32465a;
 	cursor: pointer;
-  }
-  #contacts ul li.contact:focus {
+}
+
+#contacts ul li.contact:focus {
 	outline: 0;
-  }
-  @media screen and (max-width: 1000px) {
+}
+
+@media screen and (max-width: 1000px) {
 	#contacts ul li.contact .wrap .meta {
-	  display: none;
+		display: none;
 	}
 	.contact-líst .contact-view .search {
-	  display: none;
+		display: none;
 	}
 	#contacts ul li.contact .wrap img {
-	  align-items: center;
-	  margin-bottom: 18px;
+		align-items: center;
+		margin-bottom: 18px;
 	}
 	.contact-líst {
-	  min-width: 0px;
-	  width: auto;
+		min-width: 0px;
+		width: 70px;
 	}
 	#contacts .contact .wrap .green {
-	  height: 12px;
-	  width: 12px;
-	  position: absolute;
-	  left: 27px;
-	  bottom: 0px;
+		height: 12px;
+		width: 12px;
+		position: absolute;
+		left: 27px;
+		bottom: 0px;
 	}
-  }
-  .not-amout {
+	#bottom-bar {
+		display: none;
+	}
+	#user-contact .name {
+		display: none;
+	}
+	.text-null, .image-null {
+		display: none;
+	}
+}
+
+.not-amout {
 	display: none;
-  }
-  .contact {
+}
+
+.contact {
 	border-left: 4px solid #0a1d3b;
-  }
-  .selected {
+}
+
+.selected {
 	background-color: rgba(255, 255, 255, 0.15);
 	border-left: 4px solid #2196f3;
-  }
-  .newMesseage {
+}
+
+.newMesseage {
 	font-size: 8px;
 	text-align: left;
 	position: relative;
 	left: 0px;
 	top: -15px;
-  }
-  #bottom-bar {
+}
+
+#bottom-bar {
 	width: 318px;
 	bottom: 0;
 	position: fixed;
-  }
-  #bottom-bar button {
+}
+
+#bottom-bar button {
 	float: left;
 	border: none;
 	width: 50%;
@@ -222,45 +258,53 @@
 	color: #f5f5f5;
 	cursor: pointer;
 	font-size: 0.85em;
-  }
-  .bg {
+}
+
+.bg {
 	background: #32465a;
-  }
-  #bottom-bar button:focus {
+}
+
+#bottom-bar button:focus {
 	outline: none;
-  }
-  #bottom-bar button:nth-child(1) {
+}
+
+#bottom-bar button:nth-child(1) {
 	border-right: 1px solid #2c3e50;
-  }
-  #bottom-bar button:hover {
+}
+
+#bottom-bar button:hover {
 	background: #435f7a;
-  }
-  #bottom-bar button i {
+}
+
+#bottom-bar button i {
 	margin-right: 3px;
 	font-size: 1em;
-  }
-  .tab-active {
+}
+
+.tab-active {
 	background-color: #2196f3;
-  }
-  #user-contact {
+}
+
+#user-contact {
 	display: flex;
 	padding: 10px 5px;
-  }
-  #user-contact p {
+}
+
+#user-contact p {
 	color: white;
 	position: relative;
 	left: 8px;
-	top: 7px;
-  }
-  
-  // Khi không có conversation
-  #contacts .image-null {
-    height: 130px;
-    width: 130px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-image: url('../../../../assets/images/chats_emptystate_v3.png');
-    background-size: contain;
+	top: 4px;
+}
+
+// Khi không có conversation
+#contacts .image-null {
+	height: 130px;
+	width: 130px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-image: url('../../../../assets/images/chats_emptystate_v3.png');
+	background-size: contain;
 	border-style: none;
 	text-align: center;
 	position: absolute;
@@ -269,22 +313,72 @@
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
+
 #contacts .text-null {
-    position: absolute;
-    top: 35%;
-    left: 21%;
+	position: absolute;
+	top: 35%;
+	left: 21%;
 }
+
 #contacts .text-null p {
 	color: white;
-    font-size: 21px;
+	font-size: 21px;
 }
+
 .search-null span {
 	font-size: 15px;
 	font-weight: 400;
 	color: rgb(138, 141, 145);
 	margin-left: 10px;
 }
+
 .search-null {
 	position: relative;
 	left: -15%;
+}
+
+@media screen and (min-width: 1000px) {
+	#arrow-previous {
+		display: none;
+	}
+}
+
+#arrow-previous {
+	bottom: 9px;
+	left: 9px;
+	position: fixed;
+}
+
+#arrow-previous a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+#arrow-previous a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+#arrow-previous .previous {
+	background-color: #f1f1f1;
+	color: black;
+}
+
+#arrow-previous .next {
+	background-color: #4CAF50;
+	color: white;
+}
+
+#arrow-previous .round {
+	border-radius: 50%;
+}
+
+#user-contact ngx-avatar {
+	border-radius: 50%;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+	position: relative;
 }

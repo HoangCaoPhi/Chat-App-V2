@@ -1,85 +1,144 @@
 <div class="info-content">
     <div class="info-image">
-       <div class="image">
-         <ngx-avatar [name]="userShareService.userName" size="120"  *ngIf="!userShareService.avatarUrl"></ngx-avatar>
-         <img [src]="userShareService.avatarUrl" alt="" *ngIf="userShareService.avatarUrl" style="object-fit: cover;">
-       </div>
+        <div class="image">
+            <ngx-avatar
+                [name]="userShareService.userName"
+                size="120"
+                *ngIf="!userShareService.avatarUrl"
+            ></ngx-avatar>
+            <img
+                [src]="userShareService.avatarUrl"
+                alt
+                *ngIf="userShareService.avatarUrl"
+                style="object-fit: cover;"
+            >
+        </div>
     </div>
- 
+
+
     <div class="info-status">
-       <p>{{ userShareService.userName }}</p>
-       <p style="text-align: center;">{{ userShareService.email }}</p>
-       <p style="text-align: center;">{{ userShareService.contactMobile }}</p>
-       <p class="line"></p>
+        <p>{{ userShareService.userName }}</p>
+        <p style="text-align: center;">{{ userShareService.email }}</p>
+        <p style="text-align: center;">{{ userShareService.contactMobile }}</p>
+        <p class="line"></p>
     </div>
- 
-  <div class="share-file">
-       <div class="title" (click)="toggleFile()">
-          <p class="name-share">TỆP ĐÃ CHIA SẺ</p>
-          <span class="icon-dropdown">
-             <img *ngIf="showFile; then showFileIcon; else hiddenFileIcon">
-             <ng-template #showFileIcon>
-                <img src="/assets/ICON/IconAppChat/13.svg">
-             </ng-template>
-             <ng-template #hiddenFileIcon>
-                <img src="/assets/ICON/IconAppChat/19.svg" style=" transform: rotate(180deg);">
-             </ng-template>
-          </span>
- 
-       </div>
-       <ng-container *ngFor="let file of files">
-          <div class="file" *ngIf="showFile &&  file.type==5">
-             <span *ngIf="file.typeOf === 'pdf'">
-                <img src="../../../assets/ICON//IconboxChat/pdf-icon.svg" alt="PDF">
-             </span>
-             <span *ngIf="file.typeOf === 'docx'">
-                <img src="../../../assets/ICON/IconboxChat/docx-icon.svg" alt="DOCX">
-             </span>
-             <span *ngIf="file.typeOf === 'pptx'">
-                <img src="../../../assets/ICON/IconboxChat/pptx-icon.svg" alt="PowerPoint">
-             </span>
-             <p>
-                <span>{{ file.content }}</span>
-             </p>
-          </div>
-       </ng-container>
-       <p class="line"></p>
-    </div> 
- 
+
+
+    <div class="share-file">
+        <div
+            class="title"
+            (click)="toggleFile()"
+        >
+            <p class="name-share">TỆP ĐÃ CHIA SẺ</p>
+            <span class="icon-dropdown">
+                <img *ngIf="showFile; then showFileIcon; else hiddenFileIcon">
+                <ng-template #showFileIcon>
+                    <img src="/assets/ICON/IconAppChat/13.svg">
+                </ng-template>
+                <ng-template #hiddenFileIcon>
+                    <img
+                        src="/assets/ICON/IconAppChat/19.svg"
+                        style=" transform: rotate(180deg);"
+                    >
+                </ng-template>
+            </span>
+
+
+        </div>
+        <ng-container *ngFor="let file of files">
+            <div
+                class="file"
+                *ngIf="showFile &&  file.type==5"
+            >
+                <span *ngIf="file.typeOf === 'pdf'">
+                    <img
+                        src="../../../assets/ICON//IconboxChat/pdf-icon.svg"
+                        alt="PDF"
+                    >
+                </span>
+                <span *ngIf="file.typeOf === 'docx'">
+                    <img
+                        src="../../../assets/ICON/IconboxChat/docx-icon.svg"
+                        alt="DOCX"
+                    >
+                </span>
+                <span *ngIf="file.typeOf === 'pptx'">
+                    <img
+                        src="../../../assets/ICON/IconboxChat/pptx-icon.svg"
+                        alt="PowerPoint"
+                    >
+                </span>
+                <p>
+                    <span>{{ file.content }}</span>
+                </p>
+            </div>
+        </ng-container>
+        <p class="line"></p>
+    </div>
+
+
     <div class="share-img">
-       <div class="title" (click)="toggleImg()">
-          <p class="name-share">ẢNH ĐÃ CHIA SẺ</p>
-          <span class="icon-dropdown">
-             <img *ngIf="showImg; then showImgIcon; else hiddenImgIcon">
-             <ng-template #showImgIcon>
-                <img src="/assets/ICON/IconAppChat/13.svg">
-             </ng-template>
-             <ng-template #hiddenImgIcon>
-                <img src="/assets/ICON/IconAppChat/19.svg" style=" transform: rotate(180deg);">
-             </ng-template>
-          </span>
-       </div>
-       <div class="img-share" *ngIf="showImg">
-          <div class="row">
-             <ng-container *ngFor="let img of imgs">
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 bottom-25" *ngIf="img.type==2">
-                   <img class="image-share img-responsive" [src]="img.filePath" data-toggle="modal"
-                      data-target="#myModal1" (click)="watchImagePreview(img.filePath)">
-                </div>
-             </ng-container>
-          </div>
-       </div>
+        <div
+            class="title"
+            (click)="toggleImg()"
+        >
+            <p class="name-share">ẢNH ĐÃ CHIA SẺ</p>
+            <span class="icon-dropdown">
+                <img *ngIf="showImg; then showImgIcon; else hiddenImgIcon">
+                <ng-template #showImgIcon>
+                    <img src="/assets/ICON/IconAppChat/13.svg">
+                </ng-template>
+                <ng-template #hiddenImgIcon>
+                    <img
+                        src="/assets/ICON/IconAppChat/19.svg"
+                        style=" transform: rotate(180deg);"
+                    >
+                </ng-template>
+            </span>
+        </div>
+        <div
+            class="img-share"
+            *ngIf="showImg"
+        >
+            <div class="row">
+                <ng-container *ngFor="let img of imgs">
+                    <div
+                        class="col-lg-4 col-md-6 col-sm-6 col-xs-12 bottom-25"
+                        *ngIf="img.type==2"
+                    >
+                        <img
+                            class="image-share img-responsive"
+                            [src]="img.filePath"
+                            data-toggle="modal"
+                            data-target="#myModal1"
+                            (click)="watchImagePreview(img.filePath)"
+                        >
+                    </div>
+                </ng-container>
+            </div>
+        </div>
     </div>
- </div>
- <!-- Modal -->
- <div class="modal fade" id="myModal1" role="dialog">
+</div>
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="myModal1"
+    role="dialog"
+>
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-       <!-- Modal content-->
-       <div class="modal-content center" role="document">
-          <div class="modal-body">
-             <img src="{{  imagePreview }}" alt="" class="modal-image">
-          </div>
-       </div>
+        <!-- Modal content -->
+        <div
+            class="modal-content center"
+            role="document"
+        >
+            <div class="modal-body">
+                <img
+                    src="{{  imagePreview }}"
+                    alt
+                    class="modal-image"
+                >
+            </div>
+        </div>
     </div>
- </div>
- <!-- Modal -->
+</div>
+<!-- Modal -->

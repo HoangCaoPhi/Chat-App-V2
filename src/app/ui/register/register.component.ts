@@ -73,13 +73,14 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
-          this.showNotification('success', 'Bạn đã tạo tài khoản thành công !')
-        },
-        error => {
-          this.error = error;
-          this.showNotification('error', error)
-          this.loading = false;
+          if(data.code == 200) {
+            this.router.navigate([this.returnUrl]);
+            this.showNotification('success', data.message)
+        }
+        else if(data.code == 1002) {
+            this.loading = false;
+            this.showNotification('error', data.message)
+        }
         });
   }
       /**

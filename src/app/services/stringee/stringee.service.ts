@@ -130,7 +130,7 @@ export class StringeeService {
     });
   }
   //#endregion
-
+  
   //#region LẤY CUỘC TRÒ CHUYỆN VÀ TIN NHẤN 
   /**
    * Lấy tin nhắn của từng cuộc trò chuyện tương ứng

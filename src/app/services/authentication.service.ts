@@ -19,20 +19,20 @@ export class AuthenticationService {
     }
     
     login(email: string, password: string) {
-        return this.http.post<any>('https://localhost:44378/api/users/login', { email, password })
+        return this.http.post<any>('https://localhost:44378/api/authenticate/login', { email, password })
             .pipe(map(user => {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
+                localStorage.setItem('currentUser', JSON.stringify(user.data));
+                this.currentUserSubject.next(user.data);
                 return user;
             }));
     }
 
     register(userClient: User) {
-        return this.http.post<any>('https://localhost:44378/api/users/register', userClient)
+        return this.http.post<any>('https://localhost:44378/api/authenticate/register', userClient)
         .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
+            localStorage.setItem('currentUser', JSON.stringify(user.data));
+            this.currentUserSubject.next(user.data);
             return user;
         }));
     }
