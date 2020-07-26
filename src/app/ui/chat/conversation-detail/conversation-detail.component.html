@@ -1,30 +1,14 @@
 <!-- ---------=======================  END THONG TIN MESSEAGE ==========================    --------- -->
 <!-- ---------=======================   NOI DUNG TIN NHAN  ==========================    --------- -->
 <div class="content-messeage">
-    <div
-        class="d-flex justify-content-center"
-        style="margin-top: 6px;"
-    >
-        <div
-            class="spinner-border text-primary spinner-border-sm"
-            role="status"
-            *ngIf="loading"
-        >
+    <div class="d-flex justify-content-center" style="margin-top: 6px;">
+        <div class="spinner-border text-primary spinner-border-sm" role="status" *ngIf="loading">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <div
-        style="height: 90%"
-        #scrollframe
-        infinite-scroll
-        [infiniteScrollDistance]="scrollDistance"
-        [infiniteScrollUpDistance]="scrollUpDistance"
-        [infiniteScrollThrottle]="throttle"
-        (scrolledUp)="onUp()"
-        [scrollWindow]="false"
-        (scroll)="scrolled($event)"
-        class="content"
-    >
+    <div style="height: 90%" #scrollframe infinite-scroll [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolledUp)="onUp()"
+        [scrollWindow]="false" (scroll)="scrolled($event)" class="content">
 
 
 
@@ -35,63 +19,30 @@
                     <p class="hello">
                         Xin Chào, {{ userCurrentShareService?.firstName }}
                     </p>
-                    <img
-                        src="../../../../assets/images/watermark.svg"
-                        alt
-                    >
+                    <img src="../../../../assets/images/watermark.svg" alt>
                     <p class="info">
                         Hãy đi đến cuộc trò chuyện để kết nối với mọi người
                     </p>
                 </div>
             </ng-container>
             <!-- Khi không có cuộc trò chuyện nào -->
-            <ul
-                *ngFor="let messeage of responseLastMsg"
-                class="item"
-                #item
-            >
+            <ul *ngFor="let messeage of responseLastMsg" class="item" #item>
                 <!-- Người gửi -->
-                <li
-                    class="replies"
-                    *ngIf="messeage.sender == UserId"
-                >
-                    <ngx-avatar
-                        [name]="userCurrentShareService.userName"
-                        size="34"
-                        alt="message-icon"
-                        data-toggle="dropdown"
-                        *ngIf="messeage.content.content && !userCurrentShareService?.avatarUrl"
-                    ></ngx-avatar>
-                    <img
-                        [src]="userCurrentShareService?.avatarUrl"
-                        width="30"
-                        height="30"
-                        alt="logo"
-                        class="rounded-circle"
-                        *ngIf="userCurrentShareService?.avatarUrl"
-                        style="object-fit: cover;"
-                    >
-                    <p
-                        class="left"
-                        *ngIf="messeage.type == 1 && messeage.content.content"
-                    >
+                <li class="replies" *ngIf="messeage.sender == UserId">
+                    <ngx-avatar [name]="userCurrentShareService.userName" size="34" alt="message-icon"
+                        data-toggle="dropdown" *ngIf="messeage.content.content && !userCurrentShareService?.avatarUrl">
+                    </ngx-avatar>
+                    <img [src]="userCurrentShareService?.avatarUrl" width="30" height="30" alt="logo"
+                        class="rounded-circle" *ngIf="userCurrentShareService?.avatarUrl" style="object-fit: cover;">
+                    <p class="left" *ngIf="messeage.type == 1 && messeage.content.content">
                         {{ messeage.content.content }}
                     </p>
                     <!-- Ảnh -->
-                    <img
-                        (click)="watchImagePreview(messeage.content.file?.filePath)"
-                        *ngIf="messeage.type == 2"
-                        [src]="messeage.content.file?.filePath"
-                        class="img-preview"
-                        data-toggle="modal"
-                        data-target="#myModal"
-                    >
+                    <img (click)="watchImagePreview(messeage.content.file?.filePath)" *ngIf="messeage.type == 2"
+                        [src]="messeage.content.file?.filePath" class="img-preview" data-toggle="modal"
+                        data-target="#myModal">
                     <!-- File -->
-                    <a
-                        (click)="openFile(messeage.content.file.filePath)"
-                        *ngIf="messeage.type == 5"
-                        class="file"
-                    >
+                    <a (click)="openFile(messeage.content.file.filePath)" *ngIf="messeage.type == 5" class="file">
                         {{ messeage.content.content }}
                     </a>
                 </li>
@@ -99,89 +50,38 @@
 
 
                 <!-- Người nhận -->
-                <li
-                    class="sent"
-                    *ngIf="messeage.sender != UserId"
-                >
+                <li class="sent" *ngIf="messeage.sender != UserId">
                     <ng-container *ngIf="messeage.content.content">
-                        <ngx-avatar
-                            [name]="userShareService?.userName"
-                            size="34"
-                            width="40"
-                            height="40"
-                            class="rounded-circle"
-                            *ngIf="!userShareService?.avatarUrl"
-                        ></ngx-avatar>
-                        <img
-                            [src]="userShareService?.avatarUrl"
-                            width="30"
-                            height="30"
-                            alt="logo"
-                            class="rounded-circle"
-                            *ngIf="userShareService?.avatarUrl"
-                            style="object-fit: cover;"
-                        >
-                        <p
-                            class="right"
-                            *ngIf="messeage.type == 1"
-                        >
+                        <ngx-avatar [name]="userShareService?.userName" size="34" width="40" height="40"
+                            class="rounded-circle" *ngIf="!userShareService?.avatarUrl"></ngx-avatar>
+                        <img [src]="userShareService?.avatarUrl" width="30" height="30" alt="logo"
+                            class="rounded-circle" *ngIf="userShareService?.avatarUrl" style="object-fit: cover;">
+                        <p class="right" *ngIf="messeage.type == 1">
                             {{ messeage.content.content }}
                         </p>
                     </ng-container>
                     <!-- Ảnh -->
-                    <img
-                        (click)="watchImagePreview(messeage.content.file?.filePath)"
-                        *ngIf="messeage.type == 2"
-                        [src]="messeage.content.file?.filePath"
-                        class="img-preview"
-                        data-toggle="modal"
-                        data-target="#myModal"
-                    >
+                    <img (click)="watchImagePreview(messeage.content.file?.filePath)" *ngIf="messeage.type == 2"
+                        [src]="messeage.content.file?.filePath" class="img-preview" data-toggle="modal"
+                        data-target="#myModal">
                     <!-- File -->
-                    <a
-                        (click)="openFile(messeage.content.file?.filePath)"
-                        *ngIf="messeage.type == 5"
-                        class="file"
-                    >
+                    <a (click)="openFile(messeage.content.file?.filePath)" *ngIf="messeage.type == 5" class="file">
                         {{ messeage.content.content }}
                     </a>
                 </li>
             </ul>
-            <ul
-                class="item"
-                *ngIf="checkTyping"
-            >
+            <ul class="item" *ngIf="checkTyping">
                 <li class="sent">
-                    <img
-                        [src]="userShareService?.avatarUrl"
-                        width="30"
-                        height="30"
-                        alt="logo"
-                        class="rounded-circle"
-                        *ngIf="userShareService?.avatarUrl"
-                        style="object-fit: cover;"
-                    >
-                    <ngx-avatar
-                        [name]="userShareService?.userName"
-                        size="34"
-                        class="rounded-circle"
-                        *ngIf="!userShareService?.avatarUrl"
-                     ></ngx-avatar>
+                    <img [src]="userShareService?.avatarUrl" width="30" height="30" alt="logo" class="rounded-circle"
+                        *ngIf="userShareService?.avatarUrl" style="object-fit: cover;">
+                    <ngx-avatar [name]="userShareService?.userName" size="34" class="rounded-circle"
+                        *ngIf="!userShareService?.avatarUrl"></ngx-avatar>
                     <div class="typing">
-                        <div
-                            class="spin spinner-grow spinner-grow-sm"
-                            role="status"
-                        >
+                        <div class="spin spinner-grow spinner-grow-sm" role="status">
                         </div>
-                        <div
-                            class="spin spinner-grow spinner-grow-sm"
-                            role="status"
-                        >
+                        <div class="spin spinner-grow spinner-grow-sm" role="status">
                         </div>
-                        <div
-                            class="spin spinner-grow spinner-grow-sm"
-                            role="status"
-                        >
+                        <div class="spin spinner-grow spinner-grow-sm" role="status">
                         </div>
                     </div>
                 </li>
@@ -189,57 +89,26 @@
         </div>
     </div>
     <!-- Modal -->
-    <div
-        class="modal fade"
-        id="myModal"
-        role="dialog"
-    >
+    <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <!-- Modal content -->
-            <div
-                class="modal-content center"
-                role="document"
-            >
+            <div class="modal-content center" role="document">
                 <div class="modal-body">
-                    <img
-                        src="{{  imagePreview }}"
-                        alt
-                        class="modal-image"
-                    >
+                    <img src="{{  imagePreview }}" alt class="modal-image">
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal -->
-    <form
-        (ngSubmit)="sendMesseage(sendForm)"
-        #sendForm="ngForm"
-        autocomplete="off"
-    >
+    <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm" autocomplete="off">
         <div class="send-view">
             <label class="send">
-                <img
-                    src="/assets/ICON/IconAppChat/10.svg"
-                    alt="send file"
-                >
-                <input
-                    #fileInput
-                    type="file"
-                    (change)="processFile(fileInput)"
-                >
+                <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
+                <input #fileInput type="file" (change)="processFile(fileInput)">
             </label>
             <label class="send">
-                <img
-                    src="/assets/ICON/IconAppChat/9.svg"
-                    alt="send file"
-                >
-                <input
-                    #imageInput
-                    type="file"
-                    accept="image/*"
-                    (change)="processImage(imageInput)"
-                    name="file"
-                >
+                <img src="/assets/ICON/IconAppChat/9.svg" alt="send file">
+                <input #imageInput type="file" accept="image/*" (change)="processImage(imageInput)" name="file">
             </label>
             <label class="send">
                 <span class="buzz">
@@ -247,20 +116,9 @@
                 </span>
             </label>
             <div class="send input-message">
-                <input
-                    type="text"
-                    class="form-control"
-                    name="message"
-                    id="input-message"
-                    ngModel
-                    placeholder="Nhập nội dung tin nhắn"
-                    (keyup)="onKeyUp($event)"
-                    (keydown)="onKeyDown($event)"
-                >
-                <img
-                    src="/assets/ICON/IconAppChat/7.svg"
-                    alt="icon"
-                >
+                <input type="text" class="form-control" name="message" id="input-message" ngModel
+                    placeholder="Nhập nội dung tin nhắn" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)">
+                <img src="/assets/ICON/IconAppChat/7.svg" alt="icon">
             </div>
         </div>
     </form>
@@ -272,6 +130,6 @@
 <!-- ---------=======================   NOI DUNG TIN NHAN  ==========================    --------- -->
 <script>
     $(document).ready(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-   });
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>

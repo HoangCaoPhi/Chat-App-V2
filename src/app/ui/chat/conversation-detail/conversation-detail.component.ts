@@ -3,13 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-import { Chat } from '../../../models/chat';
+// import { Chat } from '../../../models/chat';
 import { ComponentShareService } from '../../../services/component-share.service';
-import { User } from '@app/models';
+// import { User } from '@app/models';
 import { StringeeService } from '@app/services/stringee/stringee.service';
-import { Subscription, Observable, fromEvent } from 'rxjs';
+// import { Subscription, Observable, fromEvent } from 'rxjs';
+import {fromEvent } from 'rxjs';
 import { UserIdTranferService } from '@app/services/user-tranfer.service';
-import { UserService } from '@app/services/user/user.service';
+// import { UserService } from '@app/services/user/user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileService } from '@app/services/message/file.service';
 import { debounceTime } from 'rxjs/operators';
@@ -84,18 +85,20 @@ export class ViewComponent implements OnInit {
    * @param event 
    */
   onKeyUp(event: KeyboardEvent) { // with type info
-    // Tham chiếu html
-    const searchBox = document.getElementById('input-message');
-    // streams
-    const keyup$ = fromEvent(searchBox, 'keyup');
-    // Chờ đợi 5s mới emit
-    keyup$
-    .pipe(
-      debounceTime(500)
-    )
-    .subscribe(
-      ()=> this.stringeeService.userEndTyping((this.convId))
-    );
+    //  Tham chiếu html
+      const searchBox = document.getElementById('input-message');
+      // streams
+      const keyup$ = fromEvent(searchBox, 'keyup');
+      // Chờ đợi 5s mới emit
+      keyup$
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe(
+        ()=> this.stringeeService.userEndTyping((this.convId))
+      );
+      
+    // setTimeout(() => {  this.stringeeService.userEndTyping((this.convId)); }, 1000);
   }
  
   /**

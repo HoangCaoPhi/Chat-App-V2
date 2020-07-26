@@ -8,7 +8,11 @@
 	align-items: center;
 	justify-content: center;
 }
- 
+.form-group input {
+	outline: 0;
+	border-width: 0 0 2px;
+	border-radius: 0;
+}
 .login-form {
 	background-color: white;
 	border-radius: 6px;
@@ -67,3 +71,17 @@ form {
 img {
 	margin: 20px;
 }
+
+.input-form{
+	display: flex;
+  }
+ 
+  
+  i {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  .invalid-feedback {
+	  display: flex;
+  }
