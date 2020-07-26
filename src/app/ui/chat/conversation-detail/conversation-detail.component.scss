@@ -251,6 +251,9 @@
   .messages ul li.sent ngx-avatar {
     margin: 4px 8px 0 0;
   }
+  .item li.sent ngx-avatar {
+    margin: 4px 8px 0 0;
+  }
   .messages ul li.replies ngx-avatar {
     float: right;
     margin: 4px 0 0 8px;
@@ -331,7 +334,7 @@
  }
  /*=============================================== SEND MESSEAGE ========================== */ 
  .send-view {
-    min-height: 60px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     background-color: #f8f8f8;
@@ -349,6 +352,9 @@ label input {
 label input:focus {
     outline: 0;
 }
+label img {
+  margin-top: 17px;
+}
 .buzz {
     display: flex;
     background-color: #f86060;
@@ -358,7 +364,7 @@ label input:focus {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-top: 5px;
+    margin-top: 17px;
 }
 .buzz p {
     margin-top: 16px;

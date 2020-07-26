@@ -161,9 +161,12 @@
                         *ngIf="userShareService?.avatarUrl"
                         style="object-fit: cover;"
                     >
-                    <!-- <div class="spinner-grow text-muted"></div>
-                    <div class="spinner-grow text-primary"></div>
-                    <div class="spinner-grow text-success"></div> -->
+                    <ngx-avatar
+                        [name]="userShareService?.userName"
+                        size="34"
+                        class="rounded-circle"
+                        *ngIf="!userShareService?.avatarUrl"
+                     ></ngx-avatar>
                     <div class="typing">
                         <div
                             class="spin spinner-grow spinner-grow-sm"

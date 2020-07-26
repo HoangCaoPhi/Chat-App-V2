@@ -12,6 +12,16 @@
    box-sizing: border-box;
    margin: 0 auto;
    padding-top: 14px;
+   height: calc(100vh - 120px);
+   overflow: auto;
+   overflow-x: hidden;
+}
+.info-content::-webkit-scrollbar {
+   width: 8px;
+   background: transparent;
+}
+.info-content::-webkit-scrollbar-thumb {
+   background-color: rgba(0, 0, 0, 0.3);
 }
 .info-content .info-image {
    align-items: center;
@@ -63,6 +73,7 @@
    margin: 0 auto;
    width: 80%;
 }
+ 
 .title {
    display: flex;
    align-items: center;
@@ -87,6 +98,9 @@
    color: #666666;
    display: flex;
    cursor: pointer;
+   // max-height: 250px;
+   // overflow: scroll;
+   // overflow-x: hidden;
 }
 .file p {
    padding: 6px 5px;
