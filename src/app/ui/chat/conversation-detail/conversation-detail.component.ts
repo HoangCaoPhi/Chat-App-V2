@@ -26,11 +26,10 @@ export class ViewComponent implements OnInit {
   imagePreview: any;
   showAboutRight: boolean = true;
   @Input() responseLastMsg: any; // Nhận về tin nhắn từ stringee
-  @Input() userCurrentShareService;
-  @Input() userShareService: any;  
+  @Input() userCurrentShareService; // Thông tin user hiện tại đang login
+  @Input() userShareService: any;  // Thông tin user nhận qua share service
   UserId: string = JSON.parse(localStorage.getItem("currentUser")).id;
   convIdFromDataTranfer: any; // Nhận convId từ contact list
- 
   userInfo: any; // Thông tin user lấy theo id
   convId: string;
   loading: boolean = false;
@@ -52,13 +51,18 @@ export class ViewComponent implements OnInit {
       this.convId = this.route.snapshot.paramMap.get('id');
       this.getConvesationLast(this.convId);
       this.stringeeService.stringeeChat.on('onObjectChange', () => {
-        this.getConvesationLast(this.convId);
-        this.componentShareService.setConversationId(this.convId);
+          this.getConvesationLast(this.convId);
+          this.componentShareService.setConversationId(this.convId);
       })
     });
   }
   ngOnInit(): void {
-  
+    this.stringeeService.stringeeClient.on("userBeginTypingListener",  (msg)=> {
+        this.checkTyping = true;
+    });
+    this.stringeeService.stringeeClient.on("userEndTypingListener",  (msg)=> {
+        this.checkTyping = false;
+    });
   }
   //#endregion
 
@@ -72,12 +76,27 @@ export class ViewComponent implements OnInit {
       this.responseLastMsg = msgs;
     });
   }
+
+  checkTyping: boolean = false;
+  /**
+   * Xử lý khi người dùng dừng nhắn tin thì gọi service user end typing
+   * @param event 
+   */
+  onKeyUp(event: KeyboardEvent) { // with type info
+    setTimeout(() => {  this.stringeeService.userEndTyping((this.convId)); }, 1000);
+  }
+  /**
+   * Xử lý khi người dùng đang nhắn tin
+   * @param event 
+   */
+  onKeyDown(event: KeyboardEvent) { // with type info
+    this.stringeeService.userBeginTyping(this.convId);
+  }
   /**
    * Gửi tin nhắn dạng text
    * @param sendForm Form value được lấy khi người dùng nhập
    */
   sendMesseage(sendForm: NgForm) {
-    console.log(sendForm.value);
     if (sendForm.value.message) {
       this.stringeeService.sendTextMessage(this.convId, sendForm.value.message);
       sendForm.reset();

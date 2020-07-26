@@ -446,3 +446,15 @@ label input:focus {
 //   left: -7%;
 //   position: relative;
 // }
+.sent .typing {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: #eeeeee;
+  width: max-content;
+  display: inline-block;
+}
+.sent .typing .spin {
+  width: 4px;
+  height: 4px;
+  margin-bottom: 3px;
+}

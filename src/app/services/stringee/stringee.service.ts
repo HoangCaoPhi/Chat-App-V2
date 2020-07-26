@@ -56,7 +56,7 @@ export class StringeeService {
     //  console.log('authen', res);
     });
   }
-
+ 
   /**
    * Lắng nghe sự kiện disconnect
    */
@@ -186,4 +186,47 @@ export class StringeeService {
     });
   }
   //#endregion
+
+  // Typing
+  //  kích hoạt sự kiện khi người dùng gõ tin nhắn - thêm người dùng dang gõ tin nhắn vào mảng
+  userBeginTypingListen() {
+    console.log("userBeginTypingListen");
+    this.stringeeClient.on("userBeginTypingListener", function (msg) {
+      //  console.log(msg);
+  });
+}
+  // kích hoạt sự kiện khi người dùng dừng gõ tin nhắn - xóa người dùng dừng gõ tin nhắn khỏii mảng
+  userEndTypingListen() {
+    this.stringeeClient.on("userEndTypingListener", function (msg) {
+      //console.log(msg);
+    });
+  }
+  userBeginTyping(convId) {
+  //  console.log("usẻ begin typing");
+    let token = JSON.parse(localStorage.getItem('currentUser')).token;
+    let decodeToken = jwt_decode(token);
+
+    let userId = decodeToken["userId"];
+    if (convId && userId) {
+        const body = { userId: userId, convId: convId };
+        this.stringeeChat.userBeginTyping(body, function (res) { 
+         // console.log(res)
+        });
+    }
+  }
+  userEndTyping(convId) {
+    //console.log("usẻ end typing");
+    let token = JSON.parse(localStorage.getItem('currentUser')).token;
+    let decodeToken = jwt_decode(token);
+
+    let userId = decodeToken["userId"];
+
+      if (convId && userId) {
+          const body = { userId: userId, convId: convId };
+          this.stringeeChat.userEndTyping(body, function (res) { 
+           // console.log(res)
+          });
+      }
+  }
+
 }

@@ -106,7 +106,18 @@
 	left: -2px;
 	top: 6px;
 }
-
+#contacts ul li.contact .wrap img {
+	border-radius: 50%;
+	float: left;
+	margin-right: 10px;
+	margin-top: 10px;
+	position: relative;
+	left: -2px;
+	top: 6px;
+	object-fit: cover;
+	width: 34px;
+	height: 34px;
+} 
 #contacts ul li.contact .wrap .green {
 	height: 12px;
 	width: 12px;
@@ -381,4 +392,12 @@
 	margin-left: 10px;
 	margin-right: 10px;
 	position: relative;
+}
+.nav-pills  .avt {
+	width: 34px; 
+	height: 34px; 
+	object-fit: conver;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 50%;
 }

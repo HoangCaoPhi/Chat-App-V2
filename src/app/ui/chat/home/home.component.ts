@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   userShareService: any; // Thông tin người dùng để truyền qua các component con
   convId: any; // Id cuộc trò chuyện
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
-  showAboutRight: boolean = true;
-  userCurrentShareService: any;
+  showAboutRight: boolean = true; // ẩn hay hiện phần about
+  userCurrentShareService: any; // Nhận về thông tin của người dùng hiện tại
   //#endregion
 
   //#region Contructor
@@ -33,14 +33,13 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-
     route.params.subscribe(val => {
       this.stringeeService.stringeeClient.on('connect', () => {
         console.log("connect")
         this.stringeeService.authenListners();
         this.stringeeService.realTimeUpdate();
         this.stringeeService.getAndUpdateInfo();
-        this.getConversationLast();
+        this.getConversationLast();     
         this.getMessageLast(val.id);
       })
       this.convId = val.id;
@@ -63,7 +62,6 @@ export class HomeComponent implements OnInit {
     console.log("getConversationLast")
     this.stringeeService.stringeeServiceConversation((status, code, message, convs) => {
       this.responseConvs = convs; 
-      console.log(this.responseConvs);
       //lấy thông tin conversation đầu tiên
       for (let con of this.responseConvs) {
         if (con.id == this.convId) {
@@ -100,6 +98,7 @@ export class HomeComponent implements OnInit {
       // }
     });
   }
+
 
   /**
    * Lấy tin nhắn của cuộc trò chuyện

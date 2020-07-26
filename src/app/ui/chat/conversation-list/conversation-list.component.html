@@ -25,6 +25,8 @@
         <!-- ========================== END SEARCH =============================== -->
 
 
+
+
         <!-- ========================== CONTACT LIST ============================= -->
         <div id="contacts">
             <!-- Khi không có cuộc trò chuyện nào -->
@@ -55,12 +57,19 @@
                             <span class="contact-status online"></span>
                             <ng-container *ngFor="let participant of conv.participants">
                                 <ngx-avatar
-                                    *ngIf="participant.userId != UserId"
+                                    *ngIf="participant.userId != UserId && !participant.avatar"
                                     [name]="participant.name"
                                     size="34"
                                 >
                                 </ngx-avatar>
+                                <img
+                                    *ngIf="participant.userId != UserId && participant.avatar"
+                                    [src]="participant.avatar"
+                                    roundShape="true"
+                                >
                             </ng-container>
+
+
 
 
                             <div class="meta">
@@ -166,7 +175,9 @@
                     <ngx-avatar
                         [name]="user.userName"
                         size="34"
+                        *ngIf="!user.avatarUrl"
                     ></ngx-avatar>
+                    <img [src]="user.avatarUrl" alt="" *ngIf="user.avatarUrl" class="avt">
                     <p class="name">{{ user.userName }}</p>
                 </li>
             </ul>
@@ -193,6 +204,8 @@
         </div>
 
 
+
+
         <div id="bottom-bar">
             <button
                 (click)="getConversationsTab()"
@@ -207,6 +220,8 @@
                 <span>Danh bạ</span>
             </button>
         </div>
+
+
 
 
         <!-- tab menu -->

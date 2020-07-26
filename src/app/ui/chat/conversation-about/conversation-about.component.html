@@ -1,4 +1,5 @@
 <div class="info-content">
+    <!-- Hình ảnh của phần thông tin -->
     <div class="info-image">
         <div class="image">
             <ngx-avatar
@@ -14,14 +15,17 @@
             >
         </div>
     </div>
+    <!-- END Hình ảnh của phần thông tin -->
 
 
+    <!-- Thông tin của người dùng -->
     <div class="info-status">
         <p>{{ userShareService.userName }}</p>
         <p style="text-align: center;">{{ userShareService.email }}</p>
         <p style="text-align: center;">{{ userShareService.contactMobile }}</p>
         <p class="line"></p>
     </div>
+    <!-- END Thông tin của người dùng -->
 
 
     <div class="share-file">
@@ -42,7 +46,6 @@
                     >
                 </ng-template>
             </span>
-
 
         </div>
         <ng-container *ngFor="let file of files">
@@ -75,6 +78,7 @@
         </ng-container>
         <p class="line"></p>
     </div>
+
 
 
     <div class="share-img">

@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Chat } from '@app/models/chat';
-import { User } from '@app/models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FileService } from '@app/services/message/file.service';
 import { ComponentShareService } from '@app/services/component-share.service';
@@ -12,14 +10,14 @@ import { ComponentShareService } from '@app/services/component-share.service';
 })
 export class ConversationAboutComponent implements OnInit {
   //#region Field
-  convId: any;
-  files: any;
-  imgs: any;
-  showFile: boolean = true;
-  showImg: boolean = true;
-  imagePreview: any;
-  @Input() userShareService: any;
-  @Input() response: any;
+  convId: any; // conversation ID
+  files: any; // Lấy tất cả những file chung
+  imgs: any; // Lấy các img chung
+  showFile: boolean = true; // Ẩn hiện file trên giao diện
+  showImg: boolean = true; // Ẩn hiện hình ảnh trên giao diện
+  imagePreview: any; // Xem trước hình ảnh với modal
+  @Input() userShareService: any; // Nhận user từ home
+  @Input() response: any; // Nhận thông tin msg từ home
   //#endregion
 
   //#region Contructor
@@ -53,9 +51,9 @@ export class ConversationAboutComponent implements OnInit {
       (res) => { this.imgs = res }
     )
   }
-/**
- *    Lấy các file chung
- */
+  /**
+   *    Lấy các file chung
+   */
   getFiles() {
     // return this.response.filter(mess => ((mess.type == 5)));
     this._chatservice.getAllFile(this.convId).subscribe(
@@ -69,12 +67,12 @@ export class ConversationAboutComponent implements OnInit {
   //#endregion
 
   //#region Tranfer Data
-      // Nhận sự thay đổi Id cuộc trò chuyện
-      getParam() {
-        this.componentShareService.getConversationId$.subscribe(() => {
-          this.getFiles();
-          this.getImages();
-        });
-      }
+  // Nhận sự thay đổi Id cuộc trò chuyện
+  getParam() {
+    this.componentShareService.getConversationId$.subscribe(() => {
+      this.getFiles();
+      this.getImages();
+    });
+  }
   //#endregion
 }

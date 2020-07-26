@@ -27,6 +27,7 @@
     >
 
 
+
         <div class="messages">
             <!-- Khi mới đăng ký tài khoản -->
             <ng-container *ngIf="responseLastMsg == null">
@@ -96,6 +97,7 @@
                 </li>
 
 
+
                 <!-- Người nhận -->
                 <li
                     class="sent"
@@ -143,6 +145,42 @@
                     >
                         {{ messeage.content.content }}
                     </a>
+                </li>
+            </ul>
+            <ul
+                class="item"
+                *ngIf="checkTyping"
+            >
+                <li class="sent">
+                    <img
+                        [src]="userShareService?.avatarUrl"
+                        width="30"
+                        height="30"
+                        alt="logo"
+                        class="rounded-circle"
+                        *ngIf="userShareService?.avatarUrl"
+                        style="object-fit: cover;"
+                    >
+                    <!-- <div class="spinner-grow text-muted"></div>
+                    <div class="spinner-grow text-primary"></div>
+                    <div class="spinner-grow text-success"></div> -->
+                    <div class="typing">
+                        <div
+                            class="spin spinner-grow spinner-grow-sm"
+                            role="status"
+                        >
+                        </div>
+                        <div
+                            class="spin spinner-grow spinner-grow-sm"
+                            role="status"
+                        >
+                        </div>
+                        <div
+                            class="spin spinner-grow spinner-grow-sm"
+                            role="status"
+                        >
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -213,6 +251,8 @@
                     id="input-message"
                     ngModel
                     placeholder="Nhập nội dung tin nhắn"
+                    (keyup)="onKeyUp($event)"
+                    (keydown)="onKeyDown($event)"
                 >
                 <img
                     src="/assets/ICON/IconAppChat/7.svg"
@@ -222,6 +262,7 @@
         </div>
     </form>
 </div>
+
 
 
 

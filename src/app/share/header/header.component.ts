@@ -46,15 +46,23 @@ export class HeaderComponent implements OnInit {
       firstname: ["", [Validators.required]],
       lastname: ["", [Validators.required]],
       username: ["", [Validators.required]],
-      contactMobile: ["", [Validators.required, Validators.pattern(("(09|03|08)[0-9 ]{8}"))]],
+      contactMobile: ["", [Validators.required]],
       avatarUrl: ["", [Validators.required]],
     })
   }
   onSubmit() {
+
     this._userservice.updateInfo(this.UserId, this.form.value).subscribe(
       data => {
         this.showNotification('success', 'Cập nhật thông tin thành công !');
-        this.stringeeService.getAndUpdateInfo();
+        let updateUserData = {
+          display_name: data.userName,
+          avatar_url: data.avatarUrl,
+          email: ""
+        }
+        this.stringeeService.updateUserInfo(updateUserData);
+        // this.updateUserInfo(updateUserData);
+       // console.log(data);
         document.getElementById("closeModal").click();
       },
       error => {

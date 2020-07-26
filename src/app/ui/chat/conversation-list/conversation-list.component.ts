@@ -1,15 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-
-import { ComponentShareService } from '@app/services/component-share.service';
-import { User } from '@app/models';
-import { StringeeService } from '@app/services/stringee/stringee.service';
-import { UserService } from '@app/services/user/user.service';
 import { filter, map } from 'rxjs/operators';
+
+import { User } from '@app/models';
+import { UserService } from '@app/services/user/user.service';
+import { StringeeService } from '@app/services/stringee/stringee.service';
 import { UserIdTranferService } from '@app/services/user-tranfer.service';
 import { AuthenticationService } from '@app/services/authentication.service';
-
+import { ComponentShareService } from '@app/services/component-share.service';
 
 @Component({
   selector: 'app-conversation-list',
@@ -27,7 +25,7 @@ export class ListComponent implements OnInit {
   UserId: any = JSON.parse(localStorage.getItem("currentUser")).id; // id của người dùng 
   tabChange: boolean; // active tab
   selectContact: string;
-  searchTerm: string;
+  searchTerm: string; // Nhận vào giá trị từ ô input tìm kiếm
   //#endregion
 
   //#region  Contructor
@@ -42,9 +40,7 @@ export class ListComponent implements OnInit {
   ) {
     route.params.subscribe(val => {
       this.convId = this.route.snapshot.paramMap.get('id');
-      // this.onCickConversation(this.convId);
       this.getParam();
- 
     });
   }
   ngOnInit(): void { }
@@ -65,9 +61,6 @@ export class ListComponent implements OnInit {
             this.stringeeService.stringeeChat.markConversationAsRead(con);
             for (let parti of con.participants) {
               if (parti.userId != this.UserId) {
-                // Nếu người dùng đã đăng nhập
-               // if (this.authenticationService.currentUserValue) {
-                  //this.router.navigate(['/chat/' + convs[0].id]);
                   // Lấy thông tin của user
                   this.stringeeService.getUserInfo(parti.userId, (status, code, msg, users) => {
                     // Truyền thông tin user cho detail
@@ -75,7 +68,6 @@ export class ListComponent implements OnInit {
                       this.userIdTranferService.setUser(user)
                     });
                   })
-                // }
                 break;
               }
             }
@@ -143,8 +135,8 @@ export class ListComponent implements OnInit {
    */
   getConversationsTab() {
     this.tabTranfer = 0;
-    this.getConversationLast();
     this.tabChange = false;
+    this.getConversationLast();
   }
   /**
    * Chuyện sang xem danh sách các người dùng
