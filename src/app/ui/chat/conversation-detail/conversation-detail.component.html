@@ -100,7 +100,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <form (ngSubmit)="sendMesseage(sendForm)" #sendForm="ngForm" autocomplete="off">
+    <form autocomplete="off">
         <div class="send-view">
             <label class="send">
                 <img src="/assets/ICON/IconAppChat/10.svg" alt="send file">
@@ -116,8 +116,10 @@
                 </span>
             </label>
             <div class="send input-message">
-                <input type="text" class="form-control" name="message" id="input-message" ngModel
-                    placeholder="Nhập nội dung tin nhắn" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)">
+                <textarea  type="text" class="form-control" name="message" id="input-message" ngModel
+                    placeholder="Nhập nội dung tin nhắn"  (keyup.enter)="sendMesseage(box.value)" 
+                    (keyup)="onKeyUp($event)" #box   (keydown.alt.enter) = "box.value = box.value + '\n'"
+                    (keydown)="onKeyDown($event)"> </textarea>
                 <img src="/assets/ICON/IconAppChat/7.svg" alt="icon">
             </div>
         </div>

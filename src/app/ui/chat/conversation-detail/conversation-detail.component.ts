@@ -112,13 +112,18 @@ export class ViewComponent implements OnInit {
    * Gửi tin nhắn dạng text
    * @param sendForm Form value được lấy khi người dùng nhập
    */
-  sendMesseage(sendForm: NgForm) {
-    if (sendForm.value.message) {
-      this.stringeeService.sendTextMessage(this.convId, sendForm.value.message);
-      sendForm.reset();
+  sendMesseage(val: string) {
+    if (val) {
+      this.stringeeService.sendTextMessage(this.convId, val);
     }
     this.getConvesationLast(this.convId);
     this.componentShareService.setConversationId(this.convId); // Truyền sự kiện để update lại last message ở conversation list
+    this.clear();
+  }
+  @ViewChild('box') box: ElementRef;
+
+  clear() {
+    this.box.nativeElement.value = "";
   }
   /**
    * Gửi tin nhắn dạng file

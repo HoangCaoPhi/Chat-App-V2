@@ -268,12 +268,14 @@
   .messages ul li.sent p {
     background: #eeeeee;
     word-wrap: break-word;
+    white-space: pre-line;
     color: #212121;;
   }
   .messages ul li.replies p {
     background: #2688e6;
     color: #ffffff;
     word-wrap: break-word;
+    white-space: pre-line;
     float: right;
   }
   .messages ul li p {
@@ -349,7 +351,7 @@
 label input {
     display: none;
 }
-label input:focus {
+label textarea:focus {
     outline: 0;
 }
 label img {
@@ -372,17 +374,23 @@ label img {
     font-weight: 500;
     color: #ffffff;
 }
-.send input {
+.send  textarea {
     border: 0;
     width: 88%;
     font-size: 13px;
     color: black;
     margin-left: 16px;
+    height: 68%;
+    resize: none;
+    overflow: hidden;
+    &:focus {
+      border-color: inherit;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
 }
-.send input:focus {
-        border-color: inherit;
-        -webkit-box-shadow: none;
-        box-shadow: none;
+.send textarea:focus {
+  outline: 0;
 }
 .input-message {
     display: flex;
