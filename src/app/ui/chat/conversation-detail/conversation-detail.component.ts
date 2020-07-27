@@ -113,7 +113,7 @@ export class ViewComponent implements OnInit {
    * @param sendForm Form value được lấy khi người dùng nhập
    */
   sendMesseage(val: string) {
-    if (val) {
+    if (val.trim() != '') {
       this.stringeeService.sendTextMessage(this.convId, val);
     }
     this.getConvesationLast(this.convId);

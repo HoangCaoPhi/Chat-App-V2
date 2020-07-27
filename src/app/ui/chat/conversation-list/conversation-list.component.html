@@ -60,11 +60,11 @@
                                 </p>
                                 <p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
                                     *ngIf="conv.lastMessage.sender && conv.lastMessage.type == 1">
-                                    Bạn: {{  conv.lastMessage.content.content }}
+                                     {{  conv.lastMessage.content.content }}
                                 </p>
                                 <p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
                                     *ngIf="!conv.lastMessage.sender && conv.lastMessage.type == 1">
-                                    {{  conv.lastMessage.content.content }}
+                                   {{  conv.lastMessage.content.content }}
                                 </p>
                                 <p class="preview" [ngClass]="{'seen': conv.unreadCount == 0}"
                                     *ngIf="conv.lastMessage.sender && conv.lastMessage.type == 2">
@@ -106,7 +106,7 @@
             <ul class="nav-pills nav-stacked" *ngIf="tabTranfer == 1">
                 <li id="user-contact" *ngFor="let user of users" (click)="onCreateConversation(user)">
                     <ngx-avatar [name]="user.userName" size="34" *ngIf="!user.avatarUrl"></ngx-avatar>
-                    <img [src]="user.avatarUrl" alt="" *ngIf="user.avatarUrl" class="avt">
+                    <img [src]="user.avatarUrl" alt="" *ngIf="user.avatarUrl" class="avt" style="object-fit: cover;">
                     <p class="name">{{ user.userName }}</p>
                 </li>
             </ul>
