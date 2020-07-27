@@ -8,7 +8,7 @@ import { ComponentShareService } from '../../../services/component-share.service
 // import { User } from '@app/models';
 import { StringeeService } from '@app/services/stringee/stringee.service';
 // import { Subscription, Observable, fromEvent } from 'rxjs';
-import {fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { UserIdTranferService } from '@app/services/user-tranfer.service';
 // import { UserService } from '@app/services/user/user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -53,17 +53,17 @@ export class ViewComponent implements OnInit {
       this.convId = this.route.snapshot.paramMap.get('id');
       this.getConvesationLast(this.convId);
       this.stringeeService.stringeeChat.on('onObjectChange', () => {
-          this.getConvesationLast(this.convId);
-          this.componentShareService.setConversationId(this.convId);
+        this.getConvesationLast(this.convId);
+        this.componentShareService.setConversationId(this.convId);
       })
     });
   }
   ngOnInit(): void {
-    this.stringeeService.stringeeClient.on("userBeginTypingListener",  (msg)=> {
-        this.checkTyping = true;
+    this.stringeeService.stringeeClient.on("userBeginTypingListener", (msg) => {
+      this.checkTyping = true;
     });
-    this.stringeeService.stringeeClient.on("userEndTypingListener",  (msg)=> {
-        this.checkTyping = false;
+    this.stringeeService.stringeeClient.on("userEndTypingListener", (msg) => {
+      this.checkTyping = false;
     });
   }
   //#endregion
@@ -86,21 +86,21 @@ export class ViewComponent implements OnInit {
    */
   onKeyUp(event: KeyboardEvent) { // with type info
     //  Tham chiếu html
-      const searchBox = document.getElementById('input-message');
-      // streams
-      const keyup$ = fromEvent(searchBox, 'keyup');
-      // Chờ đợi 5s mới emit
-      keyup$
+    const searchBox = document.getElementById('input-message');
+    // streams
+    const keyup$ = fromEvent(searchBox, 'keyup');
+    // Chờ đợi 5s mới emit
+    keyup$
       .pipe(
         debounceTime(500)
       )
       .subscribe(
-        ()=> this.stringeeService.userEndTyping((this.convId))
+        () => this.stringeeService.userEndTyping((this.convId))
       );
-      
+
     // setTimeout(() => {  this.stringeeService.userEndTyping((this.convId)); }, 1000);
   }
- 
+
   /**
    * Xử lý khi người dùng đang nhắn tin
    * @param event 
@@ -188,19 +188,18 @@ export class ViewComponent implements OnInit {
   toggleInfo() {
     this.showAboutRight = !this.showAboutRight;
   }
-  
+
   // Xử lý Scrollframe
-  @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
+  @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
-  
-  private itemContainer: any;
+
   private scrollContainer: any;
   private items = [];
   private isNearBottom = true;
   // Lắng nghe sự thay đổi 
   ngAfterViewInit() {
     this.scrollContainer = this.scrollFrame.nativeElement;
-    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());    
+    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());
 
     // Add a new item every 2 seconds for demo purposes
     setInterval(() => {
@@ -232,7 +231,7 @@ export class ViewComponent implements OnInit {
   scrolled(event: any): void {
     this.isNearBottom = this.isUserNearBottom();
   }
-  
+
 
   // Xem trước hình ảnh
   watchImagePreview(src) {

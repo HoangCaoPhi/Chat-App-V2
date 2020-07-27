@@ -31,11 +31,11 @@ export class FileService {
    */
   postFileDatabase(convId: string, content: string, filePath: string, type: number, typeOf: string): Observable<any> {
     var options = {
-      convId  : convId,
-      content : content,
+      convId: convId,
+      content: content,
       filePath: filePath,
-      type    : type,
-      typeOf  : typeOf
+      type: type,
+      typeOf: typeOf
     }
     console.log(options)
     return this.http.post<any>('https://localhost:44378/api/Files', options);
@@ -46,6 +46,15 @@ export class FileService {
    * @param convId Id của cuộc trò chuyện
    */
   getAllFile(convId: string) {
-    return this.http.get<any>('https://localhost:44378/api/Files/' + convId);
+    return this.http.get<any>('https://localhost:44378/api/Files/getAllFiles?convId=' + convId);
+  }
+  getAllImages(convId: string) {
+    return this.http.get<any>('https://localhost:44378/api/Files/getAllImages?convId=' + convId);
+  }
+  getTakeFiles(convId: string) {
+    return this.http.get<any>('https://localhost:44378/api/Files/getFiles?convId=' + convId);
+  }
+  getTakeImages(convId: string) {
+    return this.http.get<any>('https://localhost:44378/api/Files/getImages?convId=' + convId);
   }
 }

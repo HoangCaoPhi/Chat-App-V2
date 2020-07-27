@@ -18,6 +18,8 @@ export class ConversationAboutComponent implements OnInit {
   imagePreview: any; // Xem trước hình ảnh với modal
   @Input() userShareService: any; // Nhận user từ home
   @Input() response: any; // Nhận thông tin msg từ home
+  showAll: boolean = false;
+  showAllFile: boolean = false;
   //#endregion
 
   //#region Contructor
@@ -47,7 +49,7 @@ export class ConversationAboutComponent implements OnInit {
    *  Lấy ra các hình ảnh được lấy từ Db
    */
   getImages() {
-    this._chatservice.getAllFile(this.convId).subscribe(
+    this._chatservice.getTakeImages(this.convId).subscribe(
       (res) => { this.imgs = res }
     )
   }
@@ -56,8 +58,24 @@ export class ConversationAboutComponent implements OnInit {
    */
   getFiles() {
     // return this.response.filter(mess => ((mess.type == 5)));
-    this._chatservice.getAllFile(this.convId).subscribe(
+    this._chatservice.getTakeFiles(this.convId).subscribe(
       (res) => { this.files = res }
+    )
+  }
+  getAllImages() {
+    this._chatservice.getAllImages(this.convId).subscribe(
+      (res) => { 
+        this.imgs = res;
+        this.showAll = true;
+      }
+    )
+  }
+  getAllFiles() {
+    this._chatservice.getAllFile(this.convId).subscribe(
+      (res) => { 
+        this.files = res;
+        this.showAllFile = true;
+      }
     )
   }
 

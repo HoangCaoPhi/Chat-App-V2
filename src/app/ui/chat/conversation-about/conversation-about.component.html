@@ -33,22 +33,26 @@
             </span>
 
         </div>
-        <ng-container *ngFor="let file of files">
-            <div class="file" *ngIf="showFile &&  file.type==5">
-                <span *ngIf="file.typeOf === 'pdf'">
-                    <img src="../../../assets/ICON//IconboxChat/pdf-icon.svg" alt="PDF">
-                </span>
-                <span *ngIf="file.typeOf === 'docx'">
-                    <img src="../../../assets/ICON/IconboxChat/docx-icon.svg" alt="DOCX">
-                </span>
-                <span *ngIf="file.typeOf === 'pptx'">
-                    <img src="../../../assets/ICON/IconboxChat/pptx-icon.svg" alt="PowerPoint">
-                </span>
-                <p>
-                    <span>{{ file.content }}</span>
-                </p>
-            </div>
-        </ng-container>
+        <div  *ngIf="showFile">
+            <ng-container *ngFor="let file of files">
+                <div class="file">
+                    <span *ngIf="file.typeOf === 'pdf'">
+                        <img src="../../../assets/ICON//IconboxChat/pdf-icon.svg" alt="PDF">
+                    </span>
+                    <span *ngIf="file.typeOf === 'docx'">
+                        <img src="../../../assets/ICON/IconboxChat/docx-icon.svg" alt="DOCX">
+                    </span>
+                    <span *ngIf="file.typeOf === 'pptx'">
+                        <img src="../../../assets/ICON/IconboxChat/pptx-icon.svg" alt="PowerPoint">
+                    </span>
+                    <p>
+                        <span>{{ file.content }}</span>
+                    </p>
+                </div>
+            </ng-container>
+            <p class="showAll" (click)="getAllFiles()" *ngIf="files?.length > 0 && !showAllFile" >Hiển thị tất cả...</p>
+        </div>
+     
         <p class="line"></p>
     </div>
 
@@ -76,7 +80,9 @@
                     </div>
                 </ng-container>
             </div>
+            <p class="showAll" (click)="getAllImages()"  *ngIf="imgs?.length > 0 && !showAll">Hiển thị tất cả...</p>
         </div>
+
     </div>
 </div>
 <!-- Modal -->
